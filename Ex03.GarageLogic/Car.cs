@@ -18,9 +18,10 @@ namespace Ex03.GarageLogic
         private readonly eCarColor r_carColor;
         private readonly ushort r_NumberOfDoors;
 
-        protected Car():base()
+        protected Car(string i_Model, string i_LicensePlateNumber,eCarColor i_CarColor,ushort i_NumberOfDoors) :base(i_Model, i_LicensePlateNumber)
         {
-
+            r_carColor = i_CarColor;
+            r_NumberOfDoors = i_NumberOfDoors;
 
         }
 

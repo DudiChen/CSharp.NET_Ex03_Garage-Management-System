@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricCar
+    public class ElectricCar : Car
     {
+        public ElectricCar(string i_CarModel, string i_LicensePlateNumber, eCarColor i_CarColor, ushort i_NumberOfDoors)
+            : base( i_CarModel, i_LicensePlateNumber, i_CarColor, i_NumberOfDoors)
+        {
+
+        }
+
+        protected override Motor CreateMotor()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

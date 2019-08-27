@@ -11,6 +11,17 @@ namespace Ex03.GarageLogic
         private bool m_HaulingHazardousMaterials;
         private readonly float r_HaulingVolume;
 
+        public Truck(
+            string i_Model,
+            string i_LicensePlateNumber,
+            bool i_HaulingHazardousMaterials,
+            float i_HaulingVolume)
+            : base(i_Model, i_LicensePlateNumber)
+        {
+            m_HaulingHazardousMaterials = i_HaulingHazardousMaterials;
+            r_HaulingVolume = i_HaulingVolume;
+        }
+
         public bool IsHaulingHazardousMaterials
         {
             get
