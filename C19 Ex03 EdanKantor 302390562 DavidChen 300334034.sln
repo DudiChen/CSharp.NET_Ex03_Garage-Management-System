@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C19 Ex03", "C19 Ex03\C19 Ex03.csproj", "{234821E8-DF13-4339-8DFA-FE78DEABA32E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.GarageLogic", "Ex03.GarageLogic\Ex03.GarageLogic.csproj", "{FE547FF5-5006-450C-945E-7871CF3D9A62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex03.ConsoleUI", "Ex03.ConsoleUI\Ex03.ConsoleUI.csproj", "{DE09650A-CFEC-48D6-9827-541E1AC9C83A}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{234821E8-DF13-4339-8DFA-FE78DEABA32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{234821E8-DF13-4339-8DFA-FE78DEABA32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{234821E8-DF13-4339-8DFA-FE78DEABA32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{234821E8-DF13-4339-8DFA-FE78DEABA32E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE547FF5-5006-450C-945E-7871CF3D9A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FE547FF5-5006-450C-945E-7871CF3D9A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE547FF5-5006-450C-945E-7871CF3D9A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
