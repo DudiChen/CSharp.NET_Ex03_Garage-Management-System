@@ -10,12 +10,14 @@ namespace Ex03.GarageLogic
     {
         private readonly Nullable<float> r_MaxValue;
         private readonly Nullable<float> r_MinValue;
-        
+        private readonly string r_ExceptionMessage;
 
-        public ValueOutOfRangeException(Nullable<float> i_MaxValue, Nullable<float> i_MinValue)
+        public ValueOutOfRangeException(Nullable<float> i_MaxValue, Nullable<float> i_MinValue) : base()
         {
             r_MaxValue = i_MaxValue;
             r_MinValue = i_MinValue;
+            r_ExceptionMessage = messageBuilder(r_MaxValue, r_MinValue);
+
         }
 
         public Nullable<float> MaxValue
@@ -38,19 +40,31 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                StringBuilder exceptionMessageStringBuilder = new StringBuilder();
-                exceptionMessageStringBuilder.Append("The value was ");
-                if(MinValue != null)
+                return r_ExceptionMessage;
+            }
+        }
+
+        private string messageBuilder(Nullable<float> i_MaxValue, Nullable<float> i_MinValue)
+        {
+            StringBuilder exceptionMessageStringBuilder = new StringBuilder();
+            exceptionMessageStringBuilder.Append("The value was ");
+            if (i_MinValue != null)
+            {
+                exceptionMessageStringBuilder.AppendFormat("over the limit ");
+            }
+            else
+            {
+                if(i_MaxValue != null)
                 {
-                    exceptionMessageStringBuilder.AppendFormat("over the {0} limit ", MaxValue);
+                    exceptionMessageStringBuilder.AppendFormat("under the limit ");
                 }
                 else
                 {
-                    exceptionMessageStringBuilder.AppendFormat("under the {0} limit ", MinValue);
+                    exceptionMessageStringBuilder.Append("out Of Range");
                 }
-
-                return exceptionMessageStringBuilder.ToString();
             }
+            
+            return exceptionMessageStringBuilder.ToString();
         }
     }
 }

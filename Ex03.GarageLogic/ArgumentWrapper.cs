@@ -4,7 +4,7 @@ using System.CodeDom;
 
 namespace Ex03.GarageLogic
 {
-    public class ArgumentWraper
+    public class ArgumentWrapper
     {
         private readonly string r_DisplayName;
         private readonly string[] r_optionalValueStrings;
@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         private readonly Nullable<float> r_ValidationMinValue;
         private readonly Nullable<float> r_ValidationMaxValue;
 
-        internal ArgumentWraper(
+        internal ArgumentWrapper(
             string i_DisplayName,
             string[] i_OptionalValueStrings,
             bool i_IsStrictToOptionalValues,
