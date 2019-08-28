@@ -1,36 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using eCarColors = Ex03.GarageLogic.Car.eCarColors;
+using eNumberOfCarDoors = Ex03.GarageLogic.Car.eNumberOfCarDoors;
 
 namespace Ex03.GarageLogic
 {
     public static class VehicleFactory
     {
-        internal enum eCarColors
-        {
-            Black, White, Red, Yellow
-        }
+        ////internal enum eCarColors
+        ////{
+        ////    Black, White, Red, Yellow
+        ////}
 
         private static readonly int[] r_CarNumberOfWindows = { 2, 3, 4, 5 };
 
         internal enum eVehicleType
         {
-            Electric, Gas
+            Electric, Gasoline
         }
 
-        internal enum eCarNumberOfDoor
-        {
-            Two = 2, Three, Four, Five
-        }
+        ////internal enum eNumberOfCarDoors
+        ////{
+        ////    Two = 2, Three, Four, Five
+        ////}
 
         internal enum eSupportedVehicles
         {
-            GasCar = 1, ElectricCar, GasMotorcycle, ElectricMotorcycle, Truck
+            GasolineCar = 1, ElectricCar, GasolineMotorcycle, ElectricMotorcycle, Truck
         }
 
-        internal static Vehicle BuildCar(eVehicleType i_VehicleType, eCarColors i_Color, eCarNumberOfDoor i_NumberOfDoors)
+        internal static Vehicle BuildCar(eVehicleType i_VehicleType, eCarColors i_Color, eNumberOfCarDoors i_NumberOfDoors)
         {
             switch(i_VehicleType)
             {
@@ -40,9 +38,9 @@ namespace Ex03.GarageLogic
                         break;
                     }
 
-                case eVehicleType.Gas:
+                case eVehicleType.Gasoline:
                     {
-                        return new GasCar();
+                        return new GasolineCar();
                         break;
                     }
 

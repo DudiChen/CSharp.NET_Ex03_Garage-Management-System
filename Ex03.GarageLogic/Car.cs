@@ -1,31 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Ex03.GarageLogic
 {
     public abstract class Car: Vehicle
     {
-        public enum eCarColor
+        public enum eCarColors
         {
             WHITE, RED, BLACK, YELLOW
         }
 
-        private readonly eCarColor r_carColor;
+        internal enum eNumberOfCarDoors
+        {
+            Two = 2, Three, Four, Five
+        }
+
+        private readonly eCarColors r_carColor;
         private readonly ushort r_NumberOfDoors;
 
-        protected Car(string i_Model, string i_LicensePlateNumber,eCarColor i_CarColor,ushort i_NumberOfDoors) :base(i_Model, i_LicensePlateNumber)
+        protected Car(string i_Model, string i_LicensePlateNumber,eCarColors i_CarColor,ushort i_NumberOfDoors) :base(i_Model, i_LicensePlateNumber)
         {
             r_carColor = i_CarColor;
             r_NumberOfDoors = i_NumberOfDoors;
 
         }
 
-        public eCarColor Color
+        public eCarColors Color
         {
             get
             {
