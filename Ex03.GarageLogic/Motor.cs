@@ -2,5 +2,5 @@
 {
     public abstract class Motor
     {
-        class enum 
+    }
 }

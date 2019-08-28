@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
+    <Compile Include="GarageTicket.cs" />
     <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricMotor.cs" />
     <Compile Include="ElectricMotorcycle.cs" />
