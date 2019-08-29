@@ -1,13 +1,94 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using Ex03.GarageLogic;
+using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.ConsoleUI
 {
     public class UIManager
     {
-        public static ShowManu
+        
+        
+        public static int ShowMenu()
+        {
+            System.Console.Clear();
+            int menuRowCounter = 1;
+            int inputChoice;
+            StringBuilder menuDisplayStringBuilder = new StringBuilder();
+            menuDisplayStringBuilder.AppendLine("Choose a option from the garage:");
+            menuDisplayStringBuilder.AppendFormat("{0}.Add a new Vehicle to garage{1}", menuRowCounter++, Environment.NewLine);
+            menuDisplayStringBuilder.AppendFormat("{0}.Show all vehicles in the garage{1}", menuRowCounter++, Environment.NewLine);
+            menuDisplayStringBuilder.AppendFormat("{0}.Show vehicles in the garage by status{1}", menuRowCounter++, Environment.NewLine);
+            menuDisplayStringBuilder.AppendFormat("{0}.Change vehicle's status{1}", menuRowCounter++, Environment.NewLine);
+            menuDisplayStringBuilder.AppendFormat("{0}.Fill vehicle's wheels{1}", menuRowCounter++, Environment.NewLine);
+            menuDisplayStringBuilder.AppendFormat("{0}.Full Gasoline vehicle{1}", menuRowCounter++, Environment.NewLine);
+            menuDisplayStringBuilder.AppendFormat("{0}.Charge electric vehicle{1}", menuRowCounter++, Environment.NewLine);
+            menuDisplayStringBuilder.AppendFormat("{0}.Full Gasoline vehicle{1}", menuRowCounter++, Environment.NewLine);
+            menuDisplayStringBuilder.AppendFormat("{0}.Show car information{1}", menuRowCounter++, Environment.NewLine);
+
+
+            while(!int.TryParse(System.Console.ReadLine(), out inputChoice))
+            {
+                System.Console.WriteLine("Input incorrect reenter input:");
+            }
+
+            return inputChoice;
+        }
+
+        public static void RunArgumentsWithUser(OrderedDictionary i_Arguments)
+        {
+            System.Console.WriteLine("Please provide the following: information:");
+            foreach(DictionaryEntry pairEntry in i_Arguments)
+            {
+                ArgumentWrapper argument = pairEntry.Value as ArgumentWrapper;
+                bool isInputRequired = true;
+                int choiceRowCounter = 1;
+                StringBuilder argumentMessage = new StringBuilder();
+                argumentMessage.AppendFormat("{0}:{1}", argument.DisplayName, Environment.NewLine);
+                if(argument.IsStrictToOptionalValues)
+                {
+                    argumentMessage.AppendLine("choose from the following options");
+                    foreach (string option in argument.OptionalValues)
+                    {
+                        argumentMessage.AppendFormat("{0}.{1}{2}", choiceRowCounter++, option, Environment.NewLine);
+
+                    }
+                }
+                while(isInputRequired)
+                {
+
+                    try
+                    {
+                        argument.InjectValue(System.Console.ReadLine());
+                        isInputRequired = false;
+                    }
+                    catch (ValueOutOfRangeException valueOutOfRangeException)
+                    {
+                        System.Console.WriteLine("Error: {0}", valueOutOfRangeException.Message);
+                    }
+                
+                }
+            }
+        }
+
+        public static void FillTankByLicensePlate()
+        {
+            string licensePlate = getLicensePlateNumber();
+            int[] a = new[] { 1, 2, 3, 4 };
+            a.co
+        }
+
+        private static string getLicensePlateNumber()
+        {
+            System.Console.WriteLine("Insert License Plate");
+            return System.Console.ReadLine();
+        }
+
     }
 }
