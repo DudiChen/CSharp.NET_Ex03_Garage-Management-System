@@ -52,5 +52,10 @@ namespace Ex03.GarageLogic
         {
             return m_GarageTickets[i_VehicleLicenseNumber];
         }
+
+        public void AddVehicleToGarage(string i_licensePlate, ArgumentWrapper[] i_Arguments)
+        {
+            
+        }
     }
 }

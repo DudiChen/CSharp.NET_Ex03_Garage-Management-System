@@ -50,7 +50,14 @@ namespace Ex03.GarageLogic
             }
         }
 
-       
+
+        public Type ResponseType
+        {
+            get
+            {
+                return r_ValidationType;
+            }
+        }
 
         public void InjectValue(string i_InputString)
         {
@@ -81,7 +88,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_InputValue;
+                return  m_InputValue;
             }
         }
     }

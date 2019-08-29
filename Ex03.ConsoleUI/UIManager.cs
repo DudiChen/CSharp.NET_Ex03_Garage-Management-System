@@ -77,12 +77,9 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void FillTankByLicensePlate()
-        {
-            string licensePlate = getLicensePlateNumber();
-            int[] a = new[] { 1, 2, 3, 4 };
-            a.co
-        }
+        
+
+
 
         private static string getLicensePlateNumber()
         {
