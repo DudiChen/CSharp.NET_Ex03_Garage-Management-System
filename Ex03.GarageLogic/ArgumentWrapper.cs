@@ -62,7 +62,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void InsertAndConvertInputString(string i_InputString)
+        public void InjectValue(string i_InputString)
         {
             if (r_ValidationType == typeof(int))
             {

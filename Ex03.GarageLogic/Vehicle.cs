@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
@@ -16,9 +14,7 @@ namespace Ex03.GarageLogic
             m_EnergyPercentage = 0.0f;
             r_Model = i_Model;
             r_LicensePlateNumber = i_LicensePlateNumber;
-            m_Motor = CreateMotor();
+            
         }
-
-        protected abstract Motor CreateMotor();
     }
 }
