@@ -1,31 +1,32 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using eCarColors = Ex03.GarageLogic.VehicleFactory.eCarColors;
+using eNumberOfCarDoors = Ex03.GarageLogic.VehicleFactory.eNumberOfCarDoors;
+using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class Car: Vehicle
+    internal class Car: Vehicle
     {
-        public enum eCarColors
-        {
-            WHITE, RED, BLACK, YELLOW
-        }
-
-        internal enum eNumberOfCarDoors
-        {
-            Two = 2, Three, Four, Five
-        }
-
         private readonly eCarColors r_carColor;
-        private readonly ushort r_NumberOfDoors;
+        private readonly eNumberOfCarDoors r_NumberOfDoors;
+        internal const int k_NumberOfWheels = 4;
 
-        protected Car(string i_Model, string i_LicensePlateNumber,eCarColors i_CarColor,ushort i_NumberOfDoors) :base(i_Model, i_LicensePlateNumber)
+        protected internal Car(
+            Motor i_Motor,
+            Wheel[] i_Wheels,
+            string i_LicensePlateNumber,
+            string i_Model,
+            eCarColors i_CarColor,
+            eNumberOfCarDoors i_NumberOfDoors)
+        : base(i_Motor, i_Wheels, i_LicensePlateNumber, i_Model)
         {
             r_carColor = i_CarColor;
             r_NumberOfDoors = i_NumberOfDoors;
-
         }
 
-        public eCarColors Color
+
+        internal eCarColors Color
         {
             get
             {
@@ -33,13 +34,19 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public ushort NumberOfDoors
+        internal eNumberOfCarDoors NumberOfDoors
         {
             get
             {
                 return r_NumberOfDoors;
             }
         }
+
+        //internal override void Energize(eEnergyTypes i_EnergyType, float i_AmountToAdd)
+        //{
+        //    m_Motor.Energize(i_EnergyType, i_AmountToAdd);
+        //}
+
 
     }
 }

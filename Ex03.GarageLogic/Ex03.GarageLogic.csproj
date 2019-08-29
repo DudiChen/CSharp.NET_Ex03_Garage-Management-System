@@ -46,7 +46,7 @@
     <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricMotor.cs" />
     <Compile Include="ElectricMotorcycle.cs" />
-    <Compile Include="EnergyContainer.cs" />
+    <Compile Include="IEnergyContainer.cs" />
     <Compile Include="Garage.cs" />
     <Compile Include="GasolineCar.cs" />
     <Compile Include="GasolineMotor.cs" />
@@ -55,6 +55,7 @@
     <Compile Include="GasolineTankGasolineTypeException.cs" />
     <Compile Include="GasolineTruck.cs" />
     <Compile Include="GasolineTankMaxCapacityException.cs" />
+    <Compile Include="IEnergyManagement.cs" />
     <Compile Include="Motor.cs" />
     <Compile Include="Motorcycle.cs" />
     <Compile Include="MotorFactory.cs" />

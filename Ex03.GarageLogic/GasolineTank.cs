@@ -1,56 +1,83 @@
 ﻿using System;
+using System.Collections.Generic;
+//using System.Linq;
 using Ex03.GarageLogic.Exceptions;
+using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic
 {
-    internal class GasolineTank
+    internal class GasolineTank : IEnergyContainer
     {
-        public enum eGasolineType
-        {
-            Octan98, Octan96, Octan95, Soler
-        }
-
         private readonly float r_MaximumGasolineTankCapacity;
         private float m_CurrentAmountOfGasoline;
-        private readonly eGasolineType r_GasolineType;
+        //private readonly List<eEnergyTypes> r_SupportedGasolineTypes;
+        private readonly eEnergyTypes[] r_SupportedGasolineTypes;
 
-        internal GasolineTank(eGasolineType i_GasolineType, float i_MaximumGasolineTankCapacity)
+        ////internal GasolineTank(List<eEnergyTypes> i_SupportedGasolineType, float i_MaximumGasolineTankCapacity, float i_CurrentAmountOfGasoline)
+        internal GasolineTank(eEnergyTypes[] i_SupportedGasolineTypes, float i_MaximumGasolineTankCapacity, float i_CurrentAmountOfGasoline)
         {
-            
+            r_SupportedGasolineTypes = i_SupportedGasolineTypes;
+            r_MaximumGasolineTankCapacity = i_MaximumGasolineTankCapacity;
+            m_CurrentAmountOfGasoline = i_CurrentAmountOfGasoline;
         }
 
-        internal float MaximumGasolineTankCapacity
+        public eEnergyTypes[] GetSupportedEnergyTypes()
         {
-            get
+            return r_SupportedGasolineTypes;
+        }
+
+        public float GetMaxEnergyCapacity()
+        {
+            return r_MaximumGasolineTankCapacity;
+        }
+
+        ////internal float MaximumGasolineTankCapacity
+        ////{
+        ////    get
+        ////    {
+        ////        return r_MaximumGasolineTankCapacity;
+        ////    }
+        ////}
+
+        public float GetRemainingEnergyLevel()
+        {
+            return m_CurrentAmountOfGasoline;
+        }
+        ////internal float CurrentAmountOfGasoline
+        ////{
+        ////    get
+        ////    {
+        ////        return m_CurrentAmountOfGasoline;
+        ////    }
+        ////}
+
+        public void Energize(eEnergyTypes i_GasolineType, float i_AmountOfGasolineToAdd)
+        {
+            ////bool isSupportedGasolineType = r_SupportedGasolineTypes.Contains(i_GasolineType);
+            bool isSupportedGasolineType = false;
+            foreach (eEnergyTypes SupportedGasolineType in r_SupportedGasolineTypes)
             {
-                return r_MaximumGasolineTankCapacity;
+                if (i_GasolineType == SupportedGasolineType)
+                {
+                    isSupportedGasolineType = true; 
+                    break;
+                }
             }
-        }
 
-        internal float CurrentAmountOfGasoline
-        {
-            get
+            if (isSupportedGasolineType)
             {
-                return m_CurrentAmountOfGasoline;
-            }
-        }
-
-        internal void FillTank(eGasolineType i_GasolineType, float i_AmountOfGasolineToAdd)
-        {
-            if (i_GasolineType == r_GasolineType)
-            {
-                if(m_CurrentAmountOfGasoline + i_AmountOfGasolineToAdd <= MaximumGasolineTankCapacity)
+                if(m_CurrentAmountOfGasoline + i_AmountOfGasolineToAdd <= r_MaximumGasolineTankCapacity)
                 {
                     m_CurrentAmountOfGasoline += i_AmountOfGasolineToAdd;
                 }
                 else
                 {
-                    throw new GasolineTankExceededMaxCapacityException(r_MaximumGasolineTankCapacity, m_CurrentAmountOfGasoline, i_AmountOfGasolineToAdd);
+                    //throw new GasolineTankExceededMaxCapacityException(r_MaximumGasolineTankCapacity, m_CurrentAmountOfGasoline, i_AmountOfGasolineToAdd);
                 }
             }
             else
             {
-                throw new GasolineTankGasolineTypeException(r_GasolineType, i_GasolineType);
+                //throw new GasolineTankGasolineTypesException(r_SupportedGasolineTypes, i_GasolineType);
             }
         }
     }
