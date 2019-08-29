@@ -67,7 +67,7 @@ namespace Ex03.GarageLogic
             i_ArgumentsCollection.AddArgument(eArgumentKeys.Model, new ArgumentWrapper(
                 "Model", null, false, typeof(string)));
             i_ArgumentsCollection.AddArgument(eArgumentKeys.NumberOfDoors, new ArgumentWrapper(
-                "Number of doors", Enum.GetNames(typeof(eNumberOfCarDoors)), true, typeof(string)));
+                "Number of doors", Enum.GetNames(typeof(eNumberOfCarDoors)), true, typeof(eNumberOfCarDoors)));
 
         }
 
@@ -104,8 +104,7 @@ namespace Ex03.GarageLogic
         private static void GasVehicleArgumentsCollection(
              ArgumentsCollection i_ArgumentsCollection)
         {
-            i_ArgumentsCollection.AddArgument(VehicleFactory.eArgumentKeys.CurrentAmountOfGasoline, new ArgumentWrapper(
-                "Current amount of fuel in liters", null, false, typeof(int)));
+            i_ArgumentsCollection.AddArgument(VehicleFactory.eArgumentKeys.CurrentAmountOfGasoline, new ArgumentWrapper<int>("Current amount of fuel in liters", null, false));
         }
 
         private static void ElectricVehicleArgumentsCollection(
@@ -170,9 +169,55 @@ namespace Ex03.GarageLogic
         }
 
 
-        
+
+        private static Car CreateCar(ArgumentsCollection i_Arguments, IMotor i_Motor)
+        {
+            string licensePlate = (string)i_Arguments[eArgumentKeys.LicensePlate].Response;
+            string model = (string)i_Arguments[eArgumentKeys.Model].Response;
+            eNumberOfCarDoors numberOfDoors = (eNumberOfCarDoors)i_Arguments[eArgumentKeys.NumberOfDoors].Response;
+            eCarColors carColors = (eCarColors)i_Arguments[eArgumentKeys.Color].Response;
+            return new Car(licensePlate,model,i_Motor,carColors,numberOfDoors);
+        }
 
 
+  
+
+
+        internal static Vehicle GetGasolineCar(ArgumentsCollection i_Arguments)
+        {
+            
+            return CreateCar(i_Arguments,));
+        }
+
+        internal static Vehicle GetElectricCar()
+        {
+
+            return new Car();
+        }
+
+        internal static Vehicle GetGasolineMotorcycle()
+        {
+
+            return  new Motorcycle();
+        }
+
+        internal static Vehicle GetElectricMotorcycle()
+        {
+
+            return new Motorcycle();
+        }
+
+        internal static Vehicle GetElectricTruck()
+        {
+
+            return new Truck();
+        }
+
+        internal static Vehicle GetGasolineTruck()
+        {
+
+            return new Truck();
+        }
 
 
         ////private static Dictionary<eArgumentKeys, ArgumentWrapper> argumentDictionary = new Dictionary<eArgumentKeys, ArgumentWrapper>
@@ -216,6 +261,54 @@ namespace Ex03.GarageLogic
 
         }
 
+
+        internal static Vehicle BuildVehicle(
+            eSupportedVehicles i_SupportedVehicle,
+            ArgumentsCollection i_ArgumentsCollection)
+        {
+            Vehicle vehicle;
+            switch (i_SupportedVehicle)
+            {
+                case eSupportedVehicles.ElectricCar:
+                    {
+                        
+                        break;
+                    }
+
+                case eSupportedVehicles.GasolineCar:
+                    {
+                        
+                        break;
+                    }
+                case eSupportedVehicles.ElectricMotorcycle:
+                    {
+
+                        break;
+                    }
+                case eSupportedVehicles.GasolineMotorcycle:
+                    {
+
+                        break;
+                    }
+                case eSupportedVehicles.GasolineTruck:
+                    {
+
+                        break;
+                    }
+                case eSupportedVehicles.ElectricTruck:
+                    {
+
+                        break;
+                    }
+                default:
+                    {
+
+                        break;
+                    }
+            }
+
+            return vehicle;
+        }
 
     }
 }
