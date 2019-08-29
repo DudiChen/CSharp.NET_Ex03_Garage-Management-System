@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using Ex03.GarageLogic.ArgumentsUtils;
-using eCarColors = Ex03.GarageLogic.Car.eCarColors;
-using eNumberOfCarDoors = Ex03.GarageLogic.Car.eNumberOfCarDoors;
+//using eCarColors = Ex03.GarageLogic.eVehicleFactory.eCarColors;
+
+//using eNumberOfCarDoors = Ex03.GarageLogic.Car.eNumberOfCarDoors;
 
 namespace Ex03.GarageLogic
 {
@@ -20,6 +21,21 @@ namespace Ex03.GarageLogic
         internal enum eMotorType
         {
             Gasoline, Electric
+        }
+
+        internal enum eEnergyTypes
+        {
+            Octan98, Octan96, Octan95, Soler, Electricity
+        }
+
+        public enum eCarColors
+        {
+            White, Red, Black, Yellow
+        }
+
+        internal enum eNumberOfCarDoors
+        {
+            Two = 2, Three, Four, Five
         }
         internal enum eArgumentKeys
         {
@@ -171,20 +187,6 @@ namespace Ex03.GarageLogic
         ////                                                                                      { }
         ////                                                                                  };
         private static readonly int[] r_CarNumberOfWindows = { 2, 3, 4, 5 };
-        internal enum eEnergyTypes
-        {
-            Octan98, Octan96, Octan95, Soler, Electricity
-        }
-
-        public enum eCarColors
-        {
-            White, Red, Black, Yellow
-        }
-
-        internal enum eNumberOfCarDoors
-        {
-            Two = 2, Three, Four, Five
-        }
 
         internal static Vehicle BuildCar(
             eSupportedVehicles i_VehicleType,
