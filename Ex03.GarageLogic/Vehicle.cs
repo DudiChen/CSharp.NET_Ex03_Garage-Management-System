@@ -10,8 +10,9 @@ namespace Ex03.GarageLogic
         private Wheel[] m_Wheels;
         private Motor m_Motor;
 
-        protected Vehicle(string i_Model, string i_LicensePlateNumber)
+        protected Vehicle(string i_Model, string i_LicensePlateNumber,Motor i_Motor)
         {
+            m_Motor = i_Motor;
             m_EnergyPercentage = 0.0f;
             r_Model = i_Model;
             r_LicensePlateNumber = i_LicensePlateNumber;
