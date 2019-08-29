@@ -6,9 +6,9 @@
         private readonly string r_Model;
         private float m_EnergyPercentage;
         private Wheel[] m_Wheels;
-        private Motor m_Motor;
+        private IMotor m_Motor;
 
-        protected Vehicle(string i_Model, string i_LicensePlateNumber,Motor i_Motor)
+        protected Vehicle( string i_LicensePlateNumber, string i_Model,Wheel[] i_Wheels, IMotor i_Motor)
         {
             m_Motor = i_Motor;
             m_EnergyPercentage = 0.0f;

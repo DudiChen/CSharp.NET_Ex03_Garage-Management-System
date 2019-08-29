@@ -3,7 +3,7 @@
 
 namespace Ex03.GarageLogic
 {
-    public abstract class Car: Vehicle
+    public abstract class Car : Vehicle
     {
         public enum eCarColors
         {
@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         private readonly eCarColors r_carColor;
         private readonly ushort r_NumberOfDoors;
 
-        protected Car(string i_Model, string i_LicensePlateNumber,eCarColors i_CarColor,ushort i_NumberOfDoors) :base(i_Model, i_LicensePlateNumber)
+        protected Car(string i_Model, string i_LicensePlateNumber, eCarColors i_CarColor, ushort i_NumberOfDoors) : base(i_Model, i_LicensePlateNumber)
         {
             r_carColor = i_CarColor;
             r_NumberOfDoors = i_NumberOfDoors;
