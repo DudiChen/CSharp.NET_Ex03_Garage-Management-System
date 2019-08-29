@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.CodeDom;
+using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
 {

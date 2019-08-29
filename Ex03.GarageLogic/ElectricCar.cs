@@ -14,9 +14,6 @@ namespace Ex03.GarageLogic
 
         }
 
-        protected override Motor CreateMotor()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
