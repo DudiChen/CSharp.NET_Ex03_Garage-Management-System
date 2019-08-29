@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
 {
     internal class Battery
     {
-        private readonly float m_MaximumWorkingHours;
+        private readonly float r_MaximumWorkingHours;
         private float m_RemainingWorkingHours;
 
         public Battery(float i_MaximumWorkingHours)
         {
-            m_MaximumWorkingHours = i_MaximumWorkingHours;
+            r_MaximumWorkingHours = i_MaximumWorkingHours;
             m_RemainingWorkingHours = 0;
         }
 
@@ -27,13 +25,13 @@ namespace Ex03.GarageLogic
 
         public void Charge(float i_HoursToAdd)
         {
-            if (m_RemainingWorkingHours + i_HoursToAdd > m_MaximumWorkingHours)
+            if (m_RemainingWorkingHours + i_HoursToAdd <= r_MaximumWorkingHours)
             {
-                throw new ValueOutOfRangeException();
+                m_RemainingWorkingHours += i_HoursToAdd;
             }
             else
             {
-                m_RemainingWorkingHours += i_HoursToAdd;
+                throw new BatteryMaxWorkingHoursException(r_MaximumWorkingHours, m_RemainingWorkingHours, i_HoursToAdd);
             }
         }
 

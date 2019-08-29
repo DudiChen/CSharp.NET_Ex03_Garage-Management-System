@@ -2,11 +2,16 @@
 
 namespace Ex03.GarageLogic
 {
-    class MotorFactory
+    public static class MotorFactory
     {
         enum eMotorType
         {
             Electric, Gasoline
+        }
+
+        public static Motor GenerateMotor(eMotorType i_MotorType)
+        {
+
         }
     }
 }

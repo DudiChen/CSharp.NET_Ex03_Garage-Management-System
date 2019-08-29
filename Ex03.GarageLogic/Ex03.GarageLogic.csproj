@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Battery.cs" />
+    <Compile Include="BatteryMaxWorkingHoursException.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="GarageTicket.cs" />
     <Compile Include="ElectricCar.cs" />
@@ -51,7 +52,9 @@
     <Compile Include="GasolineMotor.cs" />
     <Compile Include="GasolineMotorcycle.cs" />
     <Compile Include="GasolineTank.cs" />
+    <Compile Include="GasolineTankGasolineTypeException.cs" />
     <Compile Include="GasolineTruck.cs" />
+    <Compile Include="GasolineTankMaxCapacityException.cs" />
     <Compile Include="Motor.cs" />
     <Compile Include="Motorcycle.cs" />
     <Compile Include="MotorFactory.cs" />

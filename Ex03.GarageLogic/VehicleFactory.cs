@@ -1,4 +1,5 @@
 ﻿using System;
+
 using eCarColors = Ex03.GarageLogic.Car.eCarColors;
 using eNumberOfCarDoors = Ex03.GarageLogic.Car.eNumberOfCarDoors;
 
@@ -10,6 +11,7 @@ namespace Ex03.GarageLogic
         ////{
         ////    Black, White, Red, Yellow
         ////}
+
 
         private static readonly int[] r_CarNumberOfWindows = { 2, 3, 4, 5 };
 
