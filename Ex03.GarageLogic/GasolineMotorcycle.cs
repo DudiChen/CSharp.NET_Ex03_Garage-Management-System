@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class GasMotorcycle : Motorcycle
+    public class GasolineMotorcycle : Motorcycle
     {
-        public GasMotorcycle(
+        public GasolineMotorcycle(
             string i_Model,
             string i_LicensePlateNumber,
             eLicenseType i_LicenseType,

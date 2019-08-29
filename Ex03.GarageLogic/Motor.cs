@@ -1,6 +1,8 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+
+namespace Ex03.GarageLogic
 {
-    public abstract class Motor
+    public interface IMotor
     {
         
     }

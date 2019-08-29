@@ -2,7 +2,8 @@
 
 namespace Ex03.GarageLogic
 {
-    class ElectricMotor
+    class GasolineMotor
     {
+        
     }
 }

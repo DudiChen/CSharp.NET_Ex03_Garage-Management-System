@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class GasTruck : Truck
+    public class GasolineTruck : Truck
     {
-        public GasTruck(
+        public GasolineTruck(
             string i_Model,
             string i_LicensePlateNumber,
             bool i_HaulingHazardousMaterials,
