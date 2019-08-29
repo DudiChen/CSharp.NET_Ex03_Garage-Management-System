@@ -12,11 +12,15 @@ namespace Ex03.GarageLogic
 
     public static class VehicleFactory
     {
-        ////internal enum eCarColors
-        ////{
-        ////    Black, White, Red, Yellow
-        ////}
+        internal enum eSupportedVehicles
+        {
+            GasolineCar = 1, ElectricCar, GasolineMotorcycle, ElectricMotorcycle, Truck
+        }
 
+        internal enum eMotorType
+        {
+            Gasoline, Electric
+        }
         internal enum eArgumentKeys
         {
             LicensePlate, Model, VehicleType, Color, NumberOfDoors, WheelCurrentPressure, WheelMaxPressure, wheelmanufacturer,
@@ -212,43 +216,35 @@ namespace Ex03.GarageLogic
         ////                                                                                      { }
         ////                                                                                  };
         private static readonly int[] r_CarNumberOfWindows = { 2, 3, 4, 5 };
-
-        internal enum eVehicleType
+        internal enum eEnergyTypes
         {
-            Electric,
-            Gasoline
+            Octan98, Octan96, Octan95, Soler, Electricity
         }
 
-        ////internal enum eNumberOfCarDoors
-        ////{
-        ////    Two = 2, Three, Four, Five
-        ////}
-
-        internal enum eSupportedVehicles
+        public enum eCarColors
         {
-            GasolineCar = 1,
-            ElectricCar,
-            GasolineMotorcycle,
-            ElectricMotorcycle,
-            Truck,
-            GasolineTruck,
-            ElectricTruck
+            White, Red, Black, Yellow
+        }
+
+        internal enum eNumberOfCarDoors
+        {
+            Two = 2, Three, Four, Five
         }
 
         internal static Vehicle BuildCar(
-            eVehicleType i_VehicleType,
+            eSupportedVehicles i_VehicleType,
             eCarColors i_Color,
             eNumberOfCarDoors i_NumberOfDoors)
         {
             switch (i_VehicleType)
             {
-                case eVehicleType.Electric:
+                case eSupportedVehicles.ElectricCar:
                     {
                         return new ElectricCar();
                         break;
                     }
 
-                case eVehicleType.Gasoline:
+                case eSupportedVehicles.GasolineCar:
                     {
                         return new GasolineCar();
                         break;

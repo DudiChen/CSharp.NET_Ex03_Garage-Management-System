@@ -1,17 +1,17 @@
 ﻿using System;
 
-using eGasolineType = Ex03.GarageLogic.GasolineTank.eGasolineType;
+using eEnergyTypes = Ex03.GarageLogic.MotorFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic.Exceptions
 {
     class GasolineTankGasolineTypeException : Exception
     {
-        private readonly eGasolineType r_GasolineTypeExpected;
-        private readonly eGasolineType r_GasolineTypeReceived;
+        private readonly eEnergyTypes r_GasolineTypeExpected;
+        private readonly eEnergyTypes r_GasolineTypeReceived;
 
         internal GasolineTankGasolineTypeException(
-            eGasolineType i_GasolineTypeExpected,
-            eGasolineType i_GasolineTypeReceived)
+            eEnergyTypes i_GasolineTypeExpected,
+            eEnergyTypes i_GasolineTypeReceived)
             : base(
                 string.Format("Error: Gasoline-Type received was '{0}', expected '{1}'.", 
                     i_GasolineTypeReceived.ToString(), 
@@ -22,8 +22,8 @@ namespace Ex03.GarageLogic.Exceptions
         }
 
         internal GasolineTankGasolineTypeException(
-            eGasolineType i_GasolineTypeExpected,
-            eGasolineType i_GasolineTypeReceived,
+            eEnergyTypes i_GasolineTypeExpected,
+            eEnergyTypes i_GasolineTypeReceived,
             Exception i_InnerException)
             : base(
                 string.Format(
@@ -36,14 +36,14 @@ namespace Ex03.GarageLogic.Exceptions
             r_GasolineTypeExpected = i_GasolineTypeExpected;
         }
 
-        public eGasolineType GasolineTypeExpected
+        public eEnergyTypes GasolineTypeExpected
         {
             get
             {
                 return r_GasolineTypeExpected;
             }
         }
-        public eGasolineType GasolineTypeReceived
+        public eEnergyTypes GasolineTypeReceived
         {
             get
             {
