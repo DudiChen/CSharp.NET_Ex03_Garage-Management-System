@@ -19,59 +19,70 @@ namespace Ex03.ConsoleUI
         {
             m_Garage = new Garage();
 
-            
-            Utils.ShowMainMenu();
-            int userChoice = Utils.GetUserMenuChoice() - 1;
-            while (!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
+            bool terminateProgram = false;
+
+            while(!terminateProgram)
             {
-                Console.WriteLine("Invalid input: Choice made not in range. Please try again...");
-            }
-            eMainMenuOptions mainMenuOption = (eMainMenuOptions)userChoice;
+                Console.Clear();
+                Utils.ShowMainMenu();
+                int userChoice = Utils.GetUserMenuChoice() - 1;
+                while(!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
+                {
+                    Console.WriteLine("Invalid input: Choice made not in range. Please try again...");
+                }
 
-            switch (mainMenuOption)
-            {
-                case eMainMenuOptions.AddVehicle:
-                    {
-                        AddVehicle();
-                        break;
-                    }
+                eMainMenuOptions mainMenuOption = (eMainMenuOptions)userChoice;
 
-                case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
-                    {
-                        showVehiclesLicensePlateNumbers();
-                        break;
-                    }
+                switch(mainMenuOption)
+                {
+                    case eMainMenuOptions.AddVehicle:
+                        {
+                            AddVehicle();
+                            break;
+                        }
 
-                case eMainMenuOptions.ChangeVehicleStatus:
-                    {
-                        changeVehicleStatus();
-                        break;
-                    }
-                case eMainMenuOptions.InflateWheels:
-                    {
-                        inflateWheels();
-                        break;
-                    }
-                case eMainMenuOptions.FuelGasolineVehicle:
-                    {
-                        fuelGasolineVehicle();
-                        break;
-                    }
-                case eMainMenuOptions.ChargeElectricVehicle:
-                    {
-                        chargeElectricVehicle();
-                        break;
-                    }
-                case eMainMenuOptions.GetVehicleInfoByLicensePlateNumber:
-                    {
-                        getVehicleInfoByLicensePlateNumber();
-                        break;
-                    }
-                case eMainMenuOptions.QuitProgram:
-                    {
+                    case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
+                        {
+                            showVehiclesLicensePlateNumbers();
+                            break;
+                        }
 
-                        break;
-                    }
+                    case eMainMenuOptions.ChangeVehicleStatus:
+                        {
+                            changeVehicleStatus();
+                            break;
+                        }
+
+                    case eMainMenuOptions.InflateWheels:
+                        {
+                            inflateWheels();
+                            break;
+                        }
+
+                    case eMainMenuOptions.FuelGasolineVehicle:
+                        {
+                            fuelGasolineVehicle();
+                            break;
+                        }
+
+                    case eMainMenuOptions.ChargeElectricVehicle:
+                        {
+                            chargeElectricVehicle();
+                            break;
+                        }
+
+                    case eMainMenuOptions.GetVehicleInfoByLicensePlateNumber:
+                        {
+                            getVehicleInfoByLicensePlateNumber();
+                            break;
+                        }
+
+                    case eMainMenuOptions.QuitProgram:
+                        {
+                            terminateProgram = true;
+                            break;
+                        }
+                }
             }
         }
 
@@ -182,11 +193,6 @@ namespace Ex03.ConsoleUI
 
         }
 
-        // ?????
-        private static void quitProgram()
-        {
-
-        }
 
         private static void RunArgumentsWithUser(ArgumentsCollection i_Arguments, string i_LicensePlateNumber)
         {
@@ -221,7 +227,21 @@ namespace Ex03.ConsoleUI
                 {
                     try
                     {
-                        argument.InjectValue(System.Console.ReadLine());
+                        string inputString = Console.ReadLine();
+
+                        if (argument.IsStrictToOptionalValues)
+                        {
+                            int inputInt;
+                            if(!int.TryParse(inputString, out inputInt))
+                            {
+                                throw new ArgumentException();
+                            }
+                            else
+                            {
+                                inputString = argument.OptionalValues[inputInt];
+                            }
+                        }
+                        argument.InjectValue(inputString);
                         isInputRequired = false;
                     }
                     catch (ValueOutOfRangeException valueOutOfRangeException)

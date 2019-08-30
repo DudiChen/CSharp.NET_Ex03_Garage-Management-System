@@ -66,8 +66,8 @@ namespace Ex03.ConsoleUI
 
         public static void ShowMainMenu()
         {
-            StringBuilder menuLinesConcatenator = new StringBuilder("\t\t:::::\tMain Menu\t:::::");
-
+            StringBuilder menuLinesConcatenator = new StringBuilder("\t\t=== Garage Management System ===");
+            //menuLinesConcatenator.AppendFormat("{0}::::  Main Menu  :::::", Environment.NewLine);
             menuLinesConcatenator.AppendFormat("{0}{0}Please choose from the below menu options:", Environment.NewLine);
 
             for (int i = 0; i < sr_MainMenuNumberOfOptions; i++)
@@ -79,7 +79,7 @@ namespace Ex03.ConsoleUI
                     MainMenuOptionsMap[(eMainMenuOptions)i]);
             }
 
-            Console.WriteLine(menuLinesConcatenator);
+            Console.WriteLine("{0}{1}{2}{1}",menuLinesConcatenator, Environment.NewLine, Utils.m_LineSeparatorThin);
         }
 
         public static int GetUserMenuChoice()
