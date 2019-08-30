@@ -35,19 +35,19 @@ namespace Ex03.GarageLogic.ArgumentsUtils
         }
 
 
-        public ArgumentWrapper this[string index]
+        internal ArgumentWrapper this[string i_ArgumentKey]
         {
             get
             {
-                return (ArgumentWrapper)m_argumentOrderedDictionaryDictionary[index];
+                return (ArgumentWrapper)m_argumentOrderedDictionaryDictionary[i_ArgumentKey];
             }
         }
 
-        public ArgumentWrapper this[VehicleFactory.eArgumentKeys index]
+        internal ArgumentWrapper this[VehicleFactory.eArgumentKeys i_ArgumentKey]
         {
             get
             {
-                return (ArgumentWrapper)m_argumentOrderedDictionaryDictionary[index];
+                return (ArgumentWrapper)m_argumentOrderedDictionaryDictionary[i_ArgumentKey.ToString()];
             }
 
         }
