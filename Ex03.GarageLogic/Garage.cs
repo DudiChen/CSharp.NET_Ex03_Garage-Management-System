@@ -51,7 +51,7 @@ namespace Ex03.GarageLogic
         }
 
         public bool HasVehicleVisited(string i_VehicleLicenseNumber)
-        { 
+        {
             return m_GarageTickets.ContainsKey(i_VehicleLicenseNumber);
         }
 
@@ -80,7 +80,7 @@ namespace Ex03.GarageLogic
             return m_GarageTickets[i_VehicleLicenseNumber];
         }
 
-        public void AddVehicleToGarage(ArgumentsCollection i_Arguments, string i_VehicleTypeString, string i_OwnerName,string i_OwnerPhoneNumber)
+        public void AddVehicleToGarage(ArgumentsCollection i_Arguments, string i_VehicleTypeString, string i_OwnerName, string i_OwnerPhoneNumber)
         {
             eSupportedVehicles vehicleType = parseVehicleTypeFromString(i_VehicleTypeString);
             Vehicle newVehicle = VehicleFactory.BuildVehicle(vehicleType, i_Arguments);
@@ -149,14 +149,14 @@ Owner's phone number: {1}{2}",
             eSupportedVehicles result;
             try
             {
-                
+
                 result = (eSupportedVehicles)Enum.Parse(typeof(eSupportedVehicles), i_VehicleTypeStr);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ArgumentException("Error: Received wrong argument value for VehicleType");
             }
-           
+
 
             return result;
         }
@@ -174,6 +174,18 @@ Owner's phone number: {1}{2}",
             }
 
             return result;
+        }
+
+        
+
+        public void FillVehicleEnergyContainer(string i_EnergyType, string i_LicensePlateNumber)
+        {
+            if (!HasVehicleVisited(i_LicensePlateNumber))
+            {
+                throw new ArgumentException("Error: Received non-existing vehicle license plate number");
+            }
+            Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
+            vehicle.Energize(parseVehicleTypeFromString());
         }
     }
 }

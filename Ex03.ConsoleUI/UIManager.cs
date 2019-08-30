@@ -228,7 +228,7 @@ namespace Ex03.ConsoleUI
 
         private static void chargeElectricVehicle()
         {
-
+            
         }
 
         private static void getVehicleInfoByLicensePlateNumber()

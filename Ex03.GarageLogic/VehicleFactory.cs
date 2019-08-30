@@ -79,10 +79,10 @@ namespace Ex03.GarageLogic
                     eArgumentKeys.WheelManufacturer,
                     i,
                     new ArgumentWrapper(string.Format("Tire {0} manufacturerer", i), null, false, typeof(string)));
-                i_ArgumentsCollection.AddArgument(
-                    eArgumentKeys.WheelMaxPressure,
-                    i,
-                    new ArgumentWrapper(string.Format("Tire {0} max air pressure", i), null, false, typeof(float)));
+                //i_ArgumentsCollection.AddArgument(
+                //    eArgumentKeys.WheelMaxPressure,
+                //    i,
+                //    new ArgumentWrapper(string.Format("Tire {0} max air pressure", i), null, false, typeof(float)));
                 i_ArgumentsCollection.AddArgument(
                     eArgumentKeys.WheelCurrentPressure,
                     i,
@@ -226,7 +226,7 @@ namespace Ex03.GarageLogic
             return argumentsCollection;
         }
 
-        private static Wheel[] wheelsCollectionBuilder(ArgumentsCollection i_ArgumentsCollection, int i_NumberOfWheels)
+        private static Wheel[] wheelsCollectionBuilder(ArgumentsCollection i_ArgumentsCollection, int i_NumberOfWheels,int i_MaxTire)
         {
             Wheel[] wheels = new Wheel[i_NumberOfWheels];
 
@@ -236,15 +236,15 @@ namespace Ex03.GarageLogic
                     "{0}{1}",
                     eArgumentKeys.WheelManufacturer.ToString(),
                     i).ToString()].Response;
-                float wheelMaxWheelPressure = float.Parse(i_ArgumentsCollection[string.Format(
-                    "{0}{1}",
-                    eArgumentKeys.WheelMaxPressure.ToString(),
-                    i).ToString()].Response);
+                //float wheelMaxWheelPressure = float.Parse(i_ArgumentsCollection[string.Format(
+                //    "{0}{1}",
+                //    eArgumentKeys.WheelMaxPressure.ToString(),
+                //    i).ToString()].Response);
                 float wheelWheelPressure = float.Parse(i_ArgumentsCollection[string.Format(
                     "{0}{1}",
                     eArgumentKeys.WheelCurrentPressure.ToString(),
                     i).ToString()].Response);
-                wheels[i-1] = new Wheel(wheelManufacturer, wheelMaxWheelPressure, wheelWheelPressure);
+                wheels[i-1] = new Wheel(wheelManufacturer, i_MaxTire, wheelWheelPressure);
             }
 
             return wheels;
@@ -256,7 +256,7 @@ namespace Ex03.GarageLogic
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             eNumberOfCarDoors numberOfDoors = (eNumberOfCarDoors)Enum.Parse(typeof(eNumberOfCarDoors),i_Arguments[eArgumentKeys.NumberOfDoors].Response);
             eCarColors carColor = (eCarColors)Enum.Parse(typeof(eCarColors),i_Arguments[eArgumentKeys.Color].Response);
-            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Car.k_NumberOfWheels);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Car.k_NumberOfWheels,Car.k_MaxTirePressure);
 
             return new Car(i_Motor, wheels, licensePlate, model, carColor, numberOfDoors);
         }
@@ -267,7 +267,7 @@ namespace Ex03.GarageLogic
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             bool isCarryingHazardousMaterials = bool.Parse(i_Arguments[eArgumentKeys.HazardousMaterials].Response);
             int haulingVolume = int.Parse( i_Arguments[eArgumentKeys.HaulVolume].Response);
-            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Truck.k_NumberOfWheels);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Truck.k_NumberOfWheels,Truck.k_MaxTirePressure);
 
             return new Truck(i_Motor, wheels, licensePlate, model, isCarryingHazardousMaterials, haulingVolume);
         }
@@ -278,7 +278,7 @@ namespace Ex03.GarageLogic
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             Motorcycle.eLicenseType licenseType = (Motorcycle.eLicenseType)Enum.Parse(typeof(Motorcycle.eLicenseType),i_Arguments[eArgumentKeys.LicenseType].Response);
             int engineVolume = int.Parse( i_Arguments[eArgumentKeys.EngineVolume].Response);
-            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels,Motorcycle.k_MaxTirePressure);
 
             return new Motorcycle(i_Motor, wheels, licensePlate, model, licenseType, engineVolume);
         }
