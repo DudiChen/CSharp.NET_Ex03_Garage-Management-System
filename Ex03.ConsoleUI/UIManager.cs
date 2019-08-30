@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Text;
 using Ex03.GarageLogic;
@@ -82,8 +83,21 @@ namespace Ex03.ConsoleUI
                             terminateProgram = true;
                             break;
                         }
+
+                    default:
+                        {
+
+                            break;
+                        }
                 }
+                promptToContinue();
             }
+        }
+
+        private static void promptToContinue()
+        {
+            Console.WriteLine("{0}Press Enter to continue...", Environment.NewLine);
+            Console.Read();
         }
 
         private static void AddVehicle()
@@ -109,47 +123,70 @@ namespace Ex03.ConsoleUI
         public static string GetVehicleType()
         {
             string[] supportedVehicleTypes = m_Garage.GetSupportedVehicles();
-            showSupportedVehicleTypes(supportedVehicleTypes);
+            showSubMenu(supportedVehicleTypes, "Please choose the Vehicle's Type from the following options:");
             int UserChoice = Utils.GetUserMenuChoice();
             return supportedVehicleTypes[UserChoice - 1];
         }
 
-        private static void showSupportedVehicleTypes(string[] i_supportedVehicleTypes)
+        public static string GetEnergyType()
         {
-            StringBuilder supportedVehicleTypesMenu = new StringBuilder("Please choose the Vehicle's Type from the following options:");
-            for (int i = 0; i < i_supportedVehicleTypes.Length; i++)
+            string[] supportedEnergyTypes = m_Garage.GetSupportedEnergyTypes();
+            showSubMenu(supportedEnergyTypes, "Please choose the Vehicle's Energy Type from the following options:");
+            int UserChoice = Utils.GetUserMenuChoice();
+            return supportedEnergyTypes[UserChoice - 1];
+        }
+
+        //private static void showSubMenu(Collection<string> i_MenuOptions, string i_UserPromptMessage)
+        private static void showSubMenu(string[] i_MenuOptions, string i_UserPromptMessage)
+        {
+            StringBuilder subMenu = new StringBuilder(i_UserPromptMessage);
+            //for (int i = 0; i < i_MenuOptions.Length; i++)
+            int rowCounter = 0;
+            foreach (string option in i_MenuOptions)
             {
-                supportedVehicleTypesMenu.AppendFormat(
-                    "{0}{1}. {2}.",
+                subMenu.AppendFormat(
+                    "{0}\t{1}. {2}",
                     Environment.NewLine,
-                    i + 1,
-                    i_supportedVehicleTypes[i]);
+                    //i + 1,
+                    ++rowCounter,
+                    //i_MenuOptions[i]);
+                    option);
             }
-            Console.WriteLine(supportedVehicleTypesMenu);
+            Console.WriteLine(subMenu);
         }
 
         public static string GetVehicleStatus()
         {
             string[] vehicleStatusStrings = Enum.GetNames(typeof(eTicketStatus));
-            showDesiredVehicleStatus(vehicleStatusStrings);
+            showSubMenu(vehicleStatusStrings, "Please provide the Vehicle's status from the following options:");
             int UserChoice = Utils.GetUserMenuChoice();
             return vehicleStatusStrings[UserChoice - 1];
         }
 
-        public static void showDesiredVehicleStatus(string[] i_VehicleStatusStrings)
-        {
-            //string[] vehicleStatusStrings = Enum.GetNames(typeof(eTicketStatus));
-            StringBuilder vehicleStatusMenu = new StringBuilder("Please provide the Vehicle's desired status from the following options:");
-            for (int i = 0; i < i_VehicleStatusStrings.Length; i++)
-            {
-                vehicleStatusMenu.AppendFormat("{0}{1}. {2}.", Environment.NewLine, i + 1, i_VehicleStatusStrings[i]);
-            }
-            Console.WriteLine(vehicleStatusMenu);
-        }
-
         private static void showVehiclesLicensePlateNumbers()
         {
+            List<string> licensePlateNumbers = null;
+            string[] promptOptions = new string[] { "Vehicle Status", "Retrieve all"};
+            showSubMenu(promptOptions, "Retrieve License Plate Numbers by:");
+            int userChoice = Utils.GetUserMenuChoice();
+            string[] licensePlateNumberArray;
+            List<string> licensePlateNumbersList = null;
+            StringBuilder outputMessage = new StringBuilder();
+            if (userChoice == 1)
+            {
+                string vehicleStatus = GetVehicleStatus();
+                licensePlateNumbersList = m_Garage.GetListOfLicensePlateNumbers(vehicleStatus);
+                licensePlateNumberArray = licensePlateNumbersList.ToArray();
+                outputMessage.AppendFormat("Vehicle License Plate Numbers of status '{0}' found:", vehicleStatus);
+            }
+            else //(userChoice == 2)
+            {
+                licensePlateNumbersList = m_Garage.GetListOfLicensePlateNumbers();
+                licensePlateNumberArray = licensePlateNumbersList.ToArray();
+                outputMessage.AppendFormat("All available License Plate Numbers:");
+            }
 
+            showSubMenu(licensePlateNumberArray, outputMessage.ToString());
         }
 
         private static void changeVehicleStatus(string i_LicensePlateNumber, string i_NewStatus)
@@ -191,7 +228,7 @@ namespace Ex03.ConsoleUI
         private static void getVehicleInfoByLicensePlateNumber()
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
-            System.Console.WriteLine(m_Garage.ShowVehicleByLicensePlateNumber(licensePlateNumber));
+            System.Console.WriteLine(m_Garage.GetVehicleInfoByLicensePlateNumber(licensePlateNumber));
         }
 
 
@@ -203,9 +240,7 @@ namespace Ex03.ConsoleUI
                 ArgumentWrapper argument = i_Arguments[i];
                 bool isInputRequired = true;
                 int choiceRowCounter = 1;
-                //StringBuilder argumentMessage = new StringBuilder();
-                //argumentMessage.AppendFormat("{0}:{1}", argument.DisplayName, Environment.NewLine);
-                //Console.WriteLine("{0}:{1}", argument.DisplayName, Environment.NewLine);
+
                 if (argument.DisplayName == "License plate number")
                 {
                     argument.InjectValue(i_LicensePlateNumber);
@@ -215,14 +250,15 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("{0}:", argument.DisplayName);
                 if (argument.IsStrictToOptionalValues)
                 {
-                    //argumentMessage.AppendLine("Choose from the following options");
-                    Console.WriteLine("Choose from the following options:");
-                    StringBuilder choiceStringBuilder = new StringBuilder();
-                    foreach (string option in argument.OptionalValues)
-                    {
-                        choiceStringBuilder.AppendFormat("{0}.{1}{2}", choiceRowCounter++, option, Environment.NewLine);
-                    }
-                    System.Console.WriteLine(choiceStringBuilder.ToString());
+                    showSubMenu(argument.OptionalValues, "Choose from the following options:");
+                    
+                    //Console.WriteLine("Choose from the following options:");
+                    //StringBuilder choiceStringBuilder = new StringBuilder();
+                    //foreach (string option in argument.OptionalValues)
+                    //{
+                    //    choiceStringBuilder.AppendFormat("{0}.{1}{2}", choiceRowCounter++, option, Environment.NewLine);
+                    //}
+                    //System.Console.WriteLine(choiceStringBuilder.ToString());
                 }
                 while (isInputRequired)
                 {
