@@ -88,7 +88,7 @@ namespace Ex03.ConsoleUI
                 string ownerPhoneNumber = Utils.GetOwnerPhoneNumber();
                 string vehicleTypeString = GetVehicleType();
                 ArgumentsCollection vehicleArguments = m_Garage.GetArgumentsByVehicleType(vehicleTypeString);
-                // DUDI
+                RunArgumentsWithUser();
                 m_Garage.AddVehicleToGarage(vehicleArguments, vehicleTypeString, ownerName, ownerPhoneNumber);
                 Console.WriteLine("The Vehicle was added Successfully.");
             }
@@ -187,12 +187,14 @@ namespace Ex03.ConsoleUI
 
         }
 
-        private static void RunArgumentsWithUser(OrderedDictionary i_Arguments)
+        private static void RunArgumentsWithUser(ArgumentsCollection i_Arguments)
         {
             System.Console.WriteLine("Please provide the following information:");
-            foreach(DictionaryEntry pairEntry in i_Arguments)
+            for (int i = 0; i < i_Arguments.Length; i++)
+            //foreach (DictionaryEntry pairEntry in i_Arguments)
             {
-                ArgumentWrapper argument = pairEntry.Value as ArgumentWrapper;
+                //ArgumentWrapper argument = pairEntry.Value as ArgumentWrapper;
+                ArgumentWrapper argument = i_Arguments[i];
                 bool isInputRequired = true;
                 int choiceRowCounter = 1;
                 StringBuilder argumentMessage = new StringBuilder();
