@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         private readonly string[] r_OptionalValueStrings;
         private readonly bool r_IsStrictToOptionalValues;
         private readonly Type r_ValidationType;
-        private object m_InputValue;
+        private string m_InputValue;
 
         internal ArgumentWrapper(
             string i_DisplayName,
@@ -61,20 +61,20 @@ namespace Ex03.GarageLogic
         {
             if (r_ValidationType == typeof(int))
             {
-                m_InputValue = int.Parse(i_InputString);
+                m_InputValue = int.Parse(i_InputString).ToString();
             }
             else if (r_ValidationType == typeof(float))
             {
-                m_InputValue = float.Parse(i_InputString);
+                m_InputValue = float.Parse(i_InputString).ToString();
             }
             else if (r_ValidationType == typeof(bool))
             {
                 int choiceInt = int.Parse(i_InputString);
-                m_InputValue = bool.Parse(OptionalValues[choiceInt]);
+                m_InputValue = bool.Parse(OptionalValues[choiceInt]).ToString();
             }
             else if (r_ValidationType.IsEnum)
             {
-                m_InputValue = Enum.Parse(r_ValidationType, i_InputString);
+                m_InputValue = Enum.Parse(r_ValidationType, i_InputString).ToString();
             }
             else
             {
@@ -82,7 +82,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public object Response
+        public string Response
         {
             get
             {

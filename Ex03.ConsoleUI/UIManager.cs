@@ -19,6 +19,7 @@ namespace Ex03.ConsoleUI
         {
             m_Garage = new Garage();
 
+            
             Utils.ShowMainMenu();
             int userChoice = Utils.GetUserMenuChoice() - 1;
             while (!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
@@ -27,7 +28,7 @@ namespace Ex03.ConsoleUI
             }
             eMainMenuOptions mainMenuOption = (eMainMenuOptions)userChoice;
 
-            switch(mainMenuOption)
+            switch (mainMenuOption)
             {
                 case eMainMenuOptions.AddVehicle:
                     {
@@ -196,7 +197,7 @@ namespace Ex03.ConsoleUI
                 //ArgumentWrapper argument = pairEntry.Value as ArgumentWrapper;
                 ArgumentWrapper argument = i_Arguments[i];
                 bool isInputRequired = true;
-                //int choiceRowCounter = 1;
+                int choiceRowCounter = 1;
                 //StringBuilder argumentMessage = new StringBuilder();
                 //argumentMessage.AppendFormat("{0}:{1}", argument.DisplayName, Environment.NewLine);
                 //Console.WriteLine("{0}:{1}", argument.DisplayName, Environment.NewLine);
@@ -211,13 +212,14 @@ namespace Ex03.ConsoleUI
                 {
                     //argumentMessage.AppendLine("Choose from the following options");
                     Console.WriteLine("Choose from the following options:");
+                    StringBuilder choiceStringBuilder = new StringBuilder();
                     foreach (string option in argument.OptionalValues)
                     {
-                        //argumentMessage.AppendFormat("{0}.{1}{2}", choiceRowCounter++, option, Environment.NewLine);
-                        Console.WriteLine("{0}.{1}{2}", i + 1, option, Environment.NewLine);
+                        choiceStringBuilder.AppendFormat("{0}.{1}{2}", choiceRowCounter++, option, Environment.NewLine);
                     }
+                    System.Console.WriteLine(choiceStringBuilder.ToString());
                 }
-                while(isInputRequired)
+                while (isInputRequired)
                 {
                     try
                     {
@@ -228,7 +230,7 @@ namespace Ex03.ConsoleUI
                     {
                         System.Console.WriteLine("Error: {0}", valueOutOfRangeException.Message);
                     }
-                
+
                 }
             }
         }
