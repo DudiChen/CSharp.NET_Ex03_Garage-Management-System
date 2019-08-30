@@ -190,7 +190,8 @@ namespace Ex03.ConsoleUI
 
         private static void getVehicleInfoByLicensePlateNumber()
         {
-
+            string licensePlateNumber = Utils.GetLicensePlateNumber();
+            System.Console.WriteLine(m_Garage.ShowVehicleByLicensePlateNumber(licensePlateNumber));
         }
 
 
@@ -238,7 +239,7 @@ namespace Ex03.ConsoleUI
                             }
                             else
                             {
-                                inputString = argument.OptionalValues[inputInt];
+                                inputString = argument.OptionalValues[inputInt-1];
                             }
                         }
                         argument.InjectValue(inputString);
