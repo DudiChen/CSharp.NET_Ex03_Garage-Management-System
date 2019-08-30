@@ -54,9 +54,9 @@ namespace Ex03.ConsoleUI
                             break;
                         }
 
-                    case eMainMenuOptions.InflateWheels:
+                    case eMainMenuOptions.InflateWheelsToMaximum:
                         {
-                            inflateWheels();
+                            inflateWheelsToMaximum();
                             break;
                         }
 
@@ -90,13 +90,18 @@ namespace Ex03.ConsoleUI
                             break;
                         }
                 }
-                promptToContinue();
+
+                if (!terminateProgram)
+                {
+                    promptToContinue();
+                }
             }
         }
 
         private static void promptToContinue()
         {
             Console.WriteLine("{0}Press Enter to continue...", Environment.NewLine);
+            Console.Read();
             Console.Read();
         }
 
@@ -210,9 +215,10 @@ namespace Ex03.ConsoleUI
             changeVehicleStatus(licensePlateNumber, newStatus);
         }
 
-        private static void inflateWheels()
+        private static void inflateWheelsToMaximum()
         {
-
+            string licensePlateNumber = Utils.GetLicensePlateNumber();
+            //m_Garage.
         }
 
         private static void fuelGasolineVehicle()

@@ -13,7 +13,7 @@ namespace Ex03.ConsoleUI
             AddVehicle,
             ShowVehiclesLicensePlateNumbers,
             ChangeVehicleStatus,
-            InflateWheels,
+            InflateWheelsToMaximum,
             FuelGasolineVehicle,
             ChargeElectricVehicle,
             GetVehicleInfoByLicensePlateNumber,
@@ -32,7 +32,7 @@ namespace Ex03.ConsoleUI
                         eMainMenuOptions.ChangeVehicleStatus,
                         "Change Vehicle's Status in Garage By License-Plate Number"
                     },
-                    { eMainMenuOptions.InflateWheels, "Fully inflate a Vehicle's Wheels By License-Plate Number" },
+                    { eMainMenuOptions.InflateWheelsToMaximum, "Fully inflate a Vehicle's Wheels By License-Plate Number" },
                     { eMainMenuOptions.FuelGasolineVehicle, "Add Fuel to a Gasoline Vehicle By License-Plate Number" },
                     {
                         eMainMenuOptions.ChargeElectricVehicle,

@@ -8,7 +8,6 @@ using eSupportedVehicles = Ex03.GarageLogic.VehicleFactory.eSupportedVehicles;
 
 namespace Ex03.GarageLogic
 {
-    // TBD Access Modifiers!
     public class Garage
     {
         private Dictionary<string, GarageTicket> m_GarageTickets;
@@ -138,6 +137,11 @@ Owner's phone number: {1}{2}",
                 Environment.NewLine);
             showVehicleInfoStringBuilder.AppendLine(m_vehicleInventory[i_LicensePlateNumber].ToString());
             return showVehicleInfoStringBuilder.ToString();
+        }
+
+        public static void InflateWheelsToMaximum(string i_LicensePlateNumber)
+        {
+
         }
 
         private eSupportedVehicles parseVehicleTypeFromString(string i_VehicleTypeStr)
