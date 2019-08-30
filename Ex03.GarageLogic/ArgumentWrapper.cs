@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.CodeDom;
 using Ex03.GarageLogic.Exceptions;
 
@@ -50,7 +49,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         public Type ResponseType
         {
             get
@@ -72,7 +70,7 @@ namespace Ex03.GarageLogic
             else if (r_ValidationType == typeof(bool))
             {
                 int choiceInt = int.Parse(i_InputString);
-                m_InputValue = Boolean.Parse(OptionalValues[choiceInt]);
+                m_InputValue = bool.Parse(OptionalValues[choiceInt]);
             }
             else if (r_ValidationType.IsEnum)
             {
@@ -88,7 +86,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return  m_InputValue;
+                return m_InputValue;
             }
         }
     }

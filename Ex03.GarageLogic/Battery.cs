@@ -1,15 +1,14 @@
 ﻿using System;
-using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
-
 using Ex03.GarageLogic.Exceptions;
+using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic
 {
     internal class Battery : EnergyContainer
     {
         private readonly float r_MaximumWorkingHours;
-        private float m_RemainingWorkingHours;
         private readonly eEnergyTypes[] r_SupportedElectricityTypes;
+        private float m_RemainingWorkingHours;
 
         public Battery(eEnergyTypes[] i_SupportedElectricityTypes, float i_MaximumWorkingHours, float i_RemainingWorkingHours)
         {
@@ -36,6 +35,7 @@ namespace Ex03.GarageLogic
         public override void Energize(eEnergyTypes i_ElectricityType, float i_EnergyAmountToAdd)
         {
             bool isSupportedGasolineType = false;
+
             foreach (eEnergyTypes SupportedElectricityType in r_SupportedElectricityTypes)
             {
                 if (i_ElectricityType == SupportedElectricityType)
@@ -84,7 +84,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(@"Battery remaining: {0}",GetRemainingEnergyLevel());
+            return string.Format(@"Battery remaining: {0}", GetRemainingEnergyLevel());
         }
     }
 }

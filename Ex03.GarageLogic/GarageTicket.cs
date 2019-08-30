@@ -10,8 +10,9 @@ namespace Ex03.GarageLogic
     {
         public enum eTicketStatus
         {
-            InProgress,Ready,Paid
+            InProgress, Ready, Paid
         }
+
         private readonly string r_OwnerName;
         private readonly string r_OwnerPhoneNumber;
         private readonly string r_VehicleLicenseNumber;
@@ -30,6 +31,7 @@ namespace Ex03.GarageLogic
             {
                 return m_TicketStatus;
             }
+
             set
             {
                 m_TicketStatus = value;

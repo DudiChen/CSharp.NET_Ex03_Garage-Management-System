@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using eMotorType = Ex03.GarageLogic.VehicleFactory.eMotorType;
-using eEnergyTypes  = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
+using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic
 {
     internal class Motor : IEnergyManagement
     {
-        ////private readonly List<eEnergyTypes> m_SupportedEnergyType;
-        protected EnergyContainer m_EnergyContainer;
         protected readonly eMotorType r_MotorType;
-        ////private readonly eEnergyTypes[] r_SupportedGasolineTypes;
+        protected EnergyContainer m_EnergyContainer;
 
-        ////protected internal Motor(List<eEnergyTypes> i_SupportedEnergyType, IEnergyContainer i_EnergyContainer, eMotorType i_MotorType)
-        //protected internal Motor(eMotorType i_MotorType)
         protected internal Motor(EnergyContainer i_EnergyContainer, eMotorType i_MotorType)
         {
-            ////m_SupportedEnergyType = i_SupportedEnergyType;
             m_EnergyContainer = i_EnergyContainer;
             r_MotorType = i_MotorType;
         }
@@ -26,12 +21,12 @@ namespace Ex03.GarageLogic
             get
             {
                 return r_MotorType;
-            }   
+            }
         }
 
         internal float CalculateRemainingEnergyPercentage()
         {
-            return ((m_EnergyContainer.GetRemainingEnergyLevel() / m_EnergyContainer.GetMaxEnergyCapacity()) / 100);
+            return (m_EnergyContainer.GetRemainingEnergyLevel() / m_EnergyContainer.GetMaxEnergyCapacity()) / 100;
         }
 
         public eEnergyTypes[] GetSupportedEnergyTypes()

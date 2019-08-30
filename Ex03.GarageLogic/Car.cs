@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using eCarColors = Ex03.GarageLogic.VehicleFactory.eCarColors;
 using eNumberOfCarDoors = Ex03.GarageLogic.VehicleFactory.eNumberOfCarDoors;
-//using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic
 {
-    internal class Car: Vehicle
+    internal class Car : Vehicle
     {
-        
         private readonly eCarColors r_carColor;
         private readonly eNumberOfCarDoors r_NumberOfDoors;
         internal const int k_NumberOfWheels = 4;
         internal const float k_MaxGasTank = 5.5f;
-        
 
         protected internal Car(
             Motor i_Motor,
@@ -28,7 +25,6 @@ namespace Ex03.GarageLogic
             r_carColor = i_CarColor;
             r_NumberOfDoors = i_NumberOfDoors;
         }
-
 
         internal eCarColors Color
         {
@@ -46,11 +42,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        //internal override void Energize(eEnergyTypes i_EnergyType, float i_AmountToAdd)
-        //{
-        //    m_Motor.Energize(i_EnergyType, i_AmountToAdd);
-        //}
-
         public override string ToString()
         {
             StringBuilder carDisplayString = new StringBuilder();
@@ -62,11 +53,5 @@ Number of doors: {1}",
                 r_NumberOfDoors);
             return carDisplayString.ToString();
         }
-
     }
 }
-/*
- * מספר רישוי, שם דגם, שם בעלים, מצב
-במוסך, פירוט הגלגלים )לחץ אוויר ויצרן(, מצב דלק + סוג דלק / מצב מצבר, ושאר הפרטים
-הרלוונטיים לסוג הרכב הספציפי(
-*/
