@@ -139,7 +139,13 @@ Owner's phone number: {1}{2}",
             return showVehicleInfoStringBuilder.ToString();
         }
 
-        public static void InflateWheelsToMaximum(string i_LicensePlateNumber)
+        public void InflateWheelsToMaximum(string i_LicensePlateNumber)
+        {
+            Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
+            vehicle.InflateWheelsToMaxAirPressure();
+        }
+
+        public void FuelGasolineVehicle()
         {
 
         }

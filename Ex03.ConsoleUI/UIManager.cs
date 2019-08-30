@@ -218,11 +218,12 @@ namespace Ex03.ConsoleUI
         private static void inflateWheelsToMaximum()
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
-            //m_Garage.
+            m_Garage.InflateWheelsToMaximum(licensePlateNumber);
         }
 
         private static void fuelGasolineVehicle()
         {
+            string licensePlateNumber = Utils.GetLicensePlateNumber();
 
         }
 

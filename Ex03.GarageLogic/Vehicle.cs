@@ -11,14 +11,16 @@ namespace Ex03.GarageLogic
         protected readonly string r_LicensePlateNumber;
         protected readonly string r_Model;
         protected readonly Wheel[] r_Wheels;
+        protected readonly float r_MaxWheelAirPressure;
         protected readonly Motor r_Motor;
 
         public abstract override string ToString();
 
-        protected internal Vehicle(Motor i_Motor, Wheel[] i_Wheels, string i_LicensePlateNumber, string i_Model)
+        protected internal Vehicle(Motor i_Motor, Wheel[] i_Wheels, float i_MaxWheelAirPressure, string i_LicensePlateNumber, string i_Model)
         {
             r_Motor = i_Motor;
             r_Wheels = i_Wheels;
+            r_MaxWheelAirPressure = i_MaxWheelAirPressure;
             r_LicensePlateNumber = i_LicensePlateNumber;
             r_Model = i_Model;
         }
@@ -44,17 +46,42 @@ namespace Ex03.GarageLogic
             }
         }
 
-        internal void InflateWheel(uint i_WheelNumber, float i_AirPressureToAdd)
+        internal int NumberOfWheels
         {
-            if (i_WheelNumber <= r_Wheels.Length)
+            get
             {
-                r_Wheels[(int)i_WheelNumber].Inflate(i_AirPressureToAdd);
-            }
-            else
-            {
-                // Throw Exception
+                return r_Wheels.Length;
             }
         }
+
+        internal float MaxWheelAirPressure
+        {
+            get
+            {
+                return r_MaxWheelAirPressure;
+            }
+        }
+
+        internal void InflateWheelsToMaxAirPressure()
+        {
+            foreach(Wheel wheel in r_Wheels)
+            {
+                float airPressureAmountToAdd = r_MaxWheelAirPressure - wheel.CurrentTirePressure;
+                wheel.Inflate(airPressureAmountToAdd);
+            }
+        }
+
+        ////internal void InflateWheel(uint i_WheelNumber, float i_AirPressureToAdd)
+        ////{
+        ////    if (i_WheelNumber <= r_Wheels.Length)
+        ////    {
+        ////        r_Wheels[(int)i_WheelNumber].Inflate(i_AirPressureToAdd);
+        ////    }
+        ////    else
+        ////    {
+        ////        // Throw Exception
+        ////    }
+        ////}
 
         public eMotorType MotorType
         {

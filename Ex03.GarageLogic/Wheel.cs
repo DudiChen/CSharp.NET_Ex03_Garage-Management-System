@@ -31,14 +31,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        internal float MaxTirePressure
-        {
-            get
-            {
-                return r_MaxTirePressure;
-            }
-        }
-
         internal float CurrentTirePressure
         {
             get
@@ -46,6 +38,14 @@ namespace Ex03.GarageLogic
                 return m_CurrentTirePressure;
             }
         }
+
+        ////internal float MaxTirePressure
+        ////{
+        ////    get
+        ////    {
+        ////        return r_MaxTirePressure;
+        ////    }
+        ////}
 
         internal void Inflate(float i_AirPressureToAdd)
         {
