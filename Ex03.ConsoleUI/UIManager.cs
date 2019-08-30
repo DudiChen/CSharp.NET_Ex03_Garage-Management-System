@@ -88,7 +88,7 @@ namespace Ex03.ConsoleUI
                 string ownerPhoneNumber = Utils.GetOwnerPhoneNumber();
                 string vehicleTypeString = GetVehicleType();
                 ArgumentsCollection vehicleArguments = m_Garage.GetArgumentsByVehicleType(vehicleTypeString);
-                RunArgumentsWithUser();
+                RunArgumentsWithUser(vehicleArguments, licensePlateNumber);
                 m_Garage.AddVehicleToGarage(vehicleArguments, vehicleTypeString, ownerName, ownerPhoneNumber);
                 Console.WriteLine("The Vehicle was added Successfully.");
             }
@@ -187,7 +187,7 @@ namespace Ex03.ConsoleUI
 
         }
 
-        private static void RunArgumentsWithUser(ArgumentsCollection i_Arguments)
+        private static void RunArgumentsWithUser(ArgumentsCollection i_Arguments, string i_LicensePlateNumber)
         {
             System.Console.WriteLine("Please provide the following information:");
             for (int i = 0; i < i_Arguments.Length; i++)
@@ -196,21 +196,29 @@ namespace Ex03.ConsoleUI
                 //ArgumentWrapper argument = pairEntry.Value as ArgumentWrapper;
                 ArgumentWrapper argument = i_Arguments[i];
                 bool isInputRequired = true;
-                int choiceRowCounter = 1;
-                StringBuilder argumentMessage = new StringBuilder();
-                argumentMessage.AppendFormat("{0}:{1}", argument.DisplayName, Environment.NewLine);
-                if(argument.IsStrictToOptionalValues)
+                //int choiceRowCounter = 1;
+                //StringBuilder argumentMessage = new StringBuilder();
+                //argumentMessage.AppendFormat("{0}:{1}", argument.DisplayName, Environment.NewLine);
+                //Console.WriteLine("{0}:{1}", argument.DisplayName, Environment.NewLine);
+                if (argument.DisplayName == "License plate number")
                 {
-                    argumentMessage.AppendLine("Choose from the following options");
+                    argument.InjectValue(i_LicensePlateNumber);
+                    continue;
+                }
+
+                Console.WriteLine("{0}:", argument.DisplayName);
+                if (argument.IsStrictToOptionalValues)
+                {
+                    //argumentMessage.AppendLine("Choose from the following options");
+                    Console.WriteLine("Choose from the following options:");
                     foreach (string option in argument.OptionalValues)
                     {
-                        argumentMessage.AppendFormat("{0}.{1}{2}", choiceRowCounter++, option, Environment.NewLine);
-
+                        //argumentMessage.AppendFormat("{0}.{1}{2}", choiceRowCounter++, option, Environment.NewLine);
+                        Console.WriteLine("{0}.{1}{2}", i + 1, option, Environment.NewLine);
                     }
                 }
                 while(isInputRequired)
                 {
-
                     try
                     {
                         argument.InjectValue(System.Console.ReadLine());
