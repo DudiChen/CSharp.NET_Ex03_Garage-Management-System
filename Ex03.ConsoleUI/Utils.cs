@@ -111,6 +111,7 @@ namespace Ex03.ConsoleUI
             return System.Console.ReadLine();
         }
 
+        
 
         //public static string GetVehicleType(string[] i_SupportedVehicleTypes)
         //{

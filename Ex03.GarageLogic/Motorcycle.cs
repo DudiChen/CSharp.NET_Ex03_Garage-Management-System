@@ -6,6 +6,8 @@ namespace Ex03.GarageLogic
     internal class Motorcycle : Vehicle
     {
         internal const int k_NumberOfWheels = 2;
+        internal const int k_MaxTirePressure = 30;
+        internal const float k_MaxBattery = 5.5f;
 
         internal enum eLicenseType
         {
