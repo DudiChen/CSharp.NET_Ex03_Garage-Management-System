@@ -3,18 +3,20 @@
 
 namespace Ex03.GarageLogic
 {
-    public abstract class Motorcycle : Vehicle
+    internal class Motorcycle : Vehicle
     {
-        public enum eLicenseType
+        internal const int k_NumberOfWheels = 2;
+
+        internal enum eLicenseType
         {
             A, A1, AB, B1
         }
 
-        private readonly eLicenseType r_LicenseType;
+                                                                                                                                                                                                                                                                           private readonly eLicenseType r_LicenseType;
         private readonly int r_EngineVolume;
 
-        protected Motorcycle(string i_Model, string i_LicensePlateNumber, eLicenseType i_LicenseType, int i_EngineVolume, Motor i_Motor)
-            : base(i_Model, i_LicensePlateNumber, i_Motor)
+        internal Motorcycle( Motor i_Motor,Wheel[] i_Wheels,string i_Model, string i_LicensePlateNumber, eLicenseType i_LicenseType, int i_EngineVolume)
+            : base(i_Motor,i_Wheels,i_LicensePlateNumber,i_Model)
         {
             r_LicenseType = i_LicenseType;
             r_EngineVolume = i_EngineVolume;

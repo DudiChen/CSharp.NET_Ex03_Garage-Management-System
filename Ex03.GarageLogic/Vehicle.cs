@@ -13,6 +13,7 @@ namespace Ex03.GarageLogic
         protected Wheel[] m_Wheels;
         protected Motor m_Motor;
 
+
         protected internal Vehicle(Motor i_Motor, Wheel[] i_Wheels, string i_LicensePlateNumber, string i_Model)
         {
             m_Motor = i_Motor;
