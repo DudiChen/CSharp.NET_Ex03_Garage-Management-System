@@ -9,13 +9,15 @@ using Ex03.GarageLogic.ArgumentsUtils;
 
 namespace Ex03.GarageLogic
 {
-
-
-    public static class VehicleFactory
+    internal static class VehicleFactory
     {
         public enum eSupportedVehicles
         {
-            GasolineCar = 1, ElectricCar, GasolineMotorcycle, ElectricMotorcycle, Truck,
+            GasolineCar = 1,
+            ElectricCar,
+            GasolineMotorcycle,
+            ElectricMotorcycle,
+            Truck,
             GasolineTruck,
             ElectricTruck
         }

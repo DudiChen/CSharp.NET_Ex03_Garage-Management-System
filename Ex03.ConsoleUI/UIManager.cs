@@ -2,59 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-//using System.Linq;
-//using System.Security.AccessControl;
 using System.Text;
 using Ex03.GarageLogic;
 using Ex03.GarageLogic.Exceptions;
 using eMainMenuOptions = Ex03.ConsoleUI.Utils.eMainMenuOptions;
+using eTicketStatus = Ex03.GarageLogic.Garage.eTicketStatus;
+using ArgumentsCollection = Ex03.GarageLogic.ArgumentsUtils.ArgumentsCollection;
 
 namespace Ex03.ConsoleUI
 {
     public static class UIManager
     {
-        //public enum eMainMenuOptions
-        //{
-        //    AddVehicle,
-        //    ShowVehiclesLicensePlateNumbers,
-        //    ChangeVehicleStatus,
-        //    InflateWheels,
-        //    FuelGasolineVehicle,
-        //    ChargeElectricVehicle,
-        //    GetVehicleInfoByLicensePlateNumber,
-        //    QuitProgram
-        //}
+        private static GarageLogic.Garage m_Garage;
 
-        //public static Dictionary<eMainMenuOptions, string> MainMenuOptionsMap = new Dictionary<eMainMenuOptions, string>
-        //    () {
-        //        {eMainMenuOptions.AddVehicle, "Check-in a Vehicle to Garage"},
-        //        {eMainMenuOptions.ShowVehiclesLicensePlateNumbers, "Show License-Plate Number List of Vehicles in Garage"},
-        //        {eMainMenuOptions.ChangeVehicleStatus, "Change Vehicle's Status in Garage By License-Plate Number"},
-        //        {eMainMenuOptions.InflateWheels, "Fully inflate a Vehicle's Wheels By License-Plate Number"},
-        //        {eMainMenuOptions.FuelGasolineVehicle, "Add Fuel to a Gasoline Vehicle By License-Plate Number"},
-        //        {eMainMenuOptions.ChargeElectricVehicle, "Add Charge to a Electric Vehicle By License-Plate Number"},
-        //        {eMainMenuOptions.GetVehicleInfoByLicensePlateNumber, "Get Vehicle Information By License-Plate Number"},
-        //        {eMainMenuOptions.QuitProgram, "Exit Garage Program"}
-        //    };
-
-        //private static string m_LineSeparatorThick = "==================================================================";
-        //private static string m_LineSeparatorThin = "------------------------------------------------------------------";
-        //private static readonly int sr_MainMenuNumberOfOptions = Enum.GetNames(typeof(eMainMenuOptions)).Length;
-
-        //private static string GetWelcomeMessage()
-        //{
-        //    StringBuilder welcomeMessage = new StringBuilder();
-        //    welcomeMessage.AppendFormat(
-        //        "{0}{1}{0}", m_LineSeparatorThick,
-        //        Environment.NewLine);
-        //    welcomeMessage.AppendFormat("\t\t:::\tGarage Management System\t:::{0}", Environment.NewLine);
-        //    welcomeMessage.AppendFormat("{0}{1}", m_LineSeparatorThick, Environment.NewLine);
-
-        //    return welcomeMessage.ToString();
-        //}
-
-        public static void MenuHandler()
+        public static void Run()
         {
+            m_Garage = new Garage();
+
             Utils.ShowMainMenu();
             int userChoice = Utils.GetUserMenuChoice();
             while (!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
@@ -67,39 +31,39 @@ namespace Ex03.ConsoleUI
             {
                 case eMainMenuOptions.AddVehicle:
                     {
-
+                        AddVehicle();
                         break;
                     }
 
                 case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
                     {
-
+                        showVehiclesLicensePlateNumbers();
                         break;
                     }
 
                 case eMainMenuOptions.ChangeVehicleStatus:
                     {
-
+                        changeVehicleStatus();
                         break;
                     }
                 case eMainMenuOptions.InflateWheels:
                     {
-
+                        inflateWheels();
                         break;
                     }
                 case eMainMenuOptions.FuelGasolineVehicle:
                     {
-
+                        fuelGasolineVehicle();
                         break;
                     }
                 case eMainMenuOptions.ChargeElectricVehicle:
                     {
-
+                        chargeElectricVehicle();
                         break;
                     }
                 case eMainMenuOptions.GetVehicleInfoByLicensePlateNumber:
                     {
-
+                        getVehicleInfoByLicensePlateNumber();
                         break;
                     }
                 case eMainMenuOptions.QuitProgram:
@@ -108,60 +72,121 @@ namespace Ex03.ConsoleUI
                         break;
                     }
             }
+        }
+
+        private static void AddVehicle()
+        {
+            string licensePlateNumber = Utils.GetLicensePlateNumber();
+            if (m_Garage.HasVehicleVisited(licensePlateNumber))
+            {
+                Console.WriteLine("Vehicle under License Plate Number '{0}' already in the system.", licensePlateNumber);
+                changeVehicleStatus(licensePlateNumber, eTicketStatus.InProgress.ToString());
+            }
+            else
+            {
+                string ownerName = Utils.GetOwnerName();
+                string ownerPhoneNumber = Utils.GetOwnerPhoneNumber();
+                string vehicleTypeString = GetVehicleType();
+                ArgumentsCollection vehicleArguments = m_Garage.GetArgumentsByVehicleType(vehicleTypeString);
+                m_Garage.AddVehicleToGarage(vehicleArguments, vehicleTypeString, ownerName, ownerPhoneNumber);
+                Console.WriteLine("The Vehicle was added Successfully.");
+            }
+        }
+
+        public static string GetVehicleType()
+        {
+            string[] supportedVehicleTypes = m_Garage.GetSupportedVehicles();
+            showSupportedVehicleTypes(supportedVehicleTypes);
+            int UserChoice = Utils.GetUserMenuChoice();
+            return supportedVehicleTypes[UserChoice - 1];
+        }
+
+        private static void showSupportedVehicleTypes(string[] i_supportedVehicleTypes)
+        {
+            StringBuilder supportedVehicleTypesMenu = new StringBuilder("Please choose the Vehicle's Type from the following options:");
+            for (int i = 0; i < i_supportedVehicleTypes.Length; i++)
+            {
+                supportedVehicleTypesMenu.AppendFormat(
+                    "{0}{1}. {2}.",
+                    Environment.NewLine,
+                    i + 1,
+                    supportedVehicleTypesMenu[i]);
+            }
+            Console.WriteLine(supportedVehicleTypesMenu);
+        }
+
+        public static string GetVehicleStatus()
+        {
+            string[] vehicleStatusStrings = Enum.GetNames(typeof(eTicketStatus));
+            showDesiredVehicleStatus(vehicleStatusStrings);
+            int UserChoice = Utils.GetUserMenuChoice();
+            return vehicleStatusStrings[UserChoice - 1];
+        }
+
+        public static void showDesiredVehicleStatus(string[] i_VehicleStatusStrings)
+        {
+            //string[] vehicleStatusStrings = Enum.GetNames(typeof(eTicketStatus));
+            StringBuilder vehicleStatusMenu = new StringBuilder("Please provide the Vehicle's desired status from the following options:");
+            for (int i = 0; i < i_VehicleStatusStrings.Length; i++)
+            {
+                vehicleStatusMenu.AppendFormat("{0}{1}. {2}.", Environment.NewLine, i + 1, i_VehicleStatusStrings[i]);
+            }
+            Console.WriteLine(vehicleStatusMenu);
+        }
+
+        private static void showVehiclesLicensePlateNumbers()
+        {
 
         }
 
-        //public static void ShowMainMenu()
-        //{
-        //    StringBuilder menuLinesConcatenator = new StringBuilder("\t\t:::::\tMain Menu\t:::::");
+        private static void changeVehicleStatus(string i_LicensePlateNumber, string i_NewStatus)
+        {
+            bool hasChangedStatus = m_Garage.ChangeVehicleStatus(i_LicensePlateNumber, i_NewStatus);
+            if (hasChangedStatus)
+            {
+                Console.WriteLine("Vehicle's Status was set to '{0}'", i_NewStatus);
+            }
+            else
+            {
+                Console.WriteLine("Vehicle's Status was already set to '{0}'", i_NewStatus);
+            }
+        }
 
-        //    menuLinesConcatenator.AppendFormat("{0}{0}Please choose from the below menu options:", Environment.NewLine);
+        // TBD: Should we change method name ????
+        private static void changeVehicleStatus()
+        {
+            string licensePlateNumber = Utils.GetLicensePlateNumber();
+            string newStatus = GetVehicleStatus();
+            changeVehicleStatus(licensePlateNumber, newStatus);
+        }
 
-        //    for(int i = 0; i <= sr_MainMenuNumberOfOptions; i++)
-        //    {
-        //        menuLinesConcatenator.AppendFormat("{0}{1}. {2}.", Environment.NewLine, i + 1, MainMenuOptionsMap[(eMainMenuOptions)i]);
-        //    }
+        private static void inflateWheels()
+        {
 
-        //    Console.WriteLine(menuLinesConcatenator);
+        }
 
-        //    //System.Console.Clear();
+        private static void fuelGasolineVehicle()
+        {
 
-        //    //int menuRowCounter = 1;
-        //    //////int inputChoice;
-        //    //StringBuilder menuDisplayStringBuilder = new StringBuilder();
-        //    //menuDisplayStringBuilder.AppendLine("Choose a option from the garage:");
-        //    //menuDisplayStringBuilder.AppendFormat("{0}.Add a new Vehicle to garage{1}", menuRowCounter++, Environment.NewLine);
-        //    //menuDisplayStringBuilder.AppendFormat("{0}.Show all vehicles in the garage{1}", menuRowCounter++, Environment.NewLine);
-        //    //menuDisplayStringBuilder.AppendFormat("{0}.Show vehicles in the garage by status{1}", menuRowCounter++, Environment.NewLine);
-        //    //menuDisplayStringBuilder.AppendFormat("{0}.Change vehicle's status{1}", menuRowCounter++, Environment.NewLine);
-        //    //menuDisplayStringBuilder.AppendFormat("{0}.Fill vehicle's wheels{1}", menuRowCounter++, Environment.NewLine);
-        //    //menuDisplayStringBuilder.AppendFormat("{0}.Full Gasoline vehicle{1}", menuRowCounter++, Environment.NewLine);
-        //    //menuDisplayStringBuilder.AppendFormat("{0}.Charge electric vehicle{1}", menuRowCounter++, Environment.NewLine);
-        //    ////menuDisplayStringBuilder.AppendFormat("{0}.Full Gasoline vehicle{1}", menuRowCounter++, Environment.NewLine);
-        //    //menuDisplayStringBuilder.AppendFormat("{0}.Show car information{1}", menuRowCounter++, Environment.NewLine);
+        }
 
+        private static void chargeElectricVehicle()
+        {
 
-        //    ////while(!int.TryParse(System.Console.ReadLine(), out inputChoice))
-        //    ////{
-        //    ////    System.Console.WriteLine("Input incorrect reenter input:");
-        //    ////}
+        }
 
-        //    ////return inputChoice;
-        //}
+        private static void getVehicleInfoByLicensePlateNumber()
+        {
 
-        //public static int GetUserMenuChoice()
-        //{
-        //    string inputChoiceStr = System.Console.ReadLine();
-        //    int inputChoice;
-        //    while (!int.TryParse(System.Console.ReadLine(), out inputChoice))
-        //    {
-        //        System.Console.WriteLine("Invalid input: Please try again...");
-        //    }
+        }
 
-        //    return inputChoice;
-        //}
+        // ?????
+        private static void quitProgram()
+        {
 
-        public static void RunArgumentsWithUser(OrderedDictionary i_Arguments)
+        }
+
+        private static void RunArgumentsWithUser(OrderedDictionary i_Arguments)
         {
             System.Console.WriteLine("Please provide the following information:");
             foreach(DictionaryEntry pairEntry in i_Arguments)
@@ -196,8 +221,5 @@ namespace Ex03.ConsoleUI
                 }
             }
         }
-
-        }
-
     }
 }
