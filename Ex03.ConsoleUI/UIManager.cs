@@ -20,7 +20,7 @@ namespace Ex03.ConsoleUI
             m_Garage = new Garage();
 
             Utils.ShowMainMenu();
-            int userChoice = Utils.GetUserMenuChoice();
+            int userChoice = Utils.GetUserMenuChoice() - 1;
             while (!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
             {
                 Console.WriteLine("Invalid input: Choice made not in range. Please try again...");
@@ -88,6 +88,7 @@ namespace Ex03.ConsoleUI
                 string ownerPhoneNumber = Utils.GetOwnerPhoneNumber();
                 string vehicleTypeString = GetVehicleType();
                 ArgumentsCollection vehicleArguments = m_Garage.GetArgumentsByVehicleType(vehicleTypeString);
+                // DUDI
                 m_Garage.AddVehicleToGarage(vehicleArguments, vehicleTypeString, ownerName, ownerPhoneNumber);
                 Console.WriteLine("The Vehicle was added Successfully.");
             }
@@ -110,7 +111,7 @@ namespace Ex03.ConsoleUI
                     "{0}{1}. {2}.",
                     Environment.NewLine,
                     i + 1,
-                    supportedVehicleTypesMenu[i]);
+                    i_supportedVehicleTypes[i]);
             }
             Console.WriteLine(supportedVehicleTypesMenu);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Ex03.GarageLogic.ArgumentsUtils;
@@ -17,13 +18,14 @@ namespace Ex03.GarageLogic
             InProgress, Ready, Paid
         }
 
+        public Garage()
+        {
+            m_GarageTickets = new Dictionary<string, GarageTicket>();
+            m_vehicleInventory = new Dictionary<string, Vehicle>();
+
+        }
         internal void AddTicket(string i_VehicleLicenseNumber, GarageTicket i_GarageTicket)
         {
-            if (m_GarageTickets == null)
-            {
-                m_GarageTickets = new Dictionary<string, GarageTicket>();
-            }
-
             if (!m_GarageTickets.ContainsKey(i_VehicleLicenseNumber))
             {
                 m_GarageTickets.Add(i_VehicleLicenseNumber, i_GarageTicket);
@@ -82,10 +84,6 @@ namespace Ex03.GarageLogic
         {
             eSupportedVehicles vehicleType = parseVehicleTypeFromString(i_VehicleTypeString);
             Vehicle newVehicle = VehicleFactory.BuildVehicle(vehicleType, i_Arguments);
-            if (m_vehicleInventory == null)
-            {
-                m_vehicleInventory = new Dictionary<string, Vehicle>();
-            }
 
             m_vehicleInventory.Add(newVehicle.LicensePlateNumber, newVehicle);
             AddTicket(newVehicle.LicensePlateNumber, new GarageTicket(i_OwnerName, i_OwnerPhoneNumber, newVehicle.LicensePlateNumber));
@@ -130,10 +128,16 @@ namespace Ex03.GarageLogic
         private eSupportedVehicles parseVehicleTypeFromString(string i_VehicleTypeStr)
         {
             eSupportedVehicles result;
-            if (!Enum.TryParse(i_VehicleTypeStr, out result))
+            try
+            {
+                
+                result = (eSupportedVehicles)Enum.Parse(typeof(eSupportedVehicles), i_VehicleTypeStr);
+            }
+            catch(Exception e)
             {
                 throw new ArgumentException("Error: Received wrong argument value for VehicleType");
             }
+           
 
             return result;
         }
@@ -141,9 +145,13 @@ namespace Ex03.GarageLogic
         private eTicketStatus parseVehicleStatusFromString(string i_VehicleStatusString)
         {
             eTicketStatus result;
-            if (!Enum.TryParse(i_VehicleStatusString, out result))
+            try
             {
-                throw new ArgumentException("Error: Received wrong argument value for VehicleStatus");
+                result = (eTicketStatus)Enum.Parse(typeof(eTicketStatus), i_VehicleStatusString);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Error: Received wrong argument value for VehicleType");
             }
 
             return result;

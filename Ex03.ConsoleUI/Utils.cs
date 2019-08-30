@@ -70,7 +70,7 @@ namespace Ex03.ConsoleUI
 
             menuLinesConcatenator.AppendFormat("{0}{0}Please choose from the below menu options:", Environment.NewLine);
 
-            for(int i = 0; i <= sr_MainMenuNumberOfOptions; i++)
+            for (int i = 0; i < sr_MainMenuNumberOfOptions; i++)
             {
                 menuLinesConcatenator.AppendFormat(
                     "{0}{1}. {2}.",
@@ -84,9 +84,8 @@ namespace Ex03.ConsoleUI
 
         public static int GetUserMenuChoice()
         {
-            string inputChoiceStr = System.Console.ReadLine();
             int inputChoice;
-            while(!int.TryParse(System.Console.ReadLine(), out inputChoice))
+            while (!int.TryParse(System.Console.ReadLine(), out inputChoice))
             {
                 System.Console.WriteLine("Invalid input: Please try again...");
             }

@@ -288,7 +288,7 @@ namespace Ex03.GarageLogic
         private static Motor getElectricMotor(ArgumentsCollection i_Arguments)
         {
             float currentAmountOfBattery = (float)i_Arguments[eArgumentKeys.CurrentAmountOfEnergy].Response;
-            Battery battery = new Battery(EnergyTypesDictionary[eSupportedVehicles.GasolineCar], Car.k_MaxGasTank, currentAmountOfBattery);
+            Battery battery = new Battery(sr_EnergyTypesDictionary[eSupportedVehicles.GasolineCar], Car.k_MaxGasTank, currentAmountOfBattery);
 
             return new Motor(battery, eMotorType.Electric);
         }
@@ -296,7 +296,7 @@ namespace Ex03.GarageLogic
         private static Motor getGasolineMotor(ArgumentsCollection i_Arguments)
         {
             float currentAmountOfGasoline = (float)i_Arguments[eArgumentKeys.CurrentAmountOfGasoline].Response;
-            GasolineTank gasolineTank = new GasolineTank(EnergyTypesDictionary[eSupportedVehicles.GasolineCar], Car.k_MaxGasTank, currentAmountOfGasoline);
+            GasolineTank gasolineTank = new GasolineTank(sr_EnergyTypesDictionary[eSupportedVehicles.GasolineCar], Car.k_MaxGasTank, currentAmountOfGasoline);
 
             return new Motor(gasolineTank, eMotorType.Gasoline);
         }

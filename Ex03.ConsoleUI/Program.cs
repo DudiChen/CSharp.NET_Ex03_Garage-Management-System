@@ -1,13 +1,12 @@
 ﻿using System;
-using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    class Program
+    public static class Program
     {
         public static void Main()
         {
-
+            UIManager.Run();
         }
 
         //public void Runner()
