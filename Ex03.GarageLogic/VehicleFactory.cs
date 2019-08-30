@@ -107,13 +107,11 @@ namespace Ex03.GarageLogic
         {
             i_ArgumentsCollection.AddArgument(
                 eArgumentKeys.LicensePlate,
-                new ArgumentWrapper("License plate", null, false, typeof(string)));
+                new ArgumentWrapper("License plate number", null, false, typeof(string)));
             i_ArgumentsCollection.AddArgument(
                 eArgumentKeys.Model,
                 new ArgumentWrapper("Model", null, false, typeof(string)));
-            i_ArgumentsCollection.AddArgument(
-                eArgumentKeys.NumberOfDoors,
-                new ArgumentWrapper("Number of doors", Enum.GetNames(typeof(eNumberOfCarDoors)), true, typeof(eNumberOfCarDoors)));
+            
         }
 
         private static void CarArgumentsCollection(

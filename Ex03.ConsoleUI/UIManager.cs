@@ -88,7 +88,7 @@ namespace Ex03.ConsoleUI
                 string ownerPhoneNumber = Utils.GetOwnerPhoneNumber();
                 string vehicleTypeString = GetVehicleType();
                 ArgumentsCollection vehicleArguments = m_Garage.GetArgumentsByVehicleType(vehicleTypeString);
-                RunArgumentsWithUser();
+                RunArgumentsWithUser(vehicleArguments);
                 m_Garage.AddVehicleToGarage(vehicleArguments, vehicleTypeString, ownerName, ownerPhoneNumber);
                 Console.WriteLine("The Vehicle was added Successfully.");
             }
