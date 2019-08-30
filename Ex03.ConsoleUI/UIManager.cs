@@ -23,7 +23,7 @@ namespace Ex03.ConsoleUI
             GetVehicleInfoByLicensePlateNumber
         }
 
-        public static Dictionary<eMainMenuOptions, string> MainMenuOptionsMap = new Dictionary<eMainMenuOptions, string>
+        public static Dictionary<eMainMenuOptions, string> m_MainMenuOptionsMap = new Dictionary<eMainMenuOptions, string>
             () {
                 {eMainMenuOptions.AddVehicle, "Check-in a Vehicle to Garage"},
                 {eMainMenuOptions.ShowVehiclesLicensePlateNumbers, "Show License-Plate Number List of Vehicles in Garage"},
@@ -57,7 +57,7 @@ namespace Ex03.ConsoleUI
 
             for(int i = 0; i <= sr_MainMenuNumberOfOptions; i++)
             {
-                menuLinesConcatenator.AppendFormat("{0}{1}. {2}.", Environment.NewLine, i + 1, MainMenuOptionsMap[(eMainMenuOptions)i]);
+                menuLinesConcatenator.AppendFormat("{0}{1}. {2}.", Environment.NewLine, i + 1, m_MainMenuOptionsMap[(eMainMenuOptions)i]);
             }
 
             System.Console.Clear();

@@ -7,8 +7,8 @@ namespace Ex03.GarageLogic
     public class ArgumentWrapper
     {
         private readonly string r_DisplayName;
-        private readonly string[] r_optionalValueStrings;
-        private readonly bool r_isStrictToOptionalValues;
+        private readonly string[] r_OptionalValueStrings;
+        private readonly bool r_IsStrictToOptionalValues;
         private readonly Type r_ValidationType;
         private object m_InputValue;
 
@@ -19,8 +19,8 @@ namespace Ex03.GarageLogic
             Type i_ParameterValidationType)
         {
             r_DisplayName = i_DisplayName;
-            r_optionalValueStrings = i_OptionalValueStrings;
-            r_isStrictToOptionalValues = i_IsStrictToOptionalValues;
+            r_OptionalValueStrings = i_OptionalValueStrings;
+            r_IsStrictToOptionalValues = i_IsStrictToOptionalValues;
             r_ValidationType = i_ParameterValidationType;
             m_InputValue = null;
         }
@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_optionalValueStrings;
+                return r_OptionalValueStrings;
             }
         }
 
@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_isStrictToOptionalValues;
+                return r_IsStrictToOptionalValues;
             }
         }
 

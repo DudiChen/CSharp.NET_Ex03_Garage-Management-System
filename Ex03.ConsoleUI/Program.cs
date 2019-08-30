@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Runtime.InteropServices.ComTypes;
+using System.Text.RegularExpressions;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    class Program
+     public class Program
     {
         public static void Main()
         {
-
+            runner();
         }
 
-        public void Runner()
+        private static void runner()
         {
             GarageLogic.Garage garage = new Garage();
 

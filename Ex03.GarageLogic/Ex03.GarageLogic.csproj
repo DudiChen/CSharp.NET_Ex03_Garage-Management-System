@@ -54,7 +54,6 @@
     <Compile Include="IEnergyManagement.cs" />
     <Compile Include="Motor.cs" />
     <Compile Include="Motorcycle.cs" />
-    <Compile Include="MotorFactory.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />

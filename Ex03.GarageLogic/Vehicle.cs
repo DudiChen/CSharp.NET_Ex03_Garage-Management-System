@@ -4,10 +4,9 @@ using System.Text;
 using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 using eMotorType = Ex03.GarageLogic.VehicleFactory.eMotorType;
 
-
 namespace Ex03.GarageLogic
 {
-    internal abstract class Vehicle 
+    internal abstract class Vehicle
     {
         protected readonly string r_LicensePlateNumber;
         protected readonly string r_Model;
@@ -15,6 +14,7 @@ namespace Ex03.GarageLogic
         protected readonly Motor r_Motor;
 
         public abstract override string ToString();
+
         protected internal Vehicle(Motor i_Motor, Wheel[] i_Wheels, string i_LicensePlateNumber, string i_Model)
         {
             r_Motor = i_Motor;
@@ -88,23 +88,29 @@ namespace Ex03.GarageLogic
         {
             StringBuilder wheelCollectionStringBuilder = new StringBuilder();
             uint wheelRowCounter = 1;
-            foreach(Wheel wheel in r_Wheels)
+            foreach (Wheel wheel in r_Wheels)
             {
-                wheelCollectionStringBuilder.AppendFormat("wheel number {0}: {1},{2}",wheelRowCounter++,wheel.ToString(),Environment.NewLine);
+                wheelCollectionStringBuilder.AppendFormat("wheel number {0}: {1},{2}", wheelRowCounter++, wheel.ToString(), Environment.NewLine);
             }
 
             return wheelCollectionStringBuilder.ToString();
-
         }
+
         protected string ToStringVehicle()
         {
             StringBuilder vehicleStringBuilder = new StringBuilder();
+
             vehicleStringBuilder.AppendFormat(
                 @"License plate number: {0}
 Model: {1}
 {2}
 Wheels:
-{3}",r_LicensePlateNumber,r_Model,r_Motor.ToString(),ToStringWheelArray());
+{3}",
+                r_LicensePlateNumber,
+                r_Model,
+                r_Motor.ToString(),
+                ToStringWheelArray());
+
             return vehicleStringBuilder.ToString();
         }
     }

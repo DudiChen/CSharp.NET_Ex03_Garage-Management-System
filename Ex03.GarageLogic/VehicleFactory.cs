@@ -57,7 +57,7 @@ namespace Ex03.GarageLogic
             OwnerPhoneNumber
         }
 
-        private static Dictionary<eSupportedVehicles, eEnergyTypes[]> EnergyTypesDictionary = new Dictionary<eSupportedVehicles, eEnergyTypes[]>()
+        private static readonly Dictionary<eSupportedVehicles, eEnergyTypes[]> sr_EnergyTypesDictionary = new Dictionary<eSupportedVehicles, eEnergyTypes[]>()
         {
             { eSupportedVehicles.ElectricCar, new eEnergyTypes[] { eEnergyTypes.Electricity } },
             { eSupportedVehicles.ElectricMotorcycle, new eEnergyTypes[] { eEnergyTypes.Electricity } },

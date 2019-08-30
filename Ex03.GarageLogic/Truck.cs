@@ -8,11 +8,12 @@ namespace Ex03.GarageLogic
 {
     internal class Truck : Vehicle
     {
-        private bool m_HaulingHazardousMaterials;
         private readonly float r_HaulingVolume;
         public const int k_NumberOfWheels = 16;
-        internal Truck(Motor i_Motor, Wheel[] i_Wheels, string i_Model, string i_LicensePlateNumber,bool i_HaulingHazardousMaterials,float i_HaulingVolume)
-            : base(i_Motor,i_Wheels,i_LicensePlateNumber,i_Model)
+        private bool m_HaulingHazardousMaterials;
+
+        internal Truck(Motor i_Motor, Wheel[] i_Wheels, string i_Model, string i_LicensePlateNumber, bool i_HaulingHazardousMaterials, float i_HaulingVolume)
+            : base(i_Motor, i_Wheels, i_LicensePlateNumber, i_Model)
         {
             m_HaulingHazardousMaterials = i_HaulingHazardousMaterials;
             r_HaulingVolume = i_HaulingVolume;

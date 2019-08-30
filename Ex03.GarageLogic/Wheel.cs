@@ -4,16 +4,16 @@ namespace Ex03.GarageLogic
 {
     internal class Wheel
     {
+        private const float k_MinTirePressure = 0.0f;
         private readonly string r_Manufacturer;
         private readonly float r_MaxTirePressure;
-        private const float k_MinTirePressure = 0.0f;
         private float m_CurrentTirePressure;
 
         internal Wheel(string i_Manufacturer, float i_MaxTirePressure, float i_CurrentTirePressure)
         {
             r_Manufacturer = i_Manufacturer;
             r_MaxTirePressure = i_MaxTirePressure;
-            if(i_CurrentTirePressure >= k_MinTirePressure && i_CurrentTirePressure <= r_MaxTirePressure)
+            if (i_CurrentTirePressure >= k_MinTirePressure && i_CurrentTirePressure <= r_MaxTirePressure)
             {
                 m_CurrentTirePressure = i_CurrentTirePressure;
             }
@@ -21,7 +21,6 @@ namespace Ex03.GarageLogic
             {
                 // Throw Exception
             }
-            
         }
 
         internal string Manufacturer
@@ -50,7 +49,7 @@ namespace Ex03.GarageLogic
 
         internal void Inflate(float i_AirPressureToAdd)
         {
-            if(m_CurrentTirePressure + i_AirPressureToAdd <= r_MaxTirePressure)
+            if (m_CurrentTirePressure + i_AirPressureToAdd <= r_MaxTirePressure)
             {
                 m_CurrentTirePressure += i_AirPressureToAdd;
             }
@@ -62,7 +61,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format(@"Manufacturer name: {0}   Max tire pressure: {1}  Current tire pressure: {2}",r_Manufacturer,r_MaxTirePressure,m_CurrentTirePressure);
+            return string.Format(@"Manufacturer name: {0}   Max tire pressure: {1}  Current tire pressure: {2}", r_Manufacturer, r_MaxTirePressure, m_CurrentTirePressure);
         }
     }
 }

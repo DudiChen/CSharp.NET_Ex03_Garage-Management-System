@@ -11,33 +11,33 @@ namespace Ex03.GarageLogic.ArgumentsUtils
 {
     public class ArgumentsCollection
     {
-        private OrderedDictionary m_argumentOrderedDictionaryDictionary;
+        private readonly OrderedDictionary r_argumentOrderedDictionaryDictionary;
 
         internal ArgumentsCollection()
         {
-            m_argumentOrderedDictionaryDictionary = new OrderedDictionary();
+            r_argumentOrderedDictionaryDictionary = new OrderedDictionary();
         }
 
         internal void AddArgument(string i_ArgumentKeyString, ArgumentWrapper i_Argument)
         {
-            m_argumentOrderedDictionaryDictionary.Add(i_ArgumentKeyString, i_Argument);
+            r_argumentOrderedDictionaryDictionary.Add(i_ArgumentKeyString, i_Argument);
         }
 
         internal void AddArgument(VehicleFactory.eArgumentKeys i_ArgumentKey, int i_MultipleInputCounter, ArgumentWrapper i_Argument)
         {
-            m_argumentOrderedDictionaryDictionary.Add(string.Format("{0}{1}", i_ArgumentKey, i_MultipleInputCounter), i_Argument);
+            r_argumentOrderedDictionaryDictionary.Add(string.Format("{0}{1}", i_ArgumentKey, i_MultipleInputCounter), i_Argument);
         }
 
         internal void AddArgument(VehicleFactory.eArgumentKeys i_ArgumentKeyString, ArgumentWrapper i_Argument)
         {
-            m_argumentOrderedDictionaryDictionary.Add(i_ArgumentKeyString.ToString(), i_Argument);
+            r_argumentOrderedDictionaryDictionary.Add(i_ArgumentKeyString.ToString(), i_Argument);
         }
 
         internal ArgumentWrapper this[string i_ArgumentKey]
         {
             get
             {
-                return (ArgumentWrapper)m_argumentOrderedDictionaryDictionary[i_ArgumentKey];
+                return (ArgumentWrapper)r_argumentOrderedDictionaryDictionary[i_ArgumentKey];
             }
         }
 
@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic.ArgumentsUtils
         {
             get
             {
-                return (ArgumentWrapper)m_argumentOrderedDictionaryDictionary[i_ArgumentKey.ToString()];
+                return (ArgumentWrapper)r_argumentOrderedDictionaryDictionary[i_ArgumentKey.ToString()];
             }
         }
     }
