@@ -68,12 +68,12 @@ namespace Ex03.GarageLogic
             return garageTickets;
         }
 
-        internal List<GarageTicket> GetTicket()
+        internal List<GarageTicket> GetTicketList()
         {
             return new List<GarageTicket>(m_GarageTickets.Values);
         }
 
-        internal GarageTicket getTicket(string i_VehicleLicenseNumber)
+        internal GarageTicket getTicketByLicensePlateNumber(string i_VehicleLicenseNumber)
         {
             return m_GarageTickets[i_VehicleLicenseNumber];
         }
@@ -101,7 +101,8 @@ namespace Ex03.GarageLogic
         {
             return Enum.GetNames(typeof(VehicleFactory.eSupportedVehicles));
         }
-        public List<string> GetVehiclesLicensePlates(GarageTicket.eTicketStatus i_TicketStatus)
+
+        public List<string> GetListOfLicensePlateNumbers(eTicketStatus i_TicketStatus)
         {
             List<string> licensePlateNumberList = new List<string>();
 
@@ -116,7 +117,7 @@ namespace Ex03.GarageLogic
             return licensePlateNumberList;
         }
 
-        public List<string> GetVehiclesLicensePlates()
+        public List<string> GetListOfLicensePlateNumbers()
         {
             return new List<string>(m_GarageTickets.Keys);
         }
@@ -129,13 +130,12 @@ namespace Ex03.GarageLogic
         private eSupportedVehicles parseVehicleTypeFromString(string i_VehicleTypeStr)
         {
             eSupportedVehicles result;
-            //if (Enum.IsDefined(typeof(eSupportedVehicles), i_VehicleTypeStr))
             if (!Enum.TryParse(i_VehicleTypeStr, out result))
             {
                 throw new ArgumentException("Error: Received wrong argument value for VehicleType");
             }
 
-            return licensePlateNumberList;
+            return result;
         }
 
         private eTicketStatus parseVehicleStatusFromString(string i_VehicleStatusString)
