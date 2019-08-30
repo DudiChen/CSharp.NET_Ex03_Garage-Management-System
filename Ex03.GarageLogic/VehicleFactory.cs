@@ -8,17 +8,40 @@ namespace Ex03.GarageLogic
 {
     internal static class VehicleFactory
     {
-        private static readonly int[] sr_CarNumberOfWindows = { 2, 3, 4, 5 };
+        ////private static readonly int[] sr_CarNumberOfWindows = { 2, 3, 4, 5 };
 
-        public enum eSupportedVehicles
+        internal enum eVehicleMaxConstantTypes
+        {
+            CarMaxElectricCapacity,
+            CarMaxGasolineTankCapacity,
+            MotorcycleMaxElectricCapacity,
+            MotorcycleMaxGasolineTankCapacity,
+            TruckMaxGasolineTankCapacity,
+            CarMaxTirePressure,
+            MotorcycleMaxTirePressure,
+            TruckMaxTirePressure
+        }
+
+        internal static readonly Dictionary<eVehicleMaxConstantTypes, float> sr_VehicleMaxConstantsCollection =
+            new Dictionary<eVehicleMaxConstantTypes, float>()
+                {
+                    {eVehicleMaxConstantTypes.CarMaxElectricCapacity, 2.5f},
+                    {eVehicleMaxConstantTypes.CarMaxGasolineTankCapacity, 42.0f},
+                    {eVehicleMaxConstantTypes.MotorcycleMaxElectricCapacity, 1.6f},
+                    {eVehicleMaxConstantTypes.MotorcycleMaxGasolineTankCapacity, 5.5f},
+                    {eVehicleMaxConstantTypes.TruckMaxGasolineTankCapacity, 120.0f},
+                    {eVehicleMaxConstantTypes.CarMaxTirePressure, 30.0f},
+                    {eVehicleMaxConstantTypes.MotorcycleMaxTirePressure, 28.0f},
+                    {eVehicleMaxConstantTypes.TruckMaxTirePressure, 26.0f}
+                };
+
+            public enum eSupportedVehicles
         {
             GasolineCar = 1,
             ElectricCar,
             GasolineMotorcycle,
             ElectricMotorcycle,
-            Truck,
-            GasolineTruck,
-            ElectricTruck
+            GasolineTruck
         }
 
         internal enum eMotorType
@@ -45,7 +68,7 @@ namespace Ex03.GarageLogic
         {
             LicensePlate,
             Model,
-            VehicleType,
+            ////VehicleType,
             Color,
             NumberOfDoors,
             WheelCurrentPressure,
@@ -67,8 +90,7 @@ namespace Ex03.GarageLogic
             { eSupportedVehicles.ElectricMotorcycle, new eEnergyTypes[] { eEnergyTypes.Electricity } },
             { eSupportedVehicles.GasolineCar, new eEnergyTypes[] { eEnergyTypes.Octan95 } },
             { eSupportedVehicles.GasolineMotorcycle, new eEnergyTypes[] { eEnergyTypes.Octan96 } },
-            { eSupportedVehicles.GasolineTruck, new eEnergyTypes[] { eEnergyTypes.Soler } },
-            { eSupportedVehicles.ElectricTruck, new eEnergyTypes[] { eEnergyTypes.Electricity } }
+            { eSupportedVehicles.GasolineTruck, new eEnergyTypes[] { eEnergyTypes.Soler } }
         };
 
         private static void WheelsArgumentsCollectionCreator(ArgumentsCollection i_ArgumentsCollection, int i_NumberOfWheels)
@@ -206,15 +228,6 @@ namespace Ex03.GarageLogic
             return argumentsCollection;
         }
 
-        internal static ArgumentsUtils.ArgumentsCollection GetElectricTruckArguments()
-        {
-            ArgumentsUtils.ArgumentsCollection argumentsCollection = new ArgumentsCollection();
-            vehicleArgumentsCollection(argumentsCollection);
-            ElectricVehicleArgumentsCollection(argumentsCollection);
-            TruckArgumentsCollection(argumentsCollection);
-
-            return argumentsCollection;
-        }
 
         internal static ArgumentsUtils.ArgumentsCollection GetGasolineTruckArguments()
         {
@@ -319,10 +332,6 @@ namespace Ex03.GarageLogic
             return createMotorcycle(i_Arguments, getElectricMotor(i_Arguments));
         }
 
-        internal static Vehicle GetElectricTruck(ArgumentsCollection i_Arguments)
-        {
-            return createTruck(i_Arguments, getElectricMotor(i_Arguments));
-        }
 
         internal static Vehicle GetGasolineTruck(ArgumentsCollection i_Arguments)
         {
@@ -367,11 +376,6 @@ namespace Ex03.GarageLogic
                         break;
                     }
 
-                case eSupportedVehicles.ElectricTruck:
-                    {
-                        vehicle = GetElectricTruck(i_ArgumentsCollection);
-                        break;
-                    }
 
                 default:
                     {
@@ -417,12 +421,6 @@ namespace Ex03.GarageLogic
                 case eSupportedVehicles.GasolineTruck:
                     {
                         vehicleArgumentsCollection = GetGasolineTruckArguments();
-                        break;
-                    }
-
-                case eSupportedVehicles.ElectricTruck:
-                    {
-                        vehicleArgumentsCollection = GetElectricTruckArguments();
                         break;
                     }
 

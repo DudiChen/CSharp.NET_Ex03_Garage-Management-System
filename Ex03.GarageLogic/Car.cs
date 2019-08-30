@@ -12,7 +12,8 @@ namespace Ex03.GarageLogic
         private readonly eNumberOfCarDoors r_NumberOfDoors;
         internal const int k_MaxTirePressure = 30;
         internal const int k_NumberOfWheels = 4;
-        internal const float k_MaxGasTank = 5.5f;
+        internal const float k_MaxGasTank = 42f;
+        internal const float k_MaxElectricBattery = 2.5f;
 
         protected internal Car(
             Motor i_Motor,

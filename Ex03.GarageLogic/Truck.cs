@@ -10,6 +10,7 @@ namespace Ex03.GarageLogic
         private readonly float r_HaulingVolume;
         public const int k_NumberOfWheels = 16;
         public const int k_MaxTirePressure = 26;
+        internal const float k_MaxGasTank = 120f;
 
         private bool m_HaulingHazardousMaterials;
 
