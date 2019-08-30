@@ -106,13 +106,13 @@ namespace Ex03.GarageLogic
             return Enum.GetNames(typeof(VehicleFactory.eEnergyTypes));
         }
 
-        public List<string> GetListOfLicensePlateNumbers(eTicketStatus i_TicketStatus)
+        public List<string> GetListOfLicensePlateNumbers(string i_VehicleStatusString)
         {
+            eTicketStatus vehicleStatus = parseVehicleStatusFromString(i_VehicleStatusString);
             List<string> licensePlateNumberList = new List<string>();
-
             foreach (GarageTicket ticket in m_GarageTickets.Values)
             {
-                if (ticket.TicketStatus == i_TicketStatus)
+                if (ticket.TicketStatus == vehicleStatus)
                 {
                     licensePlateNumberList.Add(ticket.VehicleLicenseNumber);
                 }
@@ -126,7 +126,7 @@ namespace Ex03.GarageLogic
             return new List<string>(m_GarageTickets.Keys);
         }
 
-        public string ShowVehicleByLicensePlateNumber(string i_LicensePlateNumber)
+        public string GetVehicleInfoByLicensePlateNumber(string i_LicensePlateNumber)
         {
             GarageTicket garageTicket = getTicketByLicensePlateNumber(i_LicensePlateNumber);
             StringBuilder showVehicleInfoStringBuilder = new StringBuilder();
