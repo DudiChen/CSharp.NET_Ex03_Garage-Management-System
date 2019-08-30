@@ -191,15 +191,10 @@ namespace Ex03.ConsoleUI
         {
             System.Console.WriteLine("Please provide the following information:");
             for (int i = 0; i < i_Arguments.Length; i++)
-            //foreach (DictionaryEntry pairEntry in i_Arguments)
             {
-                //ArgumentWrapper argument = pairEntry.Value as ArgumentWrapper;
                 ArgumentWrapper argument = i_Arguments[i];
                 bool isInputRequired = true;
-                //int choiceRowCounter = 1;
-                //StringBuilder argumentMessage = new StringBuilder();
-                //argumentMessage.AppendFormat("{0}:{1}", argument.DisplayName, Environment.NewLine);
-                //Console.WriteLine("{0}:{1}", argument.DisplayName, Environment.NewLine);
+                
                 if (argument.DisplayName == "License plate number")
                 {
                     argument.InjectValue(i_LicensePlateNumber);
