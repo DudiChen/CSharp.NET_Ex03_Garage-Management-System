@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
 
     public static class VehicleFactory
     {
-        internal enum eSupportedVehicles
+        public enum eSupportedVehicles
         {
             GasolineCar = 1, ElectricCar, GasolineMotorcycle, ElectricMotorcycle, Truck,
             GasolineTruck,
@@ -46,9 +46,12 @@ namespace Ex03.GarageLogic
             LicenseType,
             EngineVolume,
             HazardousMaterials,
-            HaulVolume
+            HaulVolume,
+            CurrentAmountOfEnergy,
+            OwnerName,
+            OwnerPhoneNumber
         }
-        private static  Dictionary<eSupportedVehicles,eEnergyTypes[]> EnergyTypesDictionary = new Dictionary<eSupportedVehicles, eEnergyTypes[]>()
+        private static Dictionary<eSupportedVehicles, eEnergyTypes[]> EnergyTypesDictionary = new Dictionary<eSupportedVehicles, eEnergyTypes[]>()
         {
             {eSupportedVehicles.ElectricCar, new eEnergyTypes[] { eEnergyTypes.Electricity } },
             {eSupportedVehicles.ElectricMotorcycle,new eEnergyTypes[] {eEnergyTypes.Electricity} },
@@ -69,6 +72,15 @@ namespace Ex03.GarageLogic
                 i_ArgumentsCollection.AddArgument(eArgumentKeys.WheelCurrentPressure, i, new ArgumentWrapper(
                     "Tire current air pressure", null, false, typeof(float)));
             }
+        }
+
+        private static void TicketArgumentsCollection(
+            ArgumentsCollection i_ArgumentsCollection)
+        {
+            i_ArgumentsCollection.AddArgument(eArgumentKeys.OwnerName, new ArgumentWrapper(
+                "Owner's name", null, false, typeof(string)));
+            i_ArgumentsCollection.AddArgument(eArgumentKeys.OwnerPhoneNumber, new ArgumentWrapper(
+                "Owner's phone number", null, false, typeof(string)));
         }
 
         private static void VehicleArgumentsCollection(
@@ -108,7 +120,7 @@ namespace Ex03.GarageLogic
         {
             WheelsArgumentsCollectionCreator(i_ArgumentsCollection, Truck.k_NumberOfWheels);
             i_ArgumentsCollection.AddArgument(eArgumentKeys.HazardousMaterials, new ArgumentWrapper(
-                "Contains hazardous materials", new [] {"True","False"}, true, typeof(Motorcycle.eLicenseType)));
+                "Contains hazardous materials", new[] { "True", "False" }, true, typeof(Motorcycle.eLicenseType)));
             i_ArgumentsCollection.AddArgument(eArgumentKeys.HaulVolume, new ArgumentWrapper(
                 "Engine volume in cubic centimeter", null, true, typeof(float)));
         }
@@ -116,15 +128,18 @@ namespace Ex03.GarageLogic
         private static void GasVehicleArgumentsCollection(
              ArgumentsCollection i_ArgumentsCollection)
         {
-            i_ArgumentsCollection.AddArgument(VehicleFactory.eArgumentKeys.CurrentAmountOfGasoline, new ArgumentWrapper<int>("Current amount of fuel in liters", null, false));
+            i_ArgumentsCollection.AddArgument(VehicleFactory.eArgumentKeys.CurrentAmountOfGasoline, new ArgumentWrapper(
+                "Current amount of fuel in liters", null, false, typeof(float)));
         }
 
         private static void ElectricVehicleArgumentsCollection(
             ArgumentsCollection i_ArgumentsCollection)
         {
-            i_ArgumentsCollection.AddArgument(VehicleFactory.eArgumentKeys.CurrentAmountOfGasoline, new ArgumentWrapper(
+            i_ArgumentsCollection.AddArgument(VehicleFactory.eArgumentKeys.CurrentAmountOfEnergy, new ArgumentWrapper(
                 "Current amount of hours remaining in battery", null, false, typeof(int)));
         }
+
+        
 
         internal static ArgumentsUtils.ArgumentsCollection GetGasolineCarArguments()
         {
@@ -180,7 +195,7 @@ namespace Ex03.GarageLogic
             return argumentsCollection;
         }
 
-        private static Wheel[] WheelsCollectionBuilder(ArgumentsCollection i_ArgumentsCollection, int i_NumberOfWheels)
+        private static Wheel[] wheelsCollectionBuilder(ArgumentsCollection i_ArgumentsCollection, int i_NumberOfWheels)
         {
             Wheel[] wheels = new Wheel[i_NumberOfWheels];
             for (int i = 0; i < i_NumberOfWheels; i++)
@@ -197,121 +212,92 @@ namespace Ex03.GarageLogic
                     "{0}{1}",
                     eArgumentKeys.WheelCurrentPressure.ToString(),
                     i).ToString()].Response;
-               wheels[i] = new Wheel(wheelManufacturer,wheelMaxWheelPressure,wheelWheelPressure);
+                wheels[i] = new Wheel(wheelManufacturer, wheelMaxWheelPressure, wheelWheelPressure);
             }
 
             return wheels;
         }
 
-        private static Car CreateCar(ArgumentsCollection i_Arguments, Motor i_Motor)
+        private static Car createCar(ArgumentsCollection i_Arguments, Motor i_Motor)
         {
             string licensePlate = (string)i_Arguments[eArgumentKeys.LicensePlate].Response;
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             eNumberOfCarDoors numberOfDoors = (eNumberOfCarDoors)i_Arguments[eArgumentKeys.NumberOfDoors].Response;
             eCarColors carColor = (eCarColors)i_Arguments[eArgumentKeys.Color].Response;
-            Wheel[] wheels = WheelsCollectionBuilder(i_Arguments,Car.k_NumberOfWheels);
-            return new Car(i_Motor,wheels,licensePlate,model,carColor,numberOfDoors);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Car.k_NumberOfWheels);
+            return new Car(i_Motor, wheels, licensePlate, model, carColor, numberOfDoors);
         }
-
-
-        private static Motorcycle CreateMotorcycle(ArgumentsCollection i_Arguments, Motor i_Motor)
-        {
-            string licensePlate = (string)i_Arguments[eArgumentKeys.LicensePlate].Response;
-            string model = (string)i_Arguments[eArgumentKeys.Model].Response;
-            Motorcycle.eLicenseType licenseType = (Motorcycle.eLicenseType)i_Arguments[eArgumentKeys.LicenseType].Response;
-            int engineVolume = (int)i_Arguments[eArgumentKeys.EngineVolume].Response;
-            Wheel[] wheels = WheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels);
-            return new Motorcycle(i_Motor, wheels, licensePlate, model,licenseType, engineVolume);
-        }
-
-        private static Truck CreatTruck(ArgumentsCollection i_Arguments, Motor i_Motor)
+        private static Truck createTruck(ArgumentsCollection i_Arguments, Motor i_Motor)
         {
             string licensePlate = (string)i_Arguments[eArgumentKeys.LicensePlate].Response;
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             bool isCarryingHazardousMaterials = (bool)i_Arguments[eArgumentKeys.HazardousMaterials].Response;
             int haulingVolume = (int)i_Arguments[eArgumentKeys.HaulVolume].Response;
-            Wheel[] wheels = WheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels);
             return new Truck(i_Motor, wheels, licensePlate, model, isCarryingHazardousMaterials, haulingVolume);
         }
 
-        internal static Vehicle GetGasolineCar(ArgumentsCollection i_Arguments)
+
+        private static Motorcycle createMotorcycle(ArgumentsCollection i_Arguments, Motor i_Motor)
+        {
+            string licensePlate = (string)i_Arguments[eArgumentKeys.LicensePlate].Response;
+            string model = (string)i_Arguments[eArgumentKeys.Model].Response;
+            Motorcycle.eLicenseType licenseType = (Motorcycle.eLicenseType)i_Arguments[eArgumentKeys.LicenseType].Response;
+            int engineVolume = (int)i_Arguments[eArgumentKeys.EngineVolume].Response;
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels);
+            return new Motorcycle(i_Motor, wheels, licensePlate, model, licenseType, engineVolume);
+        }
+
+        private static Motor getElectricMotor(ArgumentsCollection i_Arguments)
+        {
+            float currentAmountOfBattery = (float)i_Arguments[eArgumentKeys.CurrentAmountOfEnergy].Response;
+            Battery battery = new Battery(EnergyTypesDictionary[eSupportedVehicles.GasolineCar], Car.k_MaxGasTank, currentAmountOfBattery);
+            return new Motor(battery, eMotorType.Electric);
+        }
+
+        private static Motor getGasolineMotor(ArgumentsCollection i_Arguments)
         {
             float currentAmountOfGasoline = (float)i_Arguments[eArgumentKeys.CurrentAmountOfGasoline].Response;
-            GasolineTank gasolineTank = new GasolineTank(EnergyTypesDictionary[eSupportedVehicles.GasolineCar],Car.k_MaxGasTank,currentAmountOfGasoline);
-            Motor motor = new Motor(gasolineTank,eMotorType.Gasoline);
-            return CreateCar(i_Arguments,motor);
+            GasolineTank gasolineTank = new GasolineTank(EnergyTypesDictionary[eSupportedVehicles.GasolineCar], Car.k_MaxGasTank, currentAmountOfGasoline);
+            return new Motor(gasolineTank, eMotorType.Gasoline);
         }
 
-        internal static Vehicle GetElectricCar()
+
+        internal static Vehicle GetGasolineCar(ArgumentsCollection i_Arguments)
         {
-            return new Car();
+            return createCar(i_Arguments, getGasolineMotor(i_Arguments));
         }
 
-        internal static Vehicle GetGasolineMotorcycle()
+        internal static Vehicle GetElectricCar(ArgumentsCollection i_Arguments)
         {
-
-            return  new Motorcycle();
+            return createCar(i_Arguments, getElectricMotor(i_Arguments));
         }
 
-        internal static Vehicle GetElectricMotorcycle()
+        internal static Vehicle GetGasolineMotorcycle(ArgumentsCollection i_Arguments)
         {
-
-            return new Motorcycle();
+            return createMotorcycle(i_Arguments, getGasolineMotor(i_Arguments));
         }
 
-        internal static Vehicle GetElectricTruck()
+        internal static Vehicle GetElectricMotorcycle(ArgumentsCollection i_Arguments)
         {
-
-            return new Truck();
+            return createMotorcycle(i_Arguments, getElectricMotor(i_Arguments));
         }
 
-        internal static Vehicle GetGasolineTruck()
+        internal static Vehicle GetElectricTruck(ArgumentsCollection i_Arguments)
         {
 
-            return new Truck();
+            return createTruck(i_Arguments, getElectricMotor(i_Arguments));
         }
 
-
-        ////private static Dictionary<eArgumentKeys, ArgumentWrapper> argumentDictionary = new Dictionary<eArgumentKeys, ArgumentWrapper>
-        ////                                                                                  {
-        ////                                                                                      {eArgumentKeys.LicensePlate,
-        ////                                                                                          new ArgumentWrapper("license plate",
-        ////                                                                                              null,
-        ////                                                                                              false,
-        ////                                                                                              typeof(string),
-        ////                                                                                              null,
-        ////                                                                                              null)},
-        ////                                                                                      { }
-        ////                                                                                  };
-        private static readonly int[] r_CarNumberOfWindows = { 2, 3, 4, 5 };
-
-        internal static Vehicle BuildCar(
-            eSupportedVehicles i_VehicleType,
-            eCarColors i_Color,
-            eNumberOfCarDoors i_NumberOfDoors)
+        internal static Vehicle GetGasolineTruck(ArgumentsCollection i_Arguments)
         {
-            switch (i_VehicleType)
-            {
-                case eSupportedVehicles.ElectricCar:
-                    {
-                        return new ElectricCar();
-                        break;
-                    }
 
-                case eSupportedVehicles.GasolineCar:
-                    {
-                        return new GasolineCar();
-                        break;
-                    }
-
-                default:
-                    {
-
-                        break;
-                    }
-            }
-
+            return createTruck(i_Arguments, getGasolineMotor(i_Arguments));
         }
+
+
+
+        private static readonly int[] sr_CarNumberOfWindows = { 2, 3, 4, 5 };
 
 
         internal static Vehicle BuildVehicle(
@@ -323,7 +309,7 @@ namespace Ex03.GarageLogic
             {
                 case eSupportedVehicles.ElectricCar:
                     {
-                        
+                        vehicle = GetElectricCar(i_ArgumentsCollection);
                         break;
                     }
 
@@ -334,27 +320,27 @@ namespace Ex03.GarageLogic
                     }
                 case eSupportedVehicles.ElectricMotorcycle:
                     {
-
+                        vehicle = GetElectricMotorcycle(i_ArgumentsCollection);
                         break;
                     }
                 case eSupportedVehicles.GasolineMotorcycle:
                     {
-
+                        vehicle = GetGasolineMotorcycle(i_ArgumentsCollection);
                         break;
                     }
                 case eSupportedVehicles.GasolineTruck:
                     {
-
+                        vehicle = GetGasolineTruck(i_ArgumentsCollection);
                         break;
                     }
                 case eSupportedVehicles.ElectricTruck:
                     {
-
+                        vehicle = GetElectricTruck(i_ArgumentsCollection);
                         break;
                     }
                 default:
                     {
-
+                        vehicle = null;
                         break;
                     }
             }

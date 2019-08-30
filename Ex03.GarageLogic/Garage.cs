@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ex03.GarageLogic.ArgumentsUtils;
 
 namespace Ex03.GarageLogic
 {
@@ -7,7 +8,7 @@ namespace Ex03.GarageLogic
     public class Garage
     { 
         private Dictionary<string, GarageTicket> m_GarageTickets;
-
+        private Dictionary<string, Vehicle> m_vehicleInventory;
         internal void AddTicket(string i_VehicleLicenseNumber, GarageTicket i_GarageTicket)
         {
             if(m_GarageTickets == null)
@@ -53,9 +54,16 @@ namespace Ex03.GarageLogic
             return m_GarageTickets[i_VehicleLicenseNumber];
         }
 
-        public void AddVehicleToGarage(string i_licensePlate, ArgumentWrapper[] i_Arguments)
+        public void AddVehicleToGarage(ArgumentsCollection i_Arguments,VehicleFactory.eSupportedVehicles supportedVehicle,string i_OwnerName,string i_OwnerPhoneNumber)
         {
-            
+            Vehicle newVehicle = VehicleFactory.BuildVehicle(supportedVehicle,i_Arguments);
+            if(m_vehicleInventory == null)
+            {
+                m_vehicleInventory = new Dictionary<string, Vehicle>();
+            }
+
+            m_vehicleInventory.Add(newVehicle.LicensePlateNumber,newVehicle);
+            AddTicket(newVehicle.LicensePlateNumber,new GarageTicket(i_OwnerName,i_OwnerPhoneNumber, newVehicle.LicensePlateNumber));
         }
     }
 }

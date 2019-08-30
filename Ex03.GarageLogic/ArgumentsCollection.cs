@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Ex03.GarageLogic;
 namespace Ex03.GarageLogic.ArgumentsUtils
 {
-    internal class ArgumentsCollection
+    public class ArgumentsCollection
     {
         private OrderedDictionary m_argumentOrderedDictionaryDictionary;
         
