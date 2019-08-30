@@ -40,6 +40,18 @@ namespace Ex03.GarageLogic.ArgumentsUtils
             }
         }
 
+        public ArgumentWrapper this[int i_index]
+        {
+            get
+            {
+                return (ArgumentWrapper)r_argumentOrderedDictionaryDictionary[i_index];
+            }
+            set
+            {
+                /* set the specified index to value here */
+            }
+        }
+
         internal ArgumentWrapper this[string i_ArgumentKey]
         {
             get
