@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Ex03.GarageLogic.ArgumentsUtils;
 
 namespace Ex03.GarageLogic
@@ -64,6 +65,21 @@ namespace Ex03.GarageLogic
 
             m_vehicleInventory.Add(newVehicle.LicensePlateNumber,newVehicle);
             AddTicket(newVehicle.LicensePlateNumber,new GarageTicket(i_OwnerName,i_OwnerPhoneNumber, newVehicle.LicensePlateNumber));
+        }
+
+        public string[] GetSupportedVehicles()
+        {
+            return Enum.GetNames(typeof(VehicleFactory.eSupportedVehicles));
+        }
+
+        public string[] GetVehiclesLicensePlates(GarageTicket.eTicketStatus i_TicketStatus)
+        {
+
+        }
+
+        public string[] GetVehiclesLicensePlates()
+        {
+
         }
     }
 }
