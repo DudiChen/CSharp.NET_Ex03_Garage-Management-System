@@ -16,8 +16,10 @@ namespace Ex03.ConsoleUI
 
             while(true)
             {
-                int userChoice = UIManager.ShowMenu();
-                switch(userChoice)
+                UIManager.ShowMainMenu();
+                int userChoice = UIManager.GetUserMenuChoice();
+                //switch ((UIManager.eMainMenuOptions)userChoice)
+                switch (userChoice)
                 {
                     case 1:
                         {
