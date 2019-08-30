@@ -6,13 +6,17 @@ using Ex03.GarageLogic.ArgumentsUtils;
 
 namespace Ex03.GarageLogic
 {
-    public static class VehicleFactory
+    internal static class VehicleFactory
     {
         private static readonly int[] sr_CarNumberOfWindows = { 2, 3, 4, 5 };
 
         public enum eSupportedVehicles
         {
-            GasolineCar = 1, ElectricCar, GasolineMotorcycle, ElectricMotorcycle, Truck,
+            GasolineCar = 1,
+            ElectricCar,
+            GasolineMotorcycle,
+            ElectricMotorcycle,
+            Truck,
             GasolineTruck,
             ElectricTruck
         }
