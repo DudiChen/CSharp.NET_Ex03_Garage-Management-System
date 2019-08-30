@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using eCarColors = Ex03.GarageLogic.VehicleFactory.eCarColors;
 using eNumberOfCarDoors = Ex03.GarageLogic.VehicleFactory.eNumberOfCarDoors;
-using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
+//using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic
 {

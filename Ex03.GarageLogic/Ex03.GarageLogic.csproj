@@ -45,17 +45,11 @@
     <Compile Include="BatteryMaxWorkingHoursException.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="GarageTicket.cs" />
-    <Compile Include="ElectricCar.cs" />
-    <Compile Include="ElectricMotor.cs" />
-    <Compile Include="ElectricMotorcycle.cs" />
     <Compile Include="IEnergyContainer.cs" />
     <Compile Include="Garage.cs" />
-    <Compile Include="GasolineCar.cs" />
     <Compile Include="GasolineMotor.cs" />
-    <Compile Include="GasolineMotorcycle.cs" />
     <Compile Include="GasolineTank.cs" />
     <Compile Include="GasolineTankGasolineTypeException.cs" />
-    <Compile Include="GasolineTruck.cs" />
     <Compile Include="GasolineTankMaxCapacityException.cs" />
     <Compile Include="IEnergyManagement.cs" />
     <Compile Include="Motor.cs" />
