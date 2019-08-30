@@ -78,16 +78,16 @@ namespace Ex03.GarageLogic
                 i_ArgumentsCollection.AddArgument(
                     eArgumentKeys.WheelManufacturer,
                     i,
-                    new ArgumentWrapper(string.Format("Tire{0} manufacturerer", i), null, false, typeof(string)));
+                    new ArgumentWrapper(string.Format("Tire {0} manufacturerer", i), null, false, typeof(string)));
                 i_ArgumentsCollection.AddArgument(
                     eArgumentKeys.WheelMaxPressure,
                     i,
-                    new ArgumentWrapper(string.Format("Tire{0} max air pressure", i), null, false, typeof(float)));
+                    new ArgumentWrapper(string.Format("Tire {0} max air pressure", i), null, false, typeof(float)));
                 i_ArgumentsCollection.AddArgument(
                     eArgumentKeys.WheelCurrentPressure,
                     i,
                     new ArgumentWrapper(
-                    string.Format("Tire{0} current air pressure", i ), null, false, typeof(float)));
+                    string.Format("Tire {0} current air pressure", i ), null, false, typeof(float)));
             }
         }
 

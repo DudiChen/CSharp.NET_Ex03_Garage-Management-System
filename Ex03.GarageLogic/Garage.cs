@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 using Ex03.GarageLogic.ArgumentsUtils;
 using eSupportedVehicles = Ex03.GarageLogic.VehicleFactory.eSupportedVehicles;
 
@@ -127,7 +128,16 @@ namespace Ex03.GarageLogic
 
         public string ShowVehicleByLicensePlateNumber(string i_LicensePlateNumber)
         {
-            return m_vehicleInventory[i_LicensePlateNumber].ToString();
+            GarageTicket garageTicket = getTicketByLicensePlateNumber(i_LicensePlateNumber);
+            StringBuilder showVehicleInfoStringBuilder = new StringBuilder();
+            showVehicleInfoStringBuilder.AppendFormat(
+                @"Owner's name: {0}
+Owner's phone number: {1}{2}",
+                garageTicket.OwnerName,
+                garageTicket.OwnerPhoneNumber,
+                Environment.NewLine);
+            showVehicleInfoStringBuilder.AppendLine(m_vehicleInventory[i_LicensePlateNumber].ToString());
+            return showVehicleInfoStringBuilder.ToString();
         }
 
         private eSupportedVehicles parseVehicleTypeFromString(string i_VehicleTypeStr)
