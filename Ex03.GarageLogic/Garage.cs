@@ -101,7 +101,7 @@ namespace Ex03.GarageLogic
         {
             return Enum.GetNames(typeof(VehicleFactory.eSupportedVehicles));
         }
-        public List<string> GetVehiclesLicensePlates(GarageTicket.eTicketStatus i_TicketStatus)
+        public List<string> GetVehiclesLicensePlates(eTicketStatus i_TicketStatus)
         {
             List<string> licensePlateNumberList = new List<string>();
 
@@ -135,7 +135,7 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Error: Received wrong argument value for VehicleType");
             }
 
-            return licensePlateNumberList;
+            return result;
         }
 
         private eTicketStatus parseVehicleStatusFromString(string i_VehicleStatusString)
