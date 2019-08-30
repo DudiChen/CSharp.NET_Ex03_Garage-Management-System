@@ -41,11 +41,11 @@ namespace Ex03.ConsoleUI
                             break;
                         }
 
-                    case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
-                        {
-                            showVehiclesLicensePlateNumbers();
-                            break;
-                        }
+                case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
+                    {
+                        showVehiclesLicensePlateNumbers();
+                        break;
+                    }
 
                     case eMainMenuOptions.ChangeVehicleStatus:
                         {

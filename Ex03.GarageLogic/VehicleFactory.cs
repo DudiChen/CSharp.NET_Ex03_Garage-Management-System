@@ -135,7 +135,7 @@ namespace Ex03.GarageLogic
                 new ArgumentWrapper("License type", Enum.GetNames(typeof(Motorcycle.eLicenseType)), true, typeof(Motorcycle.eLicenseType)));
             i_ArgumentsCollection.AddArgument(
                 eArgumentKeys.EngineVolume,
-                new ArgumentWrapper("Engine volume in cubic centimeter", null, true, typeof(float)));
+                new ArgumentWrapper("Engine volume in cubic centimeter", null, false, typeof(float)));
         }
 
         private static void TruckArgumentsCollection(
@@ -144,10 +144,10 @@ namespace Ex03.GarageLogic
             WheelsArgumentsCollectionCreator(i_ArgumentsCollection, Truck.k_NumberOfWheels);
             i_ArgumentsCollection.AddArgument(
                 eArgumentKeys.HazardousMaterials,
-                new ArgumentWrapper("Contains hazardous materials", new[] { "True", "False" }, true, typeof(Motorcycle.eLicenseType)));
+                new ArgumentWrapper("Contains hazardous materials", new[] { "True", "False" }, true, typeof(bool)));
             i_ArgumentsCollection.AddArgument(
                 eArgumentKeys.HaulVolume,
-                new ArgumentWrapper("Container volume in cubic centimeter", null, true, typeof(float)));
+                new ArgumentWrapper("Container volume in cubic centimeter", null, false, typeof(float)));
         }
 
         private static void GasVehicleArgumentsCollection(
@@ -267,7 +267,7 @@ namespace Ex03.GarageLogic
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             bool isCarryingHazardousMaterials = bool.Parse(i_Arguments[eArgumentKeys.HazardousMaterials].Response);
             int haulingVolume = int.Parse( i_Arguments[eArgumentKeys.HaulVolume].Response);
-            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Truck.k_NumberOfWheels);
 
             return new Truck(i_Motor, wheels, licensePlate, model, isCarryingHazardousMaterials, haulingVolume);
         }
@@ -286,7 +286,7 @@ namespace Ex03.GarageLogic
         private static Motor getElectricMotor(ArgumentsCollection i_Arguments)
         {
             float currentAmountOfBattery = float.Parse( i_Arguments[eArgumentKeys.CurrentAmountOfEnergy].Response);
-            Battery battery = new Battery(sr_EnergyTypesDictionary[eSupportedVehicles.GasolineCar], Car.k_MaxGasTank, currentAmountOfBattery);
+            Battery battery = new Battery(sr_EnergyTypesDictionary[eSupportedVehicles.ElectricCar], Car.k_MaxGasTank, currentAmountOfBattery);
 
             return new Motor(battery, eMotorType.Electric);
         }
