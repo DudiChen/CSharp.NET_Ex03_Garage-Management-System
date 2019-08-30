@@ -100,6 +100,11 @@ namespace Ex03.GarageLogic
             return Enum.GetNames(typeof(VehicleFactory.eSupportedVehicles));
         }
 
+        public string[] GetSupportedEnergyTypes()
+        {
+            return Enum.GetNames(typeof(VehicleFactory.eEnergyTypes));
+        }
+
         public List<string> GetListOfLicensePlateNumbers(eTicketStatus i_TicketStatus)
         {
             List<string> licensePlateNumberList = new List<string>();
