@@ -19,59 +19,69 @@ namespace Ex03.ConsoleUI
         {
             m_Garage = new Garage();
 
-            
-            Utils.ShowMainMenu();
-            int userChoice = Utils.GetUserMenuChoice() - 1;
-            while (!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
+            while(true)
             {
-                Console.WriteLine("Invalid input: Choice made not in range. Please try again...");
-            }
-            eMainMenuOptions mainMenuOption = (eMainMenuOptions)userChoice;
 
-            switch (mainMenuOption)
-            {
-                case eMainMenuOptions.AddVehicle:
-                    {
-                        AddVehicle();
-                        break;
-                    }
 
-                case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
-                    {
-                        showVehiclesLicensePlateNumbers();
-                        break;
-                    }
+                Utils.ShowMainMenu();
+                int userChoice = Utils.GetUserMenuChoice() - 1;
+                while(!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
+                {
+                    Console.WriteLine("Invalid input: Choice made not in range. Please try again...");
+                }
 
-                case eMainMenuOptions.ChangeVehicleStatus:
-                    {
-                        changeVehicleStatus();
-                        break;
-                    }
-                case eMainMenuOptions.InflateWheels:
-                    {
-                        inflateWheels();
-                        break;
-                    }
-                case eMainMenuOptions.FuelGasolineVehicle:
-                    {
-                        fuelGasolineVehicle();
-                        break;
-                    }
-                case eMainMenuOptions.ChargeElectricVehicle:
-                    {
-                        chargeElectricVehicle();
-                        break;
-                    }
-                case eMainMenuOptions.GetVehicleInfoByLicensePlateNumber:
-                    {
-                        getVehicleInfoByLicensePlateNumber();
-                        break;
-                    }
-                case eMainMenuOptions.QuitProgram:
-                    {
+                eMainMenuOptions mainMenuOption = (eMainMenuOptions)userChoice;
 
-                        break;
-                    }
+                switch(mainMenuOption)
+                {
+                    case eMainMenuOptions.AddVehicle:
+                        {
+                            AddVehicle();
+                            break;
+                        }
+
+                    case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
+                        {
+                            showVehiclesLicensePlateNumbers();
+                            break;
+                        }
+
+                    case eMainMenuOptions.ChangeVehicleStatus:
+                        {
+                            changeVehicleStatus();
+                            break;
+                        }
+
+                    case eMainMenuOptions.InflateWheels:
+                        {
+                            inflateWheels();
+                            break;
+                        }
+
+                    case eMainMenuOptions.FuelGasolineVehicle:
+                        {
+                            fuelGasolineVehicle();
+                            break;
+                        }
+
+                    case eMainMenuOptions.ChargeElectricVehicle:
+                        {
+                            chargeElectricVehicle();
+                            break;
+                        }
+
+                    case eMainMenuOptions.GetVehicleInfoByLicensePlateNumber:
+                        {
+                            getVehicleInfoByLicensePlateNumber();
+                            break;
+                        }
+
+                    case eMainMenuOptions.QuitProgram:
+                        {
+
+                            break;
+                        }
+                }
             }
         }
 
