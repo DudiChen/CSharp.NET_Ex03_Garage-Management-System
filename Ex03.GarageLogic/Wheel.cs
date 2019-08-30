@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+
+namespace Ex03.GarageLogic
 {
     internal class Wheel
     {
@@ -58,6 +60,9 @@
             }
         }
 
-
+        public override string ToString()
+        {
+            return String.Format(@"Manufacturer name: {0}   Max tire pressure: {1}  Current tire pressure: {2}",r_Manufacturer,r_MaxTirePressure,m_CurrentTirePressure);
+        }
     }
 }

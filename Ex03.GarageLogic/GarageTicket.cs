@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class GarageTicket
+    public class GarageTicket
     {
-        internal enum eTicketStatus
+        public enum eTicketStatus
         {
             InProgress,Ready,Paid
         }
         private readonly string r_OwnerName;
         private readonly string r_OwnerPhoneNumber;
         private readonly string r_VehicleLicenseNumber;
-        private eTicketStatus m_ticketStatus = eTicketStatus.InProgress;
+        private eTicketStatus m_TicketStatus = eTicketStatus.InProgress;
 
         public GarageTicket(string i_OwnerName, string i_OwnerPhoneNumber, string i_VehicleLicenseNumber)
         {
@@ -28,11 +28,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_ticketStatus;
+                return m_TicketStatus;
             }
             set
             {
-                m_ticketStatus = value;
+                m_TicketStatus = value;
             }
         }
 

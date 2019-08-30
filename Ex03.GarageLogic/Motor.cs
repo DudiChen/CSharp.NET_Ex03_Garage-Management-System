@@ -8,13 +8,13 @@ namespace Ex03.GarageLogic
     internal class Motor : IEnergyManagement
     {
         ////private readonly List<eEnergyTypes> m_SupportedEnergyType;
-        protected IEnergyContainer m_EnergyContainer;
+        protected EnergyContainer m_EnergyContainer;
         protected readonly eMotorType r_MotorType;
         ////private readonly eEnergyTypes[] r_SupportedGasolineTypes;
 
         ////protected internal Motor(List<eEnergyTypes> i_SupportedEnergyType, IEnergyContainer i_EnergyContainer, eMotorType i_MotorType)
         //protected internal Motor(eMotorType i_MotorType)
-        protected internal Motor(IEnergyContainer i_EnergyContainer, eMotorType i_MotorType)
+        protected internal Motor(EnergyContainer i_EnergyContainer, eMotorType i_MotorType)
         {
             ////m_SupportedEnergyType = i_SupportedEnergyType;
             m_EnergyContainer = i_EnergyContainer;
@@ -52,6 +52,11 @@ namespace Ex03.GarageLogic
         public void Energize(eEnergyTypes i_EnergyType, float i_EnergyAmountToAdd)
         {
             m_EnergyContainer.Energize(i_EnergyType, i_EnergyAmountToAdd);
+        }
+
+        public override string ToString()
+        {
+            return m_EnergyContainer.ToString();
         }
     }
 }

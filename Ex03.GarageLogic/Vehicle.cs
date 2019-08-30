@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 using eMotorType = Ex03.GarageLogic.VehicleFactory.eMotorType;
 
 
 namespace Ex03.GarageLogic
 {
-    internal abstract class Vehicle : IEnergyManagement
+    internal abstract class Vehicle 
     {
         protected readonly string r_LicensePlateNumber;
         protected readonly string r_Model;
-        protected Wheel[] m_Wheels;
-        protected Motor m_Motor;
+        protected readonly Wheel[] r_Wheels;
+        protected readonly Motor r_Motor;
 
-
+        public abstract override string ToString();
         protected internal Vehicle(Motor i_Motor, Wheel[] i_Wheels, string i_LicensePlateNumber, string i_Model)
         {
-            m_Motor = i_Motor;
-            m_Wheels = i_Wheels;
+            r_Motor = i_Motor;
+            r_Wheels = i_Wheels;
             r_LicensePlateNumber = i_LicensePlateNumber;
             r_Model = i_Model;
         }
 
         internal float CalculateRemainingEnergyPercentage()
         {
-            return m_Motor.CalculateRemainingEnergyPercentage();
+            return r_Motor.CalculateRemainingEnergyPercentage();
         }
 
         internal string LicensePlateNumber
@@ -45,9 +46,9 @@ namespace Ex03.GarageLogic
 
         internal void InflateWheel(uint i_WheelNumber, float i_AirPressureToAdd)
         {
-            if (i_WheelNumber <= m_Wheels.Length)
+            if (i_WheelNumber <= r_Wheels.Length)
             {
-                m_Wheels[(int)i_WheelNumber].Inflate(i_AirPressureToAdd);
+                r_Wheels[(int)i_WheelNumber].Inflate(i_AirPressureToAdd);
             }
             else
             {
@@ -59,29 +60,52 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_Motor.MotorType;
+                return r_Motor.MotorType;
             }
         }
 
         public eEnergyTypes[] GetSupportedEnergyTypes()
         {
-            return m_Motor.GetSupportedEnergyTypes();
+            return r_Motor.GetSupportedEnergyTypes();
         }
 
         public float GetMaxEnergyCapacity()
         {
-            return m_Motor.GetMaxEnergyCapacity();
+            return r_Motor.GetMaxEnergyCapacity();
         }
 
         public float GetRemainingEnergyLevel()
         {
-            return m_Motor.GetRemainingEnergyLevel();
+            return r_Motor.GetRemainingEnergyLevel();
         }
 
         public void Energize(eEnergyTypes i_EnergyType, float i_AmountToAdd)
         {
-            m_Motor.Energize(i_EnergyType, i_AmountToAdd);
+            r_Motor.Energize(i_EnergyType, i_AmountToAdd);
         }
 
+        protected string ToStringWheelArray()
+        {
+            StringBuilder wheelCollectionStringBuilder = new StringBuilder();
+            uint wheelRowCounter = 1;
+            foreach(Wheel wheel in r_Wheels)
+            {
+                wheelCollectionStringBuilder.AppendFormat("wheel number {0}: {1},{2}",wheelRowCounter++,wheel.ToString(),Environment.NewLine);
+            }
+
+            return wheelCollectionStringBuilder.ToString();
+
+        }
+        protected string ToStringVehicle()
+        {
+            StringBuilder vehicleStringBuilder = new StringBuilder();
+            vehicleStringBuilder.AppendFormat(
+                @"License plate number: {0}
+Model: {1}
+{2}
+Wheels:
+{3}",r_LicensePlateNumber,r_Model,r_Motor.ToString(),ToStringWheelArray());
+            return vehicleStringBuilder.ToString();
+        }
     }
 }

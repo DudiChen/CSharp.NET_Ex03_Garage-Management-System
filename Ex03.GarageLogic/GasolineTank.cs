@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 //using System.Linq;
 using Ex03.GarageLogic.Exceptions;
 using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic
 {
-    internal class GasolineTank : IEnergyContainer
+    internal class GasolineTank : EnergyContainer
     {
         private readonly float r_MaximumGasolineTankCapacity;
         private float m_CurrentAmountOfGasoline;
@@ -21,12 +22,12 @@ namespace Ex03.GarageLogic
             m_CurrentAmountOfGasoline = i_CurrentAmountOfGasoline;
         }
 
-        public eEnergyTypes[] GetSupportedEnergyTypes()
+        public override eEnergyTypes[] GetSupportedEnergyTypes()
         {
             return r_SupportedGasolineTypes;
         }
 
-        public float GetMaxEnergyCapacity()
+        public override float GetMaxEnergyCapacity()
         {
             return r_MaximumGasolineTankCapacity;
         }
@@ -39,7 +40,7 @@ namespace Ex03.GarageLogic
         ////    }
         ////}
 
-        public float GetRemainingEnergyLevel()
+        public override float GetRemainingEnergyLevel()
         {
             return m_CurrentAmountOfGasoline;
         }
@@ -51,7 +52,7 @@ namespace Ex03.GarageLogic
         ////    }
         ////}
 
-        public void Energize(eEnergyTypes i_GasolineType, float i_AmountOfGasolineToAdd)
+        public override void Energize(eEnergyTypes i_GasolineType, float i_AmountOfGasolineToAdd)
         {
             ////bool isSupportedGasolineType = r_SupportedGasolineTypes.Contains(i_GasolineType);
             bool isSupportedGasolineType = false;
@@ -79,6 +80,30 @@ namespace Ex03.GarageLogic
             {
                 //throw new GasolineTankGasolineTypesException(r_SupportedGasolineTypes, i_GasolineType);
             }
+        }
+
+        private string toStringSupportedFuelTypes()
+        {
+            StringBuilder supportedTypeStringBuilder= new StringBuilder();
+            
+            for(int i =0;i<r_SupportedGasolineTypes.Length;i++)    
+            {
+                if(i != 0)
+                {
+                    supportedTypeStringBuilder.Append(", ");
+                }
+                supportedTypeStringBuilder.Append(r_SupportedGasolineTypes[i].ToString());
+            }
+
+            return supportedTypeStringBuilder.ToString();
+        }
+        public override string ToString()
+        {
+            return string.Format(
+                @"Gasoline Type: [{0}]
+Fuel remaining: {1}",
+                toStringSupportedFuelTypes(),
+                GetRemainingEnergyLevel());
         }
     }
 }

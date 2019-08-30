@@ -72,14 +72,29 @@ namespace Ex03.GarageLogic
             return Enum.GetNames(typeof(VehicleFactory.eSupportedVehicles));
         }
 
-        public string[] GetVehiclesLicensePlates(GarageTicket.eTicketStatus i_TicketStatus)
+        public List<string> GetVehiclesLicensePlates(GarageTicket.eTicketStatus i_TicketStatus)
         {
+            List<string> licensePlateNumberList = new List<string>();
+            
+            foreach(GarageTicket ticket in m_GarageTickets.Values)
+            {
+                if(ticket.TicketStatus == i_TicketStatus)
+                {
+                    licensePlateNumberList.Add(ticket.VehicleLicenseNumber);
+                }
+            }
 
+            return licensePlateNumberList;
         }
 
-        public string[] GetVehiclesLicensePlates()
+        public List<string> GetVehiclesLicensePlates()
         {
+            return new List<string>(m_GarageTickets.Keys);
+        }
 
+        public string ShowVehicleByLicensePlateNumber(string i_LicensePlateNumber)
+        {
+            return m_vehicleInventory[i_LicensePlateNumber].ToString();
         }
     }
 }

@@ -38,5 +38,18 @@ namespace Ex03.GarageLogic
                 return r_HaulingVolume;
             }
         }
+
+        public override string ToString()
+        {
+            StringBuilder carDisplayString = new StringBuilder();
+            carDisplayString.AppendLine(this.ToStringVehicle());
+            carDisplayString.AppendFormat(
+                @"Contains hazardous materials: {0}
+Container volume in cubic centimeter: {1}",
+                m_HaulingHazardousMaterials.ToString(),
+                r_HaulingVolume);
+
+            return carDisplayString.ToString();
+        }
     }
 }

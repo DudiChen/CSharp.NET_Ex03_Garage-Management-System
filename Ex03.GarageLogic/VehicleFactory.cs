@@ -122,7 +122,7 @@ namespace Ex03.GarageLogic
             i_ArgumentsCollection.AddArgument(eArgumentKeys.HazardousMaterials, new ArgumentWrapper(
                 "Contains hazardous materials", new[] { "True", "False" }, true, typeof(Motorcycle.eLicenseType)));
             i_ArgumentsCollection.AddArgument(eArgumentKeys.HaulVolume, new ArgumentWrapper(
-                "Engine volume in cubic centimeter", null, true, typeof(float)));
+                "Container volume in cubic centimeter", null, true, typeof(float)));
         }
 
         private static void GasVehicleArgumentsCollection(
