@@ -4,7 +4,7 @@ using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic.Exceptions
 {
-    class GasolineTankGasolineTypeException : Exception
+    public class GasolineTankGasolineTypeException : Exception
     {
         private readonly eEnergyTypes r_GasolineTypeExpected;
         private readonly eEnergyTypes r_GasolineTypeReceived;
@@ -13,7 +13,8 @@ namespace Ex03.GarageLogic.Exceptions
             eEnergyTypes i_GasolineTypeExpected,
             eEnergyTypes i_GasolineTypeReceived)
             : base(
-                string.Format("Error: Gasoline-Type received was '{0}', expected '{1}'.", 
+                string.Format(
+                    "Error: Gasoline-Type received was '{0}', expected '{1}'.", 
                     i_GasolineTypeReceived.ToString(), 
                     i_GasolineTypeExpected.ToString()))
         {
@@ -36,18 +37,19 @@ namespace Ex03.GarageLogic.Exceptions
             r_GasolineTypeExpected = i_GasolineTypeExpected;
         }
 
-        public eEnergyTypes GasolineTypeExpected
+        public string GasolineTypeExpected
         {
             get
             {
-                return r_GasolineTypeExpected;
+                return r_GasolineTypeExpected.ToString();
             }
         }
-        public eEnergyTypes GasolineTypeReceived
+
+        public string GasolineTypeReceived
         {
             get
             {
-                return r_GasolineTypeReceived;
+                return r_GasolineTypeReceived.ToString();
             }
         }
     }

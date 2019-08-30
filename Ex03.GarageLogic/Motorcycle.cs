@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -37,6 +37,17 @@ namespace Ex03.GarageLogic
                 return r_EngineVolume;
             }
         }
-
+        public override string ToString()
+        {
+            StringBuilder carDisplayString = new StringBuilder();
+            carDisplayString.AppendLine(this.ToStringVehicle());
+            carDisplayString.AppendFormat(
+                @"Type of registration: {0}
+Motor volume: {1}",
+                r_LicenseType.ToString(),
+                r_EngineVolume);
+            
+            return carDisplayString.ToString();
+        }
     }
 }

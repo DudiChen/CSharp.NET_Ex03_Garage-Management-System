@@ -28,11 +28,12 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_ticketStatus;
+                return m_TicketStatus;
             }
+
             set
             {
-                m_ticketStatus = value;
+                m_TicketStatus = value;
             }
         }
 

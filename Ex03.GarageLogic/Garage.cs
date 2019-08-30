@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     // TBD Access Modifiers!
     public class Garage
-    { 
+    {
         private Dictionary<string, GarageTicket> m_GarageTickets;
         private Dictionary<string, Vehicle> m_vehicleInventory;
 
@@ -19,14 +19,14 @@ namespace Ex03.GarageLogic
 
         internal void AddTicket(string i_VehicleLicenseNumber, GarageTicket i_GarageTicket)
         {
-            if(m_GarageTickets == null)
+            if (m_GarageTickets == null)
             {
                 m_GarageTickets = new Dictionary<string, GarageTicket>();
             }
 
-            if(!m_GarageTickets.ContainsKey(i_VehicleLicenseNumber))
+            if (!m_GarageTickets.ContainsKey(i_VehicleLicenseNumber))
             {
-                m_GarageTickets.Add(i_VehicleLicenseNumber,i_GarageTicket);
+                m_GarageTickets.Add(i_VehicleLicenseNumber, i_GarageTicket);
             }
             else
             {
@@ -56,13 +56,15 @@ namespace Ex03.GarageLogic
         internal List<GarageTicket> GetTicketListByStatus(eTicketStatus i_TicketStatus)
         {
             List<GarageTicket> garageTickets = new List<GarageTicket>();
-            foreach(GarageTicket ticket in m_GarageTickets.Values)
+
+            foreach (GarageTicket ticket in m_GarageTickets.Values)
             {
-                if(ticket.TicketStatus == i_TicketStatus)
+                if (ticket.TicketStatus == i_TicketStatus)
                 {
                     garageTickets.Add(ticket);
                 }
             }
+
             return garageTickets;
         }
 
@@ -85,8 +87,8 @@ namespace Ex03.GarageLogic
                 m_vehicleInventory = new Dictionary<string, Vehicle>();
             }
 
-            m_vehicleInventory.Add(newVehicle.LicensePlateNumber,newVehicle);
-            AddTicket(newVehicle.LicensePlateNumber,new GarageTicket(i_OwnerName,i_OwnerPhoneNumber, newVehicle.LicensePlateNumber));
+            m_vehicleInventory.Add(newVehicle.LicensePlateNumber, newVehicle);
+            AddTicket(newVehicle.LicensePlateNumber, new GarageTicket(i_OwnerName, i_OwnerPhoneNumber, newVehicle.LicensePlateNumber));
         }
 
         public ArgumentsCollection GetArgumentsByVehicleType(string i_VehicleTypeSting)
@@ -99,15 +101,29 @@ namespace Ex03.GarageLogic
         {
             return Enum.GetNames(typeof(VehicleFactory.eSupportedVehicles));
         }
-
-        public string[] getVehiclesLicensePlates(eTicketStatus i_TicketStatus)
+        public List<string> GetVehiclesLicensePlates(GarageTicket.eTicketStatus i_TicketStatus)
         {
+            List<string> licensePlateNumberList = new List<string>();
 
+            foreach (GarageTicket ticket in m_GarageTickets.Values)
+            {
+                if (ticket.TicketStatus == i_TicketStatus)
+                {
+                    licensePlateNumberList.Add(ticket.VehicleLicenseNumber);
+                }
+            }
+
+            return licensePlateNumberList;
         }
 
-        public string[] getVehiclesLicensePlates()
+        public List<string> GetVehiclesLicensePlates()
         {
+            return new List<string>(m_GarageTickets.Keys);
+        }
 
+        public string ShowVehicleByLicensePlateNumber(string i_LicensePlateNumber)
+        {
+            return m_vehicleInventory[i_LicensePlateNumber].ToString();
         }
 
         private eSupportedVehicles parseVehicleTypeFromString(string i_VehicleTypeStr)
@@ -119,7 +135,7 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Error: Received wrong argument value for VehicleType");
             }
 
-            return result;
+            return licensePlateNumberList;
         }
 
         private eTicketStatus parseVehicleStatusFromString(string i_VehicleStatusString)
