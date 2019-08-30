@@ -14,6 +14,7 @@ namespace Ex03.GarageLogic.ArgumentsUtils
         internal ArgumentsCollection()
         {
             r_argumentOrderedDictionaryDictionary = new OrderedDictionary();
+            
         }
 
         internal void AddArgument(string i_ArgumentKeyString, ArgumentWrapper i_Argument)
@@ -29,6 +30,14 @@ namespace Ex03.GarageLogic.ArgumentsUtils
         internal void AddArgument(VehicleFactory.eArgumentKeys i_ArgumentKeyString, ArgumentWrapper i_Argument)
         {
             r_argumentOrderedDictionaryDictionary.Add(i_ArgumentKeyString.ToString(), i_Argument);
+        }
+
+        public int Length
+        {
+            get
+            {
+                return r_argumentOrderedDictionaryDictionary.Count;
+            }
         }
 
         internal ArgumentWrapper this[string i_ArgumentKey]
