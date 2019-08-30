@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class Truck : Vehicle
+    internal class Truck : Vehicle
     {
         private bool m_HaulingHazardousMaterials;
         private readonly float r_HaulingVolume;
 
-        public Truck(
-            string i_Model,
-            string i_LicensePlateNumber,
-            bool i_HaulingHazardousMaterials,
-            float i_HaulingVolume)
-            : base(i_Model, i_LicensePlateNumber)
+        internal Truck(Motor i_Motor, Wheel[] i_Wheels, string i_Model, string i_LicensePlateNumber,bool i_HaulingHazardousMaterials,float i_HaulingVolume)
+            : base(i_Motor,i_Wheels,i_LicensePlateNumber,i_Model)
         {
             m_HaulingHazardousMaterials = i_HaulingHazardousMaterials;
             r_HaulingVolume = i_HaulingVolume;

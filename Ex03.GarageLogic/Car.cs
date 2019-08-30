@@ -8,9 +8,12 @@ namespace Ex03.GarageLogic
 {
     internal class Car: Vehicle
     {
+        
         private readonly eCarColors r_carColor;
         private readonly eNumberOfCarDoors r_NumberOfDoors;
         internal const int k_NumberOfWheels = 4;
+        internal const float k_MaxGasTank = 5.5f;
+        
 
         protected internal Car(
             Motor i_Motor,
