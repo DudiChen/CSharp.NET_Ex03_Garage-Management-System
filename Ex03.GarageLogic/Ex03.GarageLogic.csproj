@@ -38,9 +38,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
-    <None Include="ClassDiagram3.cd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentsCollection.cs" />
@@ -49,12 +46,9 @@
     <Compile Include="BatteryMaxWorkingHoursException.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="GarageTicket.cs" />
-    <Compile Include="IEnergyContainer.cs" />
+    <Compile Include="EnergyContainer.cs" />
     <Compile Include="Garage.cs" />
-    <Compile Include="GasolineMotor.cs" />
     <Compile Include="GasolineTank.cs" />
-    <Compile Include="GasolineTankGasolineTypeException.cs" />
-    <Compile Include="GasolineTankMaxCapacityException.cs" />
     <Compile Include="IEnergyManagement.cs" />
     <Compile Include="Motor.cs" />
     <Compile Include="Motorcycle.cs" />
