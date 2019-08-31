@@ -94,7 +94,8 @@ namespace Ex03.ConsoleUI
 
                     case eMainMenuOptions.FuelGasolineVehicle:
                         {
-                            //DUDI
+                            //DUDI 
+                            // add exceptions and try and catch
                             fuelGasolineVehicle();
                             break;
                         }
@@ -102,6 +103,7 @@ namespace Ex03.ConsoleUI
                     case eMainMenuOptions.ChargeElectricVehicle:
                         {
                             //DUDI
+                            // add exceptions and try and catch
                             chargeElectricVehicle();
                             break;
                         }
