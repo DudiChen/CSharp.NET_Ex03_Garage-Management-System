@@ -23,6 +23,7 @@ namespace Ex03.GarageLogic.Exceptions
             r_MinValue = i_MinValue;
             r_ExceptionMessage = messageBuilder(r_MaxValue, r_MinValue, i_ObjectSourceExceptionMessage);
         }
+
         public Nullable<float> MaxValue
         {
             get
@@ -54,6 +55,7 @@ namespace Ex03.GarageLogic.Exceptions
             {
                 exceptionMessageStringBuilder.AppendFormat("{0} ", i_MessageSource);
             }
+
             exceptionMessageStringBuilder.Append("Value was ");
             if (i_MinValue != null)
             {

@@ -65,7 +65,7 @@ namespace Ex03.GarageLogic
 
         internal void InflateWheelsToMaxAirPressure()
         {
-            foreach(Wheel wheel in r_Wheels)
+            foreach (Wheel wheel in r_Wheels)
             {
                 float airPressureAmountToAdd = r_MaxWheelAirPressure - wheel.CurrentTirePressure;
                 wheel.Inflate(airPressureAmountToAdd);
@@ -97,13 +97,13 @@ namespace Ex03.GarageLogic
 
         public void Energize(Nullable<eEnergyTypes> i_EnergyType, float i_AmountToAdd)
         {
-            bool areValidParams = ((i_EnergyType == null && r_Motor.MotorType == eMotorType.Electric)
-                                   || (i_EnergyType != null && r_Motor.MotorType == eMotorType.Gasoline));
+            bool areValidParams = (i_EnergyType == null && r_Motor.MotorType == eMotorType.Electric) ||
+                                  (i_EnergyType != null && r_Motor.MotorType == eMotorType.Gasoline);
             if (areValidParams)
             {
                 r_Motor.Energize(i_EnergyType, i_AmountToAdd);
             }
-            else // (i_EnergyType == null)
+            else
             {
                 throw new ArgumentNullException();
             }
@@ -117,7 +117,7 @@ namespace Ex03.GarageLogic
             {
                 wheelCollectionStringBuilder.AppendFormat("{2}\t\twheel number {0}: {1}", wheelRowCounter++, wheel.ToString(), Environment.NewLine);
             }
-            
+
             return wheelCollectionStringBuilder.ToString();
         }
 

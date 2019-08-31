@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
             r_SupportedGasolineTypes = i_SupportedGasolineTypes;
             r_MaximumGasolineTankCapacity = i_MaximumGasolineTankCapacity;
             m_CurrentAmountOfGasoline = 0;
-            AddEnergy(ref m_CurrentAmountOfGasoline,i_CurrentAmountOfGasoline,i_MaximumGasolineTankCapacity);
+            AddEnergy(ref m_CurrentAmountOfGasoline, i_CurrentAmountOfGasoline, i_MaximumGasolineTankCapacity);
         }
 
         public override eEnergyTypes[] GetSupportedEnergyTypes()
@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
 
             if (isSupportedGasolineType)
             {
-                AddEnergy(ref m_CurrentAmountOfGasoline,i_AmountOfGasolineToAdd,r_MaximumGasolineTankCapacity);
+                AddEnergy(ref m_CurrentAmountOfGasoline, i_AmountOfGasolineToAdd, r_MaximumGasolineTankCapacity);
             }
             else
             {
@@ -58,9 +58,6 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException();
             }
         }
-
-
-
 
         private string toStringSupportedFuelTypes()
         {
@@ -84,7 +81,8 @@ namespace Ex03.GarageLogic
             return string.Format(
                 "\tGasoline Type:\t{0}{2}\tFuel remaining: {1}",
                 toStringSupportedFuelTypes(),
-                GetRemainingEnergyLevel(),Environment.NewLine);
+                GetRemainingEnergyLevel(),
+                Environment.NewLine);
         }
     }
 }

@@ -23,8 +23,8 @@ namespace Ex03.GarageLogic
         {
             r_GarageTickets = new Dictionary<string, GarageTicket>();
             r_VehicleInventory = new Dictionary<string, Vehicle>();
-
         }
+
         internal void AddTicket(string i_VehicleLicenseNumber, GarageTicket i_GarageTicket)
         {
             if (!r_GarageTickets.ContainsKey(i_VehicleLicenseNumber))
@@ -42,6 +42,7 @@ namespace Ex03.GarageLogic
             eTicketStatus vehicleStatus = parseVehicleStatusFromString(i_StatusString);
             bool isStatusChangeRequired = false;
             eTicketStatus currentVehicleStatus = r_GarageTickets[i_LicensePlateNumber].TicketStatus;
+
             if (vehicleStatus != currentVehicleStatus)
             {
                 r_GarageTickets[i_LicensePlateNumber].TicketStatus = vehicleStatus;
@@ -143,7 +144,7 @@ namespace Ex03.GarageLogic
                 garageTicket.TicketStatus.ToString(),
                 Environment.NewLine);
             showVehicleInfoStringBuilder.AppendLine(r_VehicleInventory[i_LicensePlateNumber].ToString());
-                
+
             return showVehicleInfoStringBuilder.ToString();
         }
 
@@ -175,7 +176,7 @@ namespace Ex03.GarageLogic
             {
                 result = (eSupportedVehicles)Enum.Parse(typeof(eSupportedVehicles), i_VehicleTypeStr);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new FormatException("Error: Received wrong argument value for VehicleType");
             }
@@ -188,10 +189,9 @@ namespace Ex03.GarageLogic
             eEnergyTypes result;
             try
             {
-
                 result = (eEnergyTypes)Enum.Parse(typeof(eEnergyTypes), i_EnergyTypeStr);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new FormatException("Error: Received wrong argument value for GasolineType");
             }
@@ -206,7 +206,7 @@ namespace Ex03.GarageLogic
             {
                 result = (eTicketStatus)Enum.Parse(typeof(eTicketStatus), i_VehicleStatusString);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new FormatException("Error: Received wrong argument value for VehicleType");
             }

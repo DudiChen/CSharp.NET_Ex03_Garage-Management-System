@@ -14,7 +14,6 @@ namespace Ex03.GarageLogic.ArgumentsUtils
         internal ArgumentsCollection()
         {
             r_argumentOrderedDictionaryDictionary = new OrderedDictionary();
-            
         }
 
         internal void AddArgument(string i_ArgumentKeyString, ArgumentWrapper i_Argument)
@@ -45,10 +44,6 @@ namespace Ex03.GarageLogic.ArgumentsUtils
             get
             {
                 return (ArgumentWrapper)r_argumentOrderedDictionaryDictionary[i_index];
-            }
-            set
-            {
-                /* set the specified index to value here */
             }
         }
 

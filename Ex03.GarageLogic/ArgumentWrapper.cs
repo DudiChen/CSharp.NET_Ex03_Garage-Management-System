@@ -59,6 +59,11 @@ namespace Ex03.GarageLogic
 
         public void InjectValue(string i_InputString)
         {
+            if(i_InputString.Equals(string.Empty))
+            {
+                throw new ArgumentException();
+            }
+
             if (r_ValidationType == typeof(int))
             {
                 m_InputValue = int.Parse(i_InputString).ToString();

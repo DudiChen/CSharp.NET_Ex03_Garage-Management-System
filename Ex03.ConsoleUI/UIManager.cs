@@ -43,18 +43,19 @@ namespace Ex03.ConsoleUI
                             {
                                 AddVehicle();
                             }
-                            catch(FormatException)
+                            catch (FormatException)
                             {
                                 System.Console.WriteLine("Failed to Add vehicle: incorrect type was inserted");
                             }
-                            catch(ValueOutOfRangeException valueOutOfRangeException)
+                            catch (ValueOutOfRangeException valueOutOfRangeException)
                             {
-                                System.Console.WriteLine("Failed to Add vehicle: {0}",valueOutOfRangeException.Message);
+                                System.Console.WriteLine("Failed to Add vehicle: {0}", valueOutOfRangeException.Message);
                             }
-                            catch(ArgumentException)
+                            catch (ArgumentException)
                             {
-                                System.Console.WriteLine("Failed to Add vehicle: incorrect supported type inserted");
+                                System.Console.WriteLine("Failed to Add vehicle: input is invalid");
                             }
+
                             break;
                         }
 
@@ -114,7 +115,7 @@ namespace Ex03.ConsoleUI
                             {
                                 getVehicleInfoByLicensePlateNumber();
                             }
-                            catch(KeyNotFoundException)
+                            catch (KeyNotFoundException)
                             {
                                 System.Console.WriteLine("Failed to retrieve vehicle info: vehicle does not exist");
                             }
@@ -168,7 +169,7 @@ namespace Ex03.ConsoleUI
         {
             string[] supportedVehicleTypes = m_Garage.GetSupportedVehicles();
             showSubMenu(supportedVehicleTypes, "Please choose the Vehicle's Type from the following options:");
-            int userChoice = Utils.GetUserMenuChoice(supportedVehicleTypes.Length,1);
+            int userChoice = Utils.GetUserMenuChoice(supportedVehicleTypes.Length, 1);
             return supportedVehicleTypes[userChoice - 1];
         }
 
@@ -176,7 +177,7 @@ namespace Ex03.ConsoleUI
         {
             string[] supportedEnergyTypes = m_Garage.GetSupportedEnergyTypes();
             showSubMenu(supportedEnergyTypes, "Please choose the Vehicle's Energy Type from the following options:");
-            int userChoice = Utils.GetUserMenuChoice(supportedEnergyTypes.Length,1);
+            int userChoice = Utils.GetUserMenuChoice(supportedEnergyTypes.Length, 1);
             return supportedEnergyTypes[userChoice - 1];
         }
 
@@ -184,7 +185,7 @@ namespace Ex03.ConsoleUI
         {
             string[] supportedGasolineTypes = m_Garage.GetSupportedGasolineTypes();
             showSubMenu(supportedGasolineTypes, "Please choose a Gasoline Type from the following options:");
-            int userChoice = Utils.GetUserMenuChoice(supportedGasolineTypes.Length,1);
+            int userChoice = Utils.GetUserMenuChoice(supportedGasolineTypes.Length, 1);
             return supportedGasolineTypes[userChoice - 1];
         }
 
@@ -209,7 +210,7 @@ namespace Ex03.ConsoleUI
         {
             string[] vehicleStatusStrings = Enum.GetNames(typeof(eTicketStatus));
             showSubMenu(vehicleStatusStrings, "Please provide the Vehicle's status from the following options:");
-            int userChoice = Utils.GetUserMenuChoice(vehicleStatusStrings.Length,1);
+            int userChoice = Utils.GetUserMenuChoice(vehicleStatusStrings.Length, 1);
 
             return vehicleStatusStrings[userChoice - 1];
         }
@@ -230,7 +231,7 @@ namespace Ex03.ConsoleUI
                 licensePlateNumberArray = licensePlateNumbersList.ToArray();
                 outputMessage.AppendFormat("Vehicle License Plate Numbers of status '{0}' found:", vehicleStatus);
             }
-            else //(userChoice == 2)
+            else
             {
                 licensePlateNumbersList = m_Garage.GetListOfLicensePlateNumbers();
                 licensePlateNumberArray = licensePlateNumbersList.ToArray();
@@ -242,7 +243,6 @@ namespace Ex03.ConsoleUI
 
         private static void changeVehicleStatus(string i_LicensePlateNumber, string i_NewStatus)
         {
-            
             bool hasChangedStatus = m_Garage.ChangeVehicleStatus(i_LicensePlateNumber, i_NewStatus);
             if (hasChangedStatus)
             {
@@ -257,6 +257,13 @@ namespace Ex03.ConsoleUI
         private static void changeVehicleStatus()
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
+
+            if (!m_Garage.HasVehicleVisited(licensePlateNumber))
+            {
+                System.Console.WriteLine("Vehicle number does not exist!");
+                return;
+            }
+
             string newStatus = GetVehicleStatus();
             changeVehicleStatus(licensePlateNumber, newStatus);
         }
@@ -264,6 +271,14 @@ namespace Ex03.ConsoleUI
         private static void inflateWheelsToMaximum()
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
+
+            if (!m_Garage.HasVehicleVisited(licensePlateNumber))
+            {
+                System.Console.WriteLine("Vehicle number does not exist!");
+
+                return;
+            }
+
             m_Garage.InflateWheelsToMaximum(licensePlateNumber);
         }
 
@@ -278,6 +293,7 @@ namespace Ex03.ConsoleUI
             {
                 throw new FormatException("Error: Expected a float type");
             }
+
             m_Garage.FuelGasolineVehicle(licensePlateNumber, gasolineType, gasolineAmount);
             Console.WriteLine("The Vehicle's Gasoline Tank was successfully added with {0} Liters.", gasolineAmount);
         }
@@ -292,7 +308,8 @@ namespace Ex03.ConsoleUI
             {
                 throw new FormatException("Error: Expected a float type");
             }
-            float electricityHoursToAdd = (electricityMinutesToAdd / 60.0f);
+
+            float electricityHoursToAdd = electricityMinutesToAdd / 60.0f;
             m_Garage.ChargeElectricVehicle(licensePlateNumber, electricityHoursToAdd);
             Console.WriteLine("The Vehicle's Battery was successfully added with {0} Working Minutes.", electricityMinutesToAdd);
         }
@@ -300,9 +317,15 @@ namespace Ex03.ConsoleUI
         private static void getVehicleInfoByLicensePlateNumber()
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
+
+            if (!m_Garage.HasVehicleVisited(licensePlateNumber))
+            {
+                System.Console.WriteLine("Vehicle number does not exist!");
+                return;
+            }
+
             System.Console.WriteLine(m_Garage.GetVehicleInfoByLicensePlateNumber(licensePlateNumber));
         }
-
 
         private static void runArgumentsWithUser(ArgumentsCollection i_Arguments, string i_LicensePlateNumber)
         {
@@ -323,16 +346,18 @@ namespace Ex03.ConsoleUI
                 {
                     showSubMenu(argument.OptionalValues, "Choose from the following options:");
                 }
+
                 while (isInputRequired)
                 {
                     try
                     {
                         string inputString = Console.ReadLine();
 
-                        if (argument.IsStrictToOptionalValues)
+                        if(argument.IsStrictToOptionalValues)
                         {
                             int inputInt;
-                            if (!int.TryParse(inputString, out inputInt))
+
+                            if(!int.TryParse(inputString, out inputInt))
                             {
                                 throw new FormatException();
                             }
@@ -341,6 +366,7 @@ namespace Ex03.ConsoleUI
                                 inputString = argument.OptionalValues[inputInt - 1];
                             }
                         }
+
                         argument.InjectValue(inputString);
                         isInputRequired = false;
                     }
@@ -348,7 +374,6 @@ namespace Ex03.ConsoleUI
                     {
                         System.Console.WriteLine("Error: {0}", valueOutOfRangeException.Message);
                     }
-
                 }
             }
         }

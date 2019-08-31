@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 
-
 namespace Ex03.GarageLogic
 {
     internal class Truck : Vehicle
@@ -12,7 +11,7 @@ namespace Ex03.GarageLogic
         private bool m_HaulingHazardousMaterials;
 
         internal Truck(Motor i_Motor, Wheel[] i_Wheels, float i_MaxWheelPressure, string i_LicensePlateNumber, string i_Model, bool i_HaulingHazardousMaterials, float i_HaulingVolume)
-            : base(i_Motor, i_Wheels,i_MaxWheelPressure, i_LicensePlateNumber, i_Model)
+            : base(i_Motor, i_Wheels, i_MaxWheelPressure, i_LicensePlateNumber, i_Model)
         {
             m_HaulingHazardousMaterials = i_HaulingHazardousMaterials;
             r_HaulingVolume = i_HaulingVolume;
@@ -42,6 +41,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             StringBuilder carDisplayString = new StringBuilder();
+
             carDisplayString.AppendLine(this.ToStringVehicle());
             carDisplayString.AppendFormat(
                 "\tContains hazardous materials: {0}{2}\tContainer volume in cubic centimeter: {1}",

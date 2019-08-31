@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException(r_MaxTirePressure,0);
+                throw new ValueOutOfRangeException(r_MaxTirePressure, 0);
             }
         }
 

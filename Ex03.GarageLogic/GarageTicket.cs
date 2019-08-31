@@ -7,10 +7,6 @@ namespace Ex03.GarageLogic
 {
     public class GarageTicket
     {
-        //public enum eTicketStatus
-        //{
-        //    InProgress,Ready,Paid
-        //}
         private readonly string r_OwnerName;
         private readonly string r_OwnerPhoneNumber;
         private readonly string r_VehicleLicenseNumber;

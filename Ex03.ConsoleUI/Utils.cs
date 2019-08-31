@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using eTicketStatus = Ex03.GarageLogic.Garage.eTicketStatus;
-//using Ex03.ConsoleUI.UIManager;
 
 namespace Ex03.ConsoleUI
 {
     public static class Utils
     {
+        private static readonly int sr_MainMenuNumberOfOptions = Enum.GetNames(typeof(eMainMenuOptions)).Length;
+
         public enum eMainMenuOptions
         {
             AddVehicle,
@@ -45,12 +46,11 @@ namespace Ex03.ConsoleUI
                     { eMainMenuOptions.QuitProgram, "Exit Garage Program" }
                 };
 
-
         private static string m_LineSeparatorThick =
             "==================================================================";
+
         private static string m_LineSeparatorThin =
             "------------------------------------------------------------------";
-        private static readonly int sr_MainMenuNumberOfOptions = Enum.GetNames(typeof(eMainMenuOptions)).Length;
 
         private static string GetWelcomeMessage()
         {
@@ -68,7 +68,6 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder menuLinesConcatenator = new StringBuilder();
             menuLinesConcatenator.AppendFormat("{0}\t\t=== Garage Management System ==={0}", Environment.NewLine);
-            //menuLinesConcatenator.AppendFormat("{0}::::  Main Menu  :::::", Environment.NewLine);
             menuLinesConcatenator.AppendFormat("{0}{0}Please choose from the below menu options:", Environment.NewLine);
 
             for (int i = 0; i < sr_MainMenuNumberOfOptions; i++)
@@ -80,13 +79,13 @@ namespace Ex03.ConsoleUI
                     MainMenuOptionsMap[(eMainMenuOptions)i]);
             }
 
-            Console.WriteLine("{0}{1}{2}{1}",menuLinesConcatenator, Environment.NewLine, Utils.m_LineSeparatorThin);
+            Console.WriteLine("{0}{1}{2}{1}", menuLinesConcatenator, Environment.NewLine, Utils.m_LineSeparatorThin);
         }
 
-        public static int GetUserMenuChoice(int i_MaxValue,int i_MinValue)
+        public static int GetUserMenuChoice(int i_MaxValue, int i_MinValue)
         {
             int userChoice = GetUserMenuChoice();
-            while(userChoice>i_MaxValue || userChoice<i_MinValue)
+            while (userChoice > i_MaxValue || userChoice < i_MinValue)
             {
                 System.Console.WriteLine("Invalid input: Please try again...");
                 userChoice = GetUserMenuChoice();
@@ -133,7 +132,7 @@ namespace Ex03.ConsoleUI
         public static string GetStringUserInput()
         {
             string inputFromUser = System.Console.ReadLine();
-            while(inputFromUser.Equals(string.Empty))
+            while (inputFromUser.Equals(string.Empty))
             {
                 System.Console.WriteLine("Invalid input: Please try again...");
                 inputFromUser = System.Console.ReadLine();
@@ -141,11 +140,5 @@ namespace Ex03.ConsoleUI
 
             return inputFromUser;
         }
-
-        //public static string GetVehicleType(string[] i_SupportedVehicleTypes)
-        //{
-        //    StringBuilder VehicleTypeMenu = new StringBuilder("Please choose the Vehicle Type from the following options:");
-
-        //}
     }
 }

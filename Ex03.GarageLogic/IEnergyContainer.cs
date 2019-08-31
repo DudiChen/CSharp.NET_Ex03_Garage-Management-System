@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
 
         public abstract override string ToString();
 
-        protected void AddEnergy(ref float io_CurrentAmountOfEnergy,float i_AmountOfEnergyToAdd, float i_MaximumEnergyCapacity)
+        protected void AddEnergy(ref float io_CurrentAmountOfEnergy, float i_AmountOfEnergyToAdd, float i_MaximumEnergyCapacity)
         {
             if (io_CurrentAmountOfEnergy + i_AmountOfEnergyToAdd <= i_MaximumEnergyCapacity)
             {
@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
             else
             {
                 //throw new GasolineTankExceededMaxCapacityException(r_MaximumGasolineTankCapacity, m_CurrentAmountOfGasoline, i_AmountOfGasolineToAdd);
-                throw new ValueOutOfRangeException(i_MaximumEnergyCapacity,0,"Energy");
+                throw new ValueOutOfRangeException(i_MaximumEnergyCapacity, 0, "Energy");
             }
         }
     }
