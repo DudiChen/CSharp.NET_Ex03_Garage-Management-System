@@ -58,7 +58,7 @@ namespace Ex03.GarageLogic
                         i_AirPressureToAdd,
                         r_MaxWheelPressure);
                 }
-                throw new ValueOutOfRangeException(r_MaxTirePressure, 0, message);
+                throw new ValueOutOfRangeException(r_MaxWheelPressure, 0, message);
             }
             else
             {
