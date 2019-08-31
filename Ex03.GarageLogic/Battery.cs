@@ -84,7 +84,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(@"Battery remaining: {0}", GetRemainingEnergyLevel());
+            return string.Format("\tBattery remaining: {0}", GetRemainingEnergyLevel());
         }
     }
 }

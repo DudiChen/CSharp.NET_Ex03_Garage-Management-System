@@ -84,10 +84,9 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-                @"Gasoline Type: [{0}]
-Fuel remaining: {1}",
+                "\tGasoline Type:\t{0}{2}\tFuel remaining: {1}",
                 toStringSupportedFuelTypes(),
-                GetRemainingEnergyLevel());
+                GetRemainingEnergyLevel(),Environment.NewLine);
         }
     }
 }

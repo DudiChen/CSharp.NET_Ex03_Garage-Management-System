@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Net.Security;
 using System.Text;
 using Ex03.GarageLogic;
 using Ex03.GarageLogic.Exceptions;
@@ -22,19 +23,19 @@ namespace Ex03.ConsoleUI
 
             bool terminateProgram = false;
 
-            while(!terminateProgram)
+            while (!terminateProgram)
             {
                 Console.Clear();
                 Utils.ShowMainMenu();
-                int userChoice = Utils.GetUserMenuChoice() - 1;
-                while(!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
+                int userChoice = Utils.GetUserMenuChoice(Enum.GetNames(typeof(eMainMenuOptions)).Length, 1) - 1;
+                while (!Enum.IsDefined(typeof(eMainMenuOptions), userChoice))
                 {
                     Console.WriteLine("Invalid input: Choice made not in range. Please try again...");
                 }
 
                 eMainMenuOptions mainMenuOption = (eMainMenuOptions)userChoice;
 
-                switch(mainMenuOption)
+                switch (mainMenuOption)
                 {
                     case eMainMenuOptions.AddVehicle:
                         {
@@ -42,11 +43,11 @@ namespace Ex03.ConsoleUI
                             break;
                         }
 
-                case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
-                    {
-                        showVehiclesLicensePlateNumbers();
-                        break;
-                    }
+                    case eMainMenuOptions.ShowVehiclesLicensePlateNumbers:
+                        {
+                            showVehiclesLicensePlateNumbers();
+                            break;
+                        }
 
                     case eMainMenuOptions.ChangeVehicleStatus:
                         {
@@ -129,16 +130,16 @@ namespace Ex03.ConsoleUI
         {
             string[] supportedVehicleTypes = m_Garage.GetSupportedVehicles();
             showSubMenu(supportedVehicleTypes, "Please choose the Vehicle's Type from the following options:");
-            int UserChoice = Utils.GetUserMenuChoice();
-            return supportedVehicleTypes[UserChoice - 1];
+            int userChoice = Utils.GetUserMenuChoice(supportedVehicleTypes.Length,1);
+            return supportedVehicleTypes[userChoice - 1];
         }
 
         public static string GetEnergyType()
         {
             string[] supportedEnergyTypes = m_Garage.GetSupportedEnergyTypes();
             showSubMenu(supportedEnergyTypes, "Please choose the Vehicle's Energy Type from the following options:");
-            int UserChoice = Utils.GetUserMenuChoice();
-            return supportedEnergyTypes[UserChoice - 1];
+            int userChoice = Utils.GetUserMenuChoice(supportedEnergyTypes.Length,1);
+            return supportedEnergyTypes[userChoice - 1];
         }
 
         //private static void showSubMenu(Collection<string> i_MenuOptions, string i_UserPromptMessage)
@@ -168,15 +169,16 @@ namespace Ex03.ConsoleUI
             return vehicleStatusStrings[UserChoice - 1];
         }
 
+
         private static void showVehiclesLicensePlateNumbers()
         {
-            List<string> licensePlateNumbers = null;
-            string[] promptOptions = new string[] { "Vehicle Status", "Retrieve all"};
+            string[] promptOptions = new string[] { "Vehicle Status", "Retrieve all" };
             showSubMenu(promptOptions, "Retrieve License Plate Numbers by:");
-            int userChoice = Utils.GetUserMenuChoice();
+            int userChoice = Utils.GetUserMenuChoice(promptOptions.Length, 1);
             string[] licensePlateNumberArray;
             List<string> licensePlateNumbersList = null;
             StringBuilder outputMessage = new StringBuilder();
+
             if (userChoice == 1)
             {
                 string vehicleStatus = GetVehicleStatus();
@@ -229,7 +231,7 @@ namespace Ex03.ConsoleUI
 
         private static void chargeElectricVehicle()
         {
-            
+
         }
 
         private static void getVehicleInfoByLicensePlateNumber()
@@ -258,7 +260,7 @@ namespace Ex03.ConsoleUI
                 if (argument.IsStrictToOptionalValues)
                 {
                     showSubMenu(argument.OptionalValues, "Choose from the following options:");
-                    
+
                     //Console.WriteLine("Choose from the following options:");
                     //StringBuilder choiceStringBuilder = new StringBuilder();
                     //foreach (string option in argument.OptionalValues)
@@ -276,13 +278,13 @@ namespace Ex03.ConsoleUI
                         if (argument.IsStrictToOptionalValues)
                         {
                             int inputInt;
-                            if(!int.TryParse(inputString, out inputInt))
+                            if (!int.TryParse(inputString, out inputInt))
                             {
                                 throw new ArgumentException();
                             }
                             else
                             {
-                                inputString = argument.OptionalValues[inputInt-1];
+                                inputString = argument.OptionalValues[inputInt - 1];
                             }
                         }
                         argument.InjectValue(inputString);

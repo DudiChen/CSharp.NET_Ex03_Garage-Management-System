@@ -44,12 +44,13 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             StringBuilder carDisplayString = new StringBuilder();
+
             carDisplayString.AppendLine(this.ToStringVehicle());
             carDisplayString.AppendFormat(
-                @"Type of registration: {0}
-Motor volume: {1}",
+                "\tType of registration: {0}{2}\tMotor volume: {1}",
                 r_LicenseType.ToString(),
-                r_EngineVolume);
+                r_EngineVolume,
+                Environment.NewLine);
 
             return carDisplayString.ToString();
         }

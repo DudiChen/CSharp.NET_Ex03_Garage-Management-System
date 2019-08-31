@@ -47,10 +47,10 @@ namespace Ex03.GarageLogic
             StringBuilder carDisplayString = new StringBuilder();
             carDisplayString.AppendLine(this.ToStringVehicle());
             carDisplayString.AppendFormat(
-                @"Contains hazardous materials: {0}
-Container volume in cubic centimeter: {1}",
+                "\tContains hazardous materials: {0}{2}\tContainer volume in cubic centimeter: {1}",
                 m_HaulingHazardousMaterials.ToString(),
-                r_HaulingVolume);
+                r_HaulingVolume,
+                Environment.NewLine);
 
             return carDisplayString.ToString();
         }

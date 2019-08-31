@@ -50,10 +50,10 @@ namespace Ex03.GarageLogic
             StringBuilder carDisplayString = new StringBuilder();
             carDisplayString.AppendLine(this.ToStringVehicle());
             carDisplayString.AppendFormat(
-                @"Exterior color: {0}
-Number of doors: {1}",
+                "\tExterior color: {0}{2}\tNumber of doors: {1}",
                 r_carColor,
-                r_NumberOfDoors);
+                r_NumberOfDoors,
+                Environment.NewLine);
             return carDisplayString.ToString();
         }
     }

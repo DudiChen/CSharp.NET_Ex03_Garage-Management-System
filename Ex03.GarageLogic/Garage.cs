@@ -130,9 +130,7 @@ namespace Ex03.GarageLogic
             GarageTicket garageTicket = getTicketByLicensePlateNumber(i_LicensePlateNumber);
             StringBuilder showVehicleInfoStringBuilder = new StringBuilder();
             showVehicleInfoStringBuilder.AppendFormat(
-                @"Owner's name: {0}
-Owner's phone number: {1}
-vehicle status: {2}{3}",
+                    "\tOwner's name: {0}{3}\tOwner's phone number: {1}{3}\tvehicle status: {2}{3}",
                 garageTicket.OwnerName,
                 garageTicket.OwnerPhoneNumber,
                 garageTicket.TicketStatus.ToString(),
@@ -157,14 +155,12 @@ vehicle status: {2}{3}",
             eSupportedVehicles result;
             try
             {
-
                 result = (eSupportedVehicles)Enum.Parse(typeof(eSupportedVehicles), i_VehicleTypeStr);
             }
             catch (Exception e)
             {
                 throw new ArgumentException("Error: Received wrong argument value for VehicleType");
             }
-
 
             return result;
         }
@@ -184,8 +180,6 @@ vehicle status: {2}{3}",
             return result;
         }
 
-        
-
         public void FillVehicleEnergyContainer(string i_EnergyType, string i_LicensePlateNumber)
         {
             if (!HasVehicleVisited(i_LicensePlateNumber))
@@ -193,7 +187,6 @@ vehicle status: {2}{3}",
                 throw new ArgumentException("Error: Received non-existing vehicle license plate number");
             }
             Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
-            ////vehicle.Energize(parseVehicleTypeFromString());
         }
     }
 }
