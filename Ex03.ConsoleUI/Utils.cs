@@ -124,7 +124,12 @@ namespace Ex03.ConsoleUI
             return System.Console.ReadLine();
         }
 
-        
+        public static string GetGasolineAmountToAdd()
+        {
+            System.Console.WriteLine("Please provide the amount of gasoline to add:");
+            return System.Console.ReadLine();
+        }
+
 
         //public static string GetVehicleType(string[] i_SupportedVehicleTypes)
         //{

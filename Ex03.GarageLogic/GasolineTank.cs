@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
             return m_CurrentAmountOfGasoline;
         }
 
-        public override void Energize(eEnergyTypes i_GasolineType, float i_AmountOfGasolineToAdd)
+        public override void Energize(Nullable<eEnergyTypes> i_GasolineType, float i_AmountOfGasolineToAdd)
         {
             bool isSupportedGasolineType = false;
 

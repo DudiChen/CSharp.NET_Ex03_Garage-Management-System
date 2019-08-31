@@ -11,6 +11,6 @@ namespace Ex03.GarageLogic
 
         float GetRemainingEnergyLevel();
 
-        void Energize(eEnergyTypes i_EnergyType, float i_EnergyAmountToAdd);
+        void Energize(Nullable<eEnergyTypes> i_EnergyType, float i_EnergyAmountToAdd);
     }
 }

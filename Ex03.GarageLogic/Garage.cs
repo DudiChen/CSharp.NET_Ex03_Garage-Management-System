@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Ex03.GarageLogic.ArgumentsUtils;
 using eSupportedVehicles = Ex03.GarageLogic.VehicleFactory.eSupportedVehicles;
+using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 
 namespace Ex03.GarageLogic
 {
@@ -102,7 +103,12 @@ namespace Ex03.GarageLogic
 
         public string[] GetSupportedEnergyTypes()
         {
-            return Enum.GetNames(typeof(VehicleFactory.eEnergyTypes));
+            return Enum.GetNames(typeof(eEnergyTypes));
+        }
+
+        public string[] GetSupportedGasolineTypes()
+        {
+            return Enum.GetNames(typeof(VehicleFactory.eGasolineTypes));
         }
 
         public List<string> GetListOfLicensePlateNumbers(string i_VehicleStatusString)
@@ -145,9 +151,17 @@ namespace Ex03.GarageLogic
             vehicle.InflateWheelsToMaxAirPressure();
         }
 
-        public void FuelGasolineVehicle()
+        public void FuelGasolineVehicle(string i_LicensePlateNumber, string i_GasolineType, float i_AmountToAdd)
         {
+            eEnergyTypes gasolineType = parseEnergyTypeFromString(i_GasolineType);
+            Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
+            vehicle.Energize(gasolineType, i_AmountToAdd);
+        }
 
+        public void ChargeElectricVehicle(string i_LicensePlateNumber, float i_ElectricityHoursToAdd)
+        {
+            Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
+            vehicle.Energize(null, i_ElectricityHoursToAdd);
         }
 
         private eSupportedVehicles parseVehicleTypeFromString(string i_VehicleTypeStr)
@@ -161,6 +175,23 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Error: Received wrong argument value for VehicleType");
             }
+
+            return result;
+        }
+
+        private eEnergyTypes parseEnergyTypeFromString(string i_EnergyTypeStr)
+        {
+            eEnergyTypes result;
+            try
+            {
+
+                result = (eEnergyTypes)Enum.Parse(typeof(eEnergyTypes), i_EnergyTypeStr);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Error: Received wrong argument value for GasolineType");
+            }
+
 
             return result;
         }
@@ -180,13 +211,16 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public void FillVehicleEnergyContainer(string i_EnergyType, string i_LicensePlateNumber)
-        {
-            if (!HasVehicleVisited(i_LicensePlateNumber))
-            {
-                throw new ArgumentException("Error: Received non-existing vehicle license plate number");
-            }
-            Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
-        }
+
+
+        ////public void FillVehicleEnergyContainer(string i_EnergyType, string i_LicensePlateNumber)
+        ////{
+        ////    if (!HasVehicleVisited(i_LicensePlateNumber))
+        ////    {
+        ////        throw new ArgumentException("Error: Received non-existing vehicle license plate number");
+        ////    }
+        ////    Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
+        ////    vehicle.Energize(parseVehicleTypeFromString());
+        ////}
     }
 }
