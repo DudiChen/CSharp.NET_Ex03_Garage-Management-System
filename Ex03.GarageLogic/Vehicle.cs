@@ -110,10 +110,11 @@ namespace Ex03.GarageLogic
                 {
                     exceptionMessage = "Error: Received an EnergyType null value for a Gasoline motor type.";
                 }
-                else //(i_EnergyType != null && r_Motor.MotorType == eMotorType.Electric)
+                else 
                 {
                     exceptionMessage = "Error: For Electric motor type expected a EnergyType null value.";
                 }
+
                 throw new ArgumentException(exceptionMessage, nameof(i_EnergyType));
             }
         }

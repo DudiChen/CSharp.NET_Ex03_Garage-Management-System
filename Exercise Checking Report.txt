@@ -1,0 +1,10 @@
+==========================Exercise Checking Report==========================
+Exercise No...........: 3
+First Student Details.: 302390562 - Edan Kantor
+Second Student Details: 300334034 - David Chen
+Delivery Date.........: 31 - August - 2019
+Delivered In Delay....: yes
+Delay Reason..........: Needed more time
+Visual Studio Version.: 2015
+Comments..............: N/A
+=======================End Exercise Checking Report=========================
