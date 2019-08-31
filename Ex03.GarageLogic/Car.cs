@@ -18,11 +18,12 @@ namespace Ex03.GarageLogic
         protected internal Car(
             Motor i_Motor,
             Wheel[] i_Wheels,
+            float i_MaxWheelPressure,
             string i_LicensePlateNumber,
             string i_Model,
             eCarColors i_CarColor,
             eNumberOfCarDoors i_NumberOfDoors)
-        : base(i_Motor, i_Wheels, i_LicensePlateNumber, i_Model)
+        : base(i_Motor, i_Wheels,i_MaxWheelPressure, i_LicensePlateNumber, i_Model)
         {
             r_carColor = i_CarColor;
             r_NumberOfDoors = i_NumberOfDoors;

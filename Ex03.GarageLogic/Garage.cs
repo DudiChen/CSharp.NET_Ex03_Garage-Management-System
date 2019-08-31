@@ -131,9 +131,11 @@ namespace Ex03.GarageLogic
             StringBuilder showVehicleInfoStringBuilder = new StringBuilder();
             showVehicleInfoStringBuilder.AppendFormat(
                 @"Owner's name: {0}
-Owner's phone number: {1}{2}",
+Owner's phone number: {1}
+vehicle status: {2}{3}",
                 garageTicket.OwnerName,
                 garageTicket.OwnerPhoneNumber,
+                garageTicket.TicketStatus.ToString(),
                 Environment.NewLine);
             showVehicleInfoStringBuilder.AppendLine(m_vehicleInventory[i_LicensePlateNumber].ToString());
             return showVehicleInfoStringBuilder.ToString();
@@ -191,7 +193,7 @@ Owner's phone number: {1}{2}",
                 throw new ArgumentException("Error: Received non-existing vehicle license plate number");
             }
             Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
-            vehicle.Energize(parseVehicleTypeFromString());
+            ////vehicle.Energize(parseVehicleTypeFromString());
         }
     }
 }

@@ -93,7 +93,7 @@ namespace Ex03.GarageLogic
             { eSupportedVehicles.GasolineTruck, new eEnergyTypes[] { eEnergyTypes.Soler } }
         };
 
-        private static void WheelsArgumentsCollectionCreator(ArgumentsCollection i_ArgumentsCollection, int i_NumberOfWheels)
+        private static void wheelsArgumentsCollectionCreator(ArgumentsCollection i_ArgumentsCollection, int i_NumberOfWheels)
         {
             for (int i = 1; i <= i_NumberOfWheels; i++)
             {
@@ -139,7 +139,7 @@ namespace Ex03.GarageLogic
         private static void CarArgumentsCollection(
            ArgumentsCollection i_ArgumentsCollection)
         {
-            WheelsArgumentsCollectionCreator(i_ArgumentsCollection, Car.k_NumberOfWheels);
+            wheelsArgumentsCollectionCreator(i_ArgumentsCollection, Car.k_NumberOfWheels);
             i_ArgumentsCollection.AddArgument(
                 eArgumentKeys.Color,
                 new ArgumentWrapper("Exterior color", Enum.GetNames(typeof(eCarColors)), true, typeof(string)));
@@ -151,7 +151,7 @@ namespace Ex03.GarageLogic
         private static void MotorcycleArgumentsCollection(
             ArgumentsCollection i_ArgumentsCollection)
         {
-            WheelsArgumentsCollectionCreator(i_ArgumentsCollection, Motorcycle.k_NumberOfWheels);
+            wheelsArgumentsCollectionCreator(i_ArgumentsCollection, Motorcycle.k_NumberOfWheels);
             i_ArgumentsCollection.AddArgument(
                 eArgumentKeys.LicenseType,
                 new ArgumentWrapper("License type", Enum.GetNames(typeof(Motorcycle.eLicenseType)), true, typeof(Motorcycle.eLicenseType)));
@@ -163,7 +163,7 @@ namespace Ex03.GarageLogic
         private static void TruckArgumentsCollection(
             ArgumentsCollection i_ArgumentsCollection)
         {
-            WheelsArgumentsCollectionCreator(i_ArgumentsCollection, Truck.k_NumberOfWheels);
+            wheelsArgumentsCollectionCreator(i_ArgumentsCollection, Truck.k_NumberOfWheels);
             i_ArgumentsCollection.AddArgument(
                 eArgumentKeys.HazardousMaterials,
                 new ArgumentWrapper("Contains hazardous materials", new[] { "True", "False" }, true, typeof(bool)));
@@ -271,7 +271,7 @@ namespace Ex03.GarageLogic
             eCarColors carColor = (eCarColors)Enum.Parse(typeof(eCarColors), i_Arguments[eArgumentKeys.Color].Response);
             Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Car.k_NumberOfWheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxTirePressure]);
 
-            return new Car(i_Motor, wheels, licensePlate, model, carColor, numberOfDoors);
+            return new Car(i_Motor, wheels,sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxTirePressure], licensePlate, model, carColor, numberOfDoors);
         }
 
         private static Truck createTruck(ArgumentsCollection i_Arguments, Motor i_Motor)
@@ -282,7 +282,7 @@ namespace Ex03.GarageLogic
             int haulingVolume = int.Parse(i_Arguments[eArgumentKeys.HaulVolume].Response);
             Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Truck.k_NumberOfWheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.TruckMaxTirePressure]);
 
-            return new Truck(i_Motor, wheels, licensePlate, model, isCarryingHazardousMaterials, haulingVolume);
+            return new Truck(i_Motor, wheels,sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.TruckMaxTirePressure], licensePlate, model, isCarryingHazardousMaterials, haulingVolume);
         }
 
         private static Motorcycle createMotorcycle(ArgumentsCollection i_Arguments, Motor i_Motor)
@@ -293,7 +293,7 @@ namespace Ex03.GarageLogic
             int engineVolume = int.Parse(i_Arguments[eArgumentKeys.EngineVolume].Response);
             Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxTirePressure]);
 
-            return new Motorcycle(i_Motor, wheels, licensePlate, model, licenseType, engineVolume);
+            return new Motorcycle(i_Motor, wheels,sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxTirePressure], licensePlate, model, licenseType, engineVolume);
         }
 
         private static Motor getElectricMotor(ArgumentsCollection i_Arguments, float i_MaxCapacity)

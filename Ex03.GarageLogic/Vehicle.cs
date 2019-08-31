@@ -117,9 +117,9 @@ namespace Ex03.GarageLogic
             uint wheelRowCounter = 1;
             foreach (Wheel wheel in r_Wheels)
             {
-                wheelCollectionStringBuilder.AppendFormat("wheel number {0}: {1},{2}", wheelRowCounter++, wheel.ToString(), Environment.NewLine);
+                wheelCollectionStringBuilder.AppendFormat("{2}wheel number {0}: {1}", wheelRowCounter++, wheel.ToString(), Environment.NewLine);
             }
-
+            
             return wheelCollectionStringBuilder.ToString();
         }
 
@@ -131,8 +131,7 @@ namespace Ex03.GarageLogic
                 @"License plate number: {0}
 Model: {1}
 {2}
-Wheels:
-{3}",
+Wheels: {3}",
                 r_LicensePlateNumber,
                 r_Model,
                 r_Motor.ToString(),

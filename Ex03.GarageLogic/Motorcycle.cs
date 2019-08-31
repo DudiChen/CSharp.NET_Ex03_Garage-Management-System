@@ -18,8 +18,8 @@ namespace Ex03.GarageLogic
         private readonly eLicenseType r_LicenseType;
         private readonly int r_EngineVolume;
 
-        internal Motorcycle(Motor i_Motor, Wheel[] i_Wheels, string i_LicensePlateNumber, string i_Model, eLicenseType i_LicenseType, int i_EngineVolume)
-            : base(i_Motor, i_Wheels, i_LicensePlateNumber, i_Model)
+        internal Motorcycle(Motor i_Motor, Wheel[] i_Wheels,float i_MaxWheelPressure, string i_LicensePlateNumber, string i_Model, eLicenseType i_LicenseType, int i_EngineVolume)
+            : base(i_Motor, i_Wheels,i_MaxWheelPressure, i_LicensePlateNumber, i_Model)
         {
             r_LicenseType = i_LicenseType;
             r_EngineVolume = i_EngineVolume;
