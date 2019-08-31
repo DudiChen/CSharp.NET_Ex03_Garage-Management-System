@@ -184,7 +184,7 @@ namespace Ex03.GarageLogic
         {
             i_ArgumentsCollection.AddArgument(
                 VehicleFactory.eArgumentKeys.CurrentAmountOfEnergy,
-                new ArgumentWrapper("Current amount of hours remaining in battery", null, false, typeof(int)));
+                new ArgumentWrapper("Current amount of hours remaining in battery", null, false, typeof(float)));
         }
 
         internal static ArgumentsUtils.ArgumentsCollection GetGasolineCarArguments()
