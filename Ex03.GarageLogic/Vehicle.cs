@@ -67,7 +67,7 @@ namespace Ex03.GarageLogic
         {
             foreach (Wheel wheel in r_Wheels)
             {
-                float airPressureAmountToAdd = r_MaxWheelAirPressure - wheel.CurrentTirePressure;
+                float airPressureAmountToAdd = r_MaxWheelAirPressure - wheel.CurrentWheelPressure;
                 wheel.Inflate(airPressureAmountToAdd);
             }
         }

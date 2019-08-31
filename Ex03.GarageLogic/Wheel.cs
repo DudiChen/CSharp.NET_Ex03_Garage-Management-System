@@ -5,17 +5,16 @@ namespace Ex03.GarageLogic
 {
     internal class Wheel
     {
-        private const float k_MinTirePressure = 0.0f;
         private readonly string r_Manufacturer;
-        private readonly float r_MaxTirePressure;
-        private float m_CurrentTirePressure;
+        private readonly float r_MaxWheelPressure;
+        private float m_CurrentWheelPressure;
 
-        internal Wheel(string i_Manufacturer, float i_MaxTirePressure, float i_CurrentTirePressure)
+        internal Wheel(string i_Manufacturer, float i_MaxWheelPressure, float i_CurrentWheelPressure)
         {
             r_Manufacturer = i_Manufacturer;
-            r_MaxTirePressure = i_MaxTirePressure;
-            m_CurrentTirePressure = 0;
-            Inflate(i_CurrentTirePressure);
+            r_MaxWheelPressure = i_MaxWheelPressure;
+            m_CurrentWheelPressure = 0;
+            Inflate(i_CurrentWheelPressure);
         }
 
         internal string Manufacturer
@@ -26,37 +25,37 @@ namespace Ex03.GarageLogic
             }
         }
 
-        internal float CurrentTirePressure
+        internal float CurrentWheelPressure
         {
             get
             {
-                return m_CurrentTirePressure;
+                return m_CurrentWheelPressure;
             }
         }
 
-        ////internal float MaxTirePressure
+        ////internal float MaxWheelPressure
         ////{
         ////    get
         ////    {
-        ////        return r_MaxTirePressure;
+        ////        return r_MaxWheelPressure;
         ////    }
         ////}
 
         internal void Inflate(float i_AirPressureToAdd)
         {
-            if (m_CurrentTirePressure + i_AirPressureToAdd <= r_MaxTirePressure)
+            if (m_CurrentWheelPressure + i_AirPressureToAdd <= r_MaxWheelPressure)
             {
-                m_CurrentTirePressure += i_AirPressureToAdd;
+                m_CurrentWheelPressure += i_AirPressureToAdd;
             }
             else
             {
-                throw new ValueOutOfRangeException(r_MaxTirePressure, 0);
+                throw new ValueOutOfRangeException(r_MaxWheelPressure, 0);
             }
         }
 
         public override string ToString()
         {
-            return string.Format("Manufacturer name: {0}   Current tire pressure: {1}", r_Manufacturer, m_CurrentTirePressure);
+            return string.Format("Manufacturer name: {0}   Current Wheel pressure: {1}", r_Manufacturer, m_CurrentWheelPressure);
         }
     }
 }
