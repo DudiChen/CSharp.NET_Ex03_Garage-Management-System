@@ -33,13 +33,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        ////internal float MaxWheelPressure
-        ////{
-        ////    get
-        ////    {
-        ////        return r_MaxWheelPressure;
-        ////    }
-        ////}
 
         internal void Inflate(float i_AirPressureToAdd)
         {
