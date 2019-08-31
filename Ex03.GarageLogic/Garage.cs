@@ -193,7 +193,7 @@ namespace Ex03.GarageLogic
             }
             catch (Exception)
             {
-                throw new FormatException("Error: Received wrong argument value for GasolineType");
+                throw new FormatException("Error: Received invalid value for GasolineType");
             }
 
             return result;
@@ -214,5 +214,4 @@ namespace Ex03.GarageLogic
             return result;
         }
     }
-    Description
 }

@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Error: Expected 'null' value for EnergyType in Energize of Electric Type Motor");
+                throw new ArgumentException("Error: Expected 'null' value for EnergyType in Energize of Electric Type Motor", nameof(i_ElectricityType));
             }
             ////bool isSupportedGasolineType = false;
 

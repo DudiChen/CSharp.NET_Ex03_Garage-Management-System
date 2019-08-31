@@ -54,8 +54,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //throw new GasolineTankGasolineTypesException(r_SupportedGasolineTypes, i_GasolineType);
-                throw new ArgumentException();
+                throw new ArgumentException(string.Format("{0} is not a supported Gasoline type for this Vehicle",i_GasolineType.ToString()));
             }
         }
 

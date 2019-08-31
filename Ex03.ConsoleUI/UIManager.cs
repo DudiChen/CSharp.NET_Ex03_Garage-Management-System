@@ -10,6 +10,7 @@ using Ex03.GarageLogic.Exceptions;
 using eMainMenuOptions = Ex03.ConsoleUI.Utils.eMainMenuOptions;
 using eTicketStatus = Ex03.GarageLogic.Garage.eTicketStatus;
 using ArgumentsCollection = Ex03.GarageLogic.ArgumentsUtils.ArgumentsCollection;
+using Exception = System.Exception;
 
 namespace Ex03.ConsoleUI
 {
@@ -71,9 +72,10 @@ namespace Ex03.ConsoleUI
                             {
                                 changeVehicleStatus();
                             }
-                            catch (KeyNotFoundException)
+                            catch (KeyNotFoundException exception)
                             {
-                                System.Console.WriteLine("Failed to change vehicle status: vehicle does not exist");
+                                Console.WriteLine("Failed to change the vehicle's status: {0}", exception.Message);
+                                ////System.Console.WriteLine("Failed to change vehicle status: vehicle does not exist");
                             }
 
                             break;
@@ -81,13 +83,15 @@ namespace Ex03.ConsoleUI
 
                     case eMainMenuOptions.InflateWheelsToMaximum:
                         {
+                            // DUDI
+                            // test exception
                             try
                             {
                                 inflateWheelsToMaximum();
                             }
-                            catch (KeyNotFoundException)
+                            catch (KeyNotFoundException exception)
                             {
-                                System.Console.WriteLine("Failed to inflate vehicle wheels: vehicle does not exist");
+                                Console.WriteLine("Error: Failed to inflate vehicle wheels: {0}", exception.Message);
                             }
 
                             break;
@@ -96,28 +100,64 @@ namespace Ex03.ConsoleUI
                     case eMainMenuOptions.FuelGasolineVehicle:
                         {
                             //DUDI 
-                            // add exceptions and try and catch
-                            fuelGasolineVehicle();
+                            // test exceptions
+                            try
+                            {
+                                fuelGasolineVehicle();
+                            }
+                            catch(FormatException exception)
+                            {
+                                Console.WriteLine(exception.Message);
+                            }
+                            catch(ArgumentException exception)
+                            {
+                                Console.WriteLine(exception.Message);
+                            }
+
                             break;
                         }
 
                     case eMainMenuOptions.ChargeElectricVehicle:
                         {
                             //DUDI
-                            // add exceptions and try and catch
-                            chargeElectricVehicle();
+                            // test exceptions
+                            try
+                            {
+                                chargeElectricVehicle();
+                            }
+                            catch(ValueOutOfRangeException exception)
+                            {
+                                Console.WriteLine(exception.Message);
+                            }
+                            catch (FormatException exception)
+                            {
+                                Console.WriteLine(exception.Message);
+                            }
+                            catch (ArgumentException exception)
+                            {
+                                if (exception.ParamName.Equals(string.Empty))
+                                {
+                                    Console.WriteLine(exception.Message);
+                                }
+                                else
+                                {
+                                    throw;
+                                }
+                            }
+                            
                             break;
                         }
-
+                        // DUDI
+                        // test exception
                     case eMainMenuOptions.GetVehicleInfoByLicensePlateNumber:
                         {
                             try
                             {
                                 getVehicleInfoByLicensePlateNumber();
                             }
-                            catch (KeyNotFoundException)
+                            catch (KeyNotFoundException exception)
                             {
-                                System.Console.WriteLine("Failed to retrieve vehicle info: vehicle does not exist");
+                                System.Console.WriteLine("Failed to retrieve vehicle info: {0}", exception.Message);
                             }
 
                             break;
@@ -260,8 +300,12 @@ namespace Ex03.ConsoleUI
 
             if (!m_Garage.HasVehicleVisited(licensePlateNumber))
             {
-                System.Console.WriteLine("Vehicle number does not exist!");
-                return;
+                string message = string.Format(
+                    "The License Plate Number'{0} was not found in the system",
+                    licensePlateNumber);
+                throw new KeyNotFoundException(message);
+                ////System.Console.WriteLine("Vehicle number does not exist!");
+                ////return;
             }
 
             string newStatus = GetVehicleStatus();
@@ -272,14 +316,14 @@ namespace Ex03.ConsoleUI
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
 
-            if (!m_Garage.HasVehicleVisited(licensePlateNumber))
+            if (m_Garage.HasVehicleVisited(licensePlateNumber))
             {
-                System.Console.WriteLine("Vehicle number does not exist!");
-
-                return;
+                m_Garage.InflateWheelsToMaximum(licensePlateNumber);
             }
-
-            m_Garage.InflateWheelsToMaximum(licensePlateNumber);
+            else
+            {
+                throw new KeyNotFoundException("Vehicle's License Plate Number was not found.");
+            }
         }
 
         private static void fuelGasolineVehicle()
@@ -291,7 +335,7 @@ namespace Ex03.ConsoleUI
 
             if (!float.TryParse(gasolineAmountString, out gasolineAmount))
             {
-                throw new FormatException("Error: Expected a float type");
+                throw new FormatException("Expected a float type value for Gasoline amount.");
             }
 
             m_Garage.FuelGasolineVehicle(licensePlateNumber, gasolineType, gasolineAmount);
@@ -306,7 +350,7 @@ namespace Ex03.ConsoleUI
 
             if (!float.TryParse(electricityMinutesToAddString, out electricityMinutesToAdd))
             {
-                throw new FormatException("Error: Expected a float type");
+                throw new FormatException("Error: Expected a float type for electricity number of minutes to add");
             }
 
             float electricityHoursToAdd = electricityMinutesToAdd / 60.0f;
@@ -320,8 +364,11 @@ namespace Ex03.ConsoleUI
 
             if (!m_Garage.HasVehicleVisited(licensePlateNumber))
             {
-                System.Console.WriteLine("Vehicle number does not exist!");
-                return;
+                string message = string.Format(
+                    "The License Plate Number'{0} was not found in the system",
+                    licensePlateNumber);
+                throw new KeyNotFoundException(message);
+                ////System.Console.WriteLine("Vehicle number does not exist!");
             }
 
             System.Console.WriteLine(m_Garage.GetVehicleInfoByLicensePlateNumber(licensePlateNumber));

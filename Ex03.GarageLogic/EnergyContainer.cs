@@ -24,8 +24,11 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //throw new GasolineTankExceededMaxCapacityException(r_MaximumGasolineTankCapacity, m_CurrentAmountOfGasoline, i_AmountOfGasolineToAdd);
-                throw new ValueOutOfRangeException(i_MaximumEnergyCapacity, 0, "Energy");
+                string message = string.Format(
+                    "The received energy amount of '{0}' exceeds the max allowed value of '{1}'",
+                    i_AmountOfEnergyToAdd,
+                    i_MaximumEnergyCapacity);
+                throw new ValueOutOfRangeException(i_MaximumEnergyCapacity, 0, message);
             }
         }
     }
