@@ -125,7 +125,13 @@ namespace Ex03.ConsoleUI
 
         public static string GetGasolineAmountToAdd()
         {
-            System.Console.WriteLine("Please provide the amount of gasoline to add:");
+            System.Console.WriteLine("Please provide the amount of Gasoline liters to add:");
+            return System.Console.ReadLine();
+        }
+
+        public static string GetElectricityAmountToAdd()
+        {
+            System.Console.WriteLine("Please provide the amount of Electricity Working Minutes to add:");
             return System.Console.ReadLine();
         }
 

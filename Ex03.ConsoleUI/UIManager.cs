@@ -345,7 +345,7 @@ namespace Ex03.ConsoleUI
         private static void chargeElectricVehicle()
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
-            string electricityMinutesToAddString = Utils.GetGasolineAmountToAdd();
+            string electricityMinutesToAddString = Utils.GetElectricityAmountToAdd();
             float electricityMinutesToAdd;
 
             if (!float.TryParse(electricityMinutesToAddString, out electricityMinutesToAdd))

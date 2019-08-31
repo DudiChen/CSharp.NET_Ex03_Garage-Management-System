@@ -18,15 +18,17 @@ namespace Ex03.GarageLogic
 
         protected void AddEnergy(ref float io_CurrentAmountOfEnergy, float i_AmountOfEnergyToAdd, float i_MaximumEnergyCapacity)
         {
-            if (io_CurrentAmountOfEnergy + i_AmountOfEnergyToAdd <= i_MaximumEnergyCapacity)
+            float sumCurrentAndAdditional = io_CurrentAmountOfEnergy + i_AmountOfEnergyToAdd;
+            if (sumCurrentAndAdditional <= i_MaximumEnergyCapacity)
             {
                 io_CurrentAmountOfEnergy += i_AmountOfEnergyToAdd;
             }
             else
             {
                 string message = string.Format(
-                    "The received energy amount of '{0}' exceeds the max allowed value of '{1}'",
+                    "The received energy amount in hours of '{0}' amounted to {1}, which exceeded the max allowed value of '{2}'",
                     i_AmountOfEnergyToAdd,
+                    sumCurrentAndAdditional,
                     i_MaximumEnergyCapacity);
                 throw new ValueOutOfRangeException(i_MaximumEnergyCapacity, 0, message);
             }
