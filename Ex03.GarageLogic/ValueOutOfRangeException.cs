@@ -10,18 +10,27 @@ namespace Ex03.GarageLogic.Exceptions
         private readonly Nullable<float> r_MinValue;
         private readonly string r_ExceptionMessage;
 
-        public ValueOutOfRangeException(Nullable<float> i_MaxValue, Nullable<float> i_MinValue) : base()
+        public ValueOutOfRangeException(Nullable<float> i_MaxValue, Nullable<float> i_MinValue)
         {
             r_MaxValue = i_MaxValue;
             r_MinValue = i_MinValue;
-            r_ExceptionMessage = messageBuilder(r_MaxValue, r_MinValue, null);
+            ////r_ExceptionMessage = messageBuilder(r_MaxValue, r_MinValue, null);
         }
 
-        public ValueOutOfRangeException(Nullable<float> i_MaxValue, Nullable<float> i_MinValue, string i_ObjectSourceExceptionMessage)
+        public ValueOutOfRangeException(Nullable<float> i_MaxValue, Nullable<float> i_MinValue, string i_Message)
+        : base(i_Message)
         {
             r_MaxValue = i_MaxValue;
             r_MinValue = i_MinValue;
-            r_ExceptionMessage = messageBuilder(r_MaxValue, r_MinValue, i_ObjectSourceExceptionMessage);
+            ////r_ExceptionMessage = messageBuilder(r_MaxValue, r_MinValue, i_ObjectSourceExceptionMessage);
+        }
+
+        public ValueOutOfRangeException(Nullable<float> i_MaxValue, Nullable<float> i_MinValue, string i_Message, Exception i_InnerException)
+        : base(i_Message, i_InnerException)
+        {
+            r_MaxValue = i_MaxValue;
+            r_MinValue = i_MinValue;
+            ////r_ExceptionMessage = messageBuilder(r_MaxValue, r_MinValue, i_ObjectSourceExceptionMessage);
         }
 
         public Nullable<float> MaxValue
@@ -40,40 +49,40 @@ namespace Ex03.GarageLogic.Exceptions
             }
         }
 
-        public override string Message
-        {
-            get
-            {
-                return r_ExceptionMessage;
-            }
-        }
+        ////public override string Message
+        ////{
+        ////    get
+        ////    {
+        ////        return r_ExceptionMessage;
+        ////    }
+        ////}
 
-        private string messageBuilder(Nullable<float> i_MaxValue, Nullable<float> i_MinValue, string i_MessageSource)
-        {
-            StringBuilder exceptionMessageStringBuilder = new StringBuilder();
-            if (i_MessageSource != null)
-            {
-                exceptionMessageStringBuilder.AppendFormat("{0} ", i_MessageSource);
-            }
+        ////private string messageBuilder(Nullable<float> i_MaxValue, Nullable<float> i_MinValue, string i_MessageSource)
+        ////{
+        ////    StringBuilder exceptionMessageStringBuilder = new StringBuilder();
+        ////    if (i_MessageSource != null)
+        ////    {
+        ////        exceptionMessageStringBuilder.AppendFormat("{0} ", i_MessageSource);
+        ////    }
 
-            exceptionMessageStringBuilder.Append("Value was ");
-            if (i_MinValue != null)
-            {
-                exceptionMessageStringBuilder.AppendFormat("over the limit ");
-            }
-            else
-            {
-                if (i_MaxValue != null)
-                {
-                    exceptionMessageStringBuilder.AppendFormat("under the limit ");
-                }
-                else
-                {
-                    exceptionMessageStringBuilder.Append("out Of Range");
-                }
-            }
+        ////    exceptionMessageStringBuilder.Append("Value was ");
+        ////    if (i_MinValue != null)
+        ////    {
+        ////        exceptionMessageStringBuilder.AppendFormat("over the limit ");
+        ////    }
+        ////    else
+        ////    {
+        ////        if (i_MaxValue != null)
+        ////        {
+        ////            exceptionMessageStringBuilder.AppendFormat("under the limit ");
+        ////        }
+        ////        else
+        ////        {
+        ////            exceptionMessageStringBuilder.Append("out Of Range");
+        ////        }
+        ////    }
 
-            return exceptionMessageStringBuilder.ToString();
-        }
+        ////    return exceptionMessageStringBuilder.ToString();
+        ////}
     }
 }
