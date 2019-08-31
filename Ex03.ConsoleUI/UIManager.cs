@@ -83,12 +83,6 @@ namespace Ex03.ConsoleUI
                             terminateProgram = true;
                             break;
                         }
-
-                    default:
-                        {
-
-                            break;
-                        }
                 }
 
                 if (!terminateProgram)
@@ -141,20 +135,24 @@ namespace Ex03.ConsoleUI
             return supportedEnergyTypes[UserChoice - 1];
         }
 
-        //private static void showSubMenu(Collection<string> i_MenuOptions, string i_UserPromptMessage)
+        public static string GetGasolineType()
+        {
+            string[] supportedGasolineTypes = m_Garage.GetSupportedGasolineTypes();
+            showSubMenu(supportedGasolineTypes, "Please choose a Gasoline Type from the following options:");
+            int UserChoice = Utils.GetUserMenuChoice();
+            return supportedGasolineTypes[UserChoice - 1];
+        }
+
         private static void showSubMenu(string[] i_MenuOptions, string i_UserPromptMessage)
         {
             StringBuilder subMenu = new StringBuilder(i_UserPromptMessage);
-            //for (int i = 0; i < i_MenuOptions.Length; i++)
             int rowCounter = 0;
             foreach (string option in i_MenuOptions)
             {
                 subMenu.AppendFormat(
                     "{0}\t{1}. {2}",
                     Environment.NewLine,
-                    //i + 1,
                     ++rowCounter,
-                    //i_MenuOptions[i]);
                     option);
             }
             Console.WriteLine(subMenu);
@@ -170,7 +168,6 @@ namespace Ex03.ConsoleUI
 
         private static void showVehiclesLicensePlateNumbers()
         {
-            List<string> licensePlateNumbers = null;
             string[] promptOptions = new string[] { "Vehicle Status", "Retrieve all"};
             showSubMenu(promptOptions, "Retrieve License Plate Numbers by:");
             int userChoice = Utils.GetUserMenuChoice();
@@ -207,7 +204,6 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        // TBD: Should we change method name ????
         private static void changeVehicleStatus()
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
@@ -224,12 +220,29 @@ namespace Ex03.ConsoleUI
         private static void fuelGasolineVehicle()
         {
             string licensePlateNumber = Utils.GetLicensePlateNumber();
-
+            string gasolineType = GetGasolineType();
+            string gasolineAmountString = Utils.GetGasolineAmountToAdd();
+            float gasolineAmount;
+            if (!float.TryParse(gasolineAmountString, out gasolineAmount))
+            {
+                throw new ArgumentException("Error: Expected a float type");
+            }
+            m_Garage.FuelGasolineVehicle(licensePlateNumber, gasolineType, gasolineAmount);
+            Console.WriteLine("The Vehicle's Gasoline Tank was successfully added with {0} Liters.", gasolineAmount);
         }
 
         private static void chargeElectricVehicle()
         {
-            
+            string licensePlateNumber = Utils.GetLicensePlateNumber();
+            string electricityMinutesToAddString = Utils.GetGasolineAmountToAdd();
+            float electricityMinutesToAdd;
+            if (!float.TryParse(electricityMinutesToAddString, out electricityMinutesToAdd))
+            {
+                throw new ArgumentException("Error: Expected a float type");
+            }
+            float electricityHoursToAdd = (electricityMinutesToAdd / 60.0f);
+            m_Garage.ChargeElectricVehicle(licensePlateNumber, electricityHoursToAdd);
+            Console.WriteLine("The Vehicle's Battery was successfully added with {0} Working Minutes.", electricityMinutesToAdd);
         }
 
         private static void getVehicleInfoByLicensePlateNumber()
@@ -246,7 +259,7 @@ namespace Ex03.ConsoleUI
             {
                 ArgumentWrapper argument = i_Arguments[i];
                 bool isInputRequired = true;
-                int choiceRowCounter = 1;
+                ////int choiceRowCounter = 1;
 
                 if (argument.DisplayName == "License plate number")
                 {
@@ -258,14 +271,6 @@ namespace Ex03.ConsoleUI
                 if (argument.IsStrictToOptionalValues)
                 {
                     showSubMenu(argument.OptionalValues, "Choose from the following options:");
-                    
-                    //Console.WriteLine("Choose from the following options:");
-                    //StringBuilder choiceStringBuilder = new StringBuilder();
-                    //foreach (string option in argument.OptionalValues)
-                    //{
-                    //    choiceStringBuilder.AppendFormat("{0}.{1}{2}", choiceRowCounter++, option, Environment.NewLine);
-                    //}
-                    //System.Console.WriteLine(choiceStringBuilder.ToString());
                 }
                 while (isInputRequired)
                 {

@@ -54,6 +54,11 @@ namespace Ex03.GarageLogic
             Octan98, Octan96, Octan95, Soler, Electricity
         }
 
+        internal enum eGasolineTypes
+        {
+            Octan98, Octan96, Octan95, Soler
+        }
+
         public enum eCarColors
         {
             White, Red, Black, Yellow

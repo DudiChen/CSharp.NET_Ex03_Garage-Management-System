@@ -32,22 +32,11 @@ namespace Ex03.GarageLogic
             return m_RemainingWorkingHours;
         }
 
-        public override void Energize(eEnergyTypes i_ElectricityType, float i_EnergyAmountToAdd)
+        public override void Energize(Nullable<eEnergyTypes> i_ElectricityType, float i_EnergyAmountToAdd)
         {
-            bool isSupportedGasolineType = false;
-
-            foreach (eEnergyTypes SupportedElectricityType in r_SupportedElectricityTypes)
+            if (i_ElectricityType == null)
             {
-                if (i_ElectricityType == SupportedElectricityType)
-                {
-                    isSupportedGasolineType = true;
-                    break;
-                }
-            }
-
-            if (isSupportedGasolineType)
-            {
-                if (m_RemainingWorkingHours + i_EnergyAmountToAdd <= r_MaximumWorkingHours)
+                if(m_RemainingWorkingHours + i_EnergyAmountToAdd <= r_MaximumWorkingHours)
                 {
                     m_RemainingWorkingHours += i_EnergyAmountToAdd;
                 }
@@ -58,8 +47,34 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //throw new GasolineTankGasolineTypesException(r_SupportedGasolineTypes, i_GasolineType);
+                throw new ArgumentException("Error: Expected 'null' value for EnergyType in Energize of Electric Type Motor");
             }
+            ////bool isSupportedGasolineType = false;
+
+            ////foreach (eEnergyTypes SupportedElectricityType in r_SupportedElectricityTypes)
+            ////{
+            ////    if (i_ElectricityType == SupportedElectricityType)
+            ////    {
+            ////        isSupportedGasolineType = true;
+            ////        break;
+            ////    }
+            ////}
+
+            ////if (isSupportedGasolineType)
+            ////{
+            ////    if (m_RemainingWorkingHours + i_EnergyAmountToAdd <= r_MaximumWorkingHours)
+            ////    {
+            ////        m_RemainingWorkingHours += i_EnergyAmountToAdd;
+            ////    }
+            ////    else
+            ////    {
+            ////        //throw new GasolineTankExceededMaxCapacityException(r_MaximumGasolineTankCapacity, m_CurrentAmountOfGasoline, i_AmountOfGasolineToAdd);
+            ////    }
+            ////}
+            ////else
+            ////{
+            ////    //throw new GasolineTankGasolineTypesException(r_SupportedGasolineTypes, i_GasolineType);
+            ////}
         }
 
         public float RemainingWorkingHours

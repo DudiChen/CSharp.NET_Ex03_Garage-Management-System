@@ -5,7 +5,7 @@ namespace Ex03.GarageLogic
 {
     internal abstract class EnergyContainer
     {
-        public abstract void Energize(eEnergyTypes i_EnergyType, float i_EnergyAmountToAdd);
+        public abstract void Energize(Nullable<eEnergyTypes> i_EnergyType, float i_EnergyAmountToAdd);
 
         public abstract float GetMaxEnergyCapacity();
 

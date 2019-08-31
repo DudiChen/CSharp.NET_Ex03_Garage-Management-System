@@ -44,7 +44,7 @@ namespace Ex03.GarageLogic
             return m_EnergyContainer.GetRemainingEnergyLevel();
         }
 
-        public void Energize(eEnergyTypes i_EnergyType, float i_EnergyAmountToAdd)
+        public void Energize(Nullable<eEnergyTypes> i_EnergyType, float i_EnergyAmountToAdd)
         {
             m_EnergyContainer.Energize(i_EnergyType, i_EnergyAmountToAdd);
         }

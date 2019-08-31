@@ -106,9 +106,18 @@ namespace Ex03.GarageLogic
             return r_Motor.GetRemainingEnergyLevel();
         }
 
-        public void Energize(eEnergyTypes i_EnergyType, float i_AmountToAdd)
+        public void Energize(Nullable<eEnergyTypes> i_EnergyType, float i_AmountToAdd)
         {
-            r_Motor.Energize(i_EnergyType, i_AmountToAdd);
+            bool areValidParams = ((i_EnergyType == null && r_Motor.MotorType == eMotorType.Electric)
+                                   || (i_EnergyType != null && r_Motor.MotorType == eMotorType.Gasoline));
+            if (areValidParams)
+            {
+                r_Motor.Energize(i_EnergyType, i_AmountToAdd);
+            }
+            else // (i_EnergyType == null)
+            {
+                throw new ArgumentNullException();
+            }
         }
 
         protected string ToStringWheelArray()
