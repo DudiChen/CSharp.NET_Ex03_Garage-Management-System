@@ -83,8 +83,6 @@ namespace Ex03.ConsoleUI
 
                     case eMainMenuOptions.InflateWheelsToMaximum:
                         {
-                            // DUDI
-                            // test exception
                             try
                             {
                                 inflateWheelsToMaximum();
@@ -99,8 +97,6 @@ namespace Ex03.ConsoleUI
 
                     case eMainMenuOptions.FuelGasolineVehicle:
                         {
-                            //DUDI 
-                            // test exceptions
                             try
                             {
                                 fuelGasolineVehicle();
@@ -119,8 +115,6 @@ namespace Ex03.ConsoleUI
 
                     case eMainMenuOptions.ChargeElectricVehicle:
                         {
-                            //DUDI
-                            // test exceptions
                             try
                             {
                                 chargeElectricVehicle();
@@ -147,8 +141,7 @@ namespace Ex03.ConsoleUI
                             
                             break;
                         }
-                        // DUDI
-                        // test exception
+
                     case eMainMenuOptions.GetVehicleInfoByLicensePlateNumber:
                         {
                             try

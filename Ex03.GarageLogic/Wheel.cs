@@ -33,7 +33,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         internal void Inflate(float i_AirPressureToAdd)
         {
             if (m_CurrentWheelPressure + i_AirPressureToAdd > r_MaxWheelPressure || i_AirPressureToAdd < 0)
@@ -44,13 +43,14 @@ namespace Ex03.GarageLogic
                     message = string.Format(
                         "Additional air pressure amount received was '{0}' : Value cannot be negative");
                 }
-                else // (m_CurrentTirePressure + i_AirPressureToAdd > r_MaxTirePressure)
+                else 
                 {
                     message = string.Format(
                         "The received air pressure amount of '{0}' exceeds the max allowed value of '{1}'",
                         i_AirPressureToAdd,
                         r_MaxWheelPressure);
                 }
+
                 throw new ValueOutOfRangeException(r_MaxWheelPressure, 0, message);
             }
             else

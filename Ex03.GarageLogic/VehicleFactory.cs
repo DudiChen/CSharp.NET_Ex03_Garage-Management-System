@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
             TruckMaxWheelPressure
         }
 
-        internal static readonly Dictionary<eVehicleMaxConstantTypes, float> sr_VehicleMaxConstantsCollection =
+        internal static readonly Dictionary<eVehicleMaxConstantTypes, float> VehicleMaxConstantsCollection =
             new Dictionary<eVehicleMaxConstantTypes, float>()
                 {
                     { eVehicleMaxConstantTypes.CarMaxElectricCapacity, 2.5f },
@@ -264,8 +264,8 @@ namespace Ex03.GarageLogic
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             eNumberOfCarDoors numberOfDoors = (eNumberOfCarDoors)Enum.Parse(typeof(eNumberOfCarDoors), i_Arguments[eArgumentKeys.NumberOfDoors].Response);
             eCarColors carColor = (eCarColors)Enum.Parse(typeof(eCarColors), i_Arguments[eArgumentKeys.Color].Response);
-            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Car.k_NumberOfWheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxWheelPressure]);
-            return new Car(i_Motor, wheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxWheelPressure], licensePlate, model, carColor, numberOfDoors);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Car.k_NumberOfWheels, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxWheelPressure]);
+            return new Car(i_Motor, wheels, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxWheelPressure], licensePlate, model, carColor, numberOfDoors);
         }
 
         private static Truck createTruck(ArgumentsCollection i_Arguments, Motor i_Motor)
@@ -274,9 +274,9 @@ namespace Ex03.GarageLogic
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             bool isCarryingHazardousMaterials = bool.Parse(i_Arguments[eArgumentKeys.HazardousMaterials].Response);
             int haulingVolume = int.Parse(i_Arguments[eArgumentKeys.HaulVolume].Response);
-            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Truck.k_NumberOfWheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.TruckMaxWheelPressure]);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Truck.k_NumberOfWheels, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.TruckMaxWheelPressure]);
 
-            return new Truck(i_Motor, wheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.TruckMaxWheelPressure], licensePlate, model, isCarryingHazardousMaterials, haulingVolume);
+            return new Truck(i_Motor, wheels, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.TruckMaxWheelPressure], licensePlate, model, isCarryingHazardousMaterials, haulingVolume);
         }
 
         private static Motorcycle createMotorcycle(ArgumentsCollection i_Arguments, Motor i_Motor)
@@ -285,9 +285,9 @@ namespace Ex03.GarageLogic
             string model = (string)i_Arguments[eArgumentKeys.Model].Response;
             Motorcycle.eLicenseType licenseType = (Motorcycle.eLicenseType)Enum.Parse(typeof(Motorcycle.eLicenseType), i_Arguments[eArgumentKeys.LicenseType].Response);
             int engineVolume = int.Parse(i_Arguments[eArgumentKeys.EngineVolume].Response);
-            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxWheelPressure]);
+            Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Motorcycle.k_NumberOfWheels, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxWheelPressure]);
 
-            return new Motorcycle(i_Motor, wheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxWheelPressure], licensePlate, model, licenseType, engineVolume);
+            return new Motorcycle(i_Motor, wheels, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxWheelPressure], licensePlate, model, licenseType, engineVolume);
         }
 
         private static Motor getElectricMotor(ArgumentsCollection i_Arguments, float i_MaxCapacity)
@@ -314,27 +314,27 @@ namespace Ex03.GarageLogic
 
         internal static Vehicle GetGasolineCar(ArgumentsCollection i_Arguments)
         {
-            return createCar(i_Arguments, getGasolineMotor(i_Arguments, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxGasolineTankCapacity]));
+            return createCar(i_Arguments, getGasolineMotor(i_Arguments, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxGasolineTankCapacity]));
         }
 
         internal static Vehicle GetElectricCar(ArgumentsCollection i_Arguments)
         {
-            return createCar(i_Arguments, getElectricMotor(i_Arguments, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxElectricCapacity]));
+            return createCar(i_Arguments, getElectricMotor(i_Arguments, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxElectricCapacity]));
         }
 
         internal static Vehicle GetGasolineMotorcycle(ArgumentsCollection i_Arguments)
         {
-            return createMotorcycle(i_Arguments, getGasolineMotor(i_Arguments, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxGasolineTankCapacity]));
+            return createMotorcycle(i_Arguments, getGasolineMotor(i_Arguments, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxGasolineTankCapacity]));
         }
 
         internal static Vehicle GetElectricMotorcycle(ArgumentsCollection i_Arguments)
         {
-            return createMotorcycle(i_Arguments, getElectricMotor(i_Arguments, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxElectricCapacity]));
+            return createMotorcycle(i_Arguments, getElectricMotor(i_Arguments, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.MotorcycleMaxElectricCapacity]));
         }
 
         internal static Vehicle GetGasolineTruck(ArgumentsCollection i_Arguments)
         {
-            return createTruck(i_Arguments, getGasolineMotor(i_Arguments, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.TruckMaxGasolineTankCapacity]));
+            return createTruck(i_Arguments, getGasolineMotor(i_Arguments, VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.TruckMaxGasolineTankCapacity]));
         }
 
         internal static Vehicle BuildVehicle(
