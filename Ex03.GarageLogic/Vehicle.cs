@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using eEnergyTypes = Ex03.GarageLogic.VehicleFactory.eEnergyTypes;
 using eMotorType = Ex03.GarageLogic.VehicleFactory.eMotorType;
@@ -70,18 +71,6 @@ namespace Ex03.GarageLogic
                 wheel.Inflate(airPressureAmountToAdd);
             }
         }
-
-        ////internal void InflateWheel(uint i_WheelNumber, float i_AirPressureToAdd)
-        ////{
-        ////    if (i_WheelNumber <= r_Wheels.Length)
-        ////    {
-        ////        r_Wheels[(int)i_WheelNumber].Inflate(i_AirPressureToAdd);
-        ////    }
-        ////    else
-        ////    {
-        ////        // Throw Exception
-        ////    }
-        ////}
 
         public eMotorType MotorType
         {

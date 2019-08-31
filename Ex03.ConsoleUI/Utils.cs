@@ -109,19 +109,19 @@ namespace Ex03.ConsoleUI
         public static string GetLicensePlateNumber()
         {
             System.Console.WriteLine("Please provide Vehicle's License Plate Number:");
-            return System.Console.ReadLine();
+            return GetStringUserInput();
         }
 
         public static string GetOwnerName()
         {
             System.Console.WriteLine("Please provide the Vehicle's Owner Name:");
-            return System.Console.ReadLine();
+            return GetStringUserInput();
         }
 
         public static string GetOwnerPhoneNumber()
         {
             System.Console.WriteLine("Please provide the Vehicle's Owner Phone Number:");
-            return System.Console.ReadLine();
+            return GetStringUserInput();
         }
 
         public static string GetGasolineAmountToAdd()
@@ -130,6 +130,17 @@ namespace Ex03.ConsoleUI
             return System.Console.ReadLine();
         }
 
+        public static string GetStringUserInput()
+        {
+            string inputFromUser = System.Console.ReadLine();
+            while(inputFromUser.Equals(string.Empty))
+            {
+                System.Console.WriteLine("Invalid input: Please try again...");
+                inputFromUser = System.Console.ReadLine();
+            }
+
+            return inputFromUser;
+        }
 
         //public static string GetVehicleType(string[] i_SupportedVehicleTypes)
         //{

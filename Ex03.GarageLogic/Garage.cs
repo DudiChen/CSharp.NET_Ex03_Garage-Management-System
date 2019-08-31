@@ -11,8 +11,8 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string, GarageTicket> m_GarageTickets;
-        private Dictionary<string, Vehicle> m_vehicleInventory;
+        private readonly Dictionary<string, GarageTicket> r_GarageTickets;
+        private readonly Dictionary<string, Vehicle> r_VehicleInventory;
 
         public enum eTicketStatus
         {
@@ -21,19 +21,19 @@ namespace Ex03.GarageLogic
 
         public Garage()
         {
-            m_GarageTickets = new Dictionary<string, GarageTicket>();
-            m_vehicleInventory = new Dictionary<string, Vehicle>();
+            r_GarageTickets = new Dictionary<string, GarageTicket>();
+            r_VehicleInventory = new Dictionary<string, Vehicle>();
 
         }
         internal void AddTicket(string i_VehicleLicenseNumber, GarageTicket i_GarageTicket)
         {
-            if (!m_GarageTickets.ContainsKey(i_VehicleLicenseNumber))
+            if (!r_GarageTickets.ContainsKey(i_VehicleLicenseNumber))
             {
-                m_GarageTickets.Add(i_VehicleLicenseNumber, i_GarageTicket);
+                r_GarageTickets.Add(i_VehicleLicenseNumber, i_GarageTicket);
             }
             else
             {
-                m_GarageTickets[i_VehicleLicenseNumber].TicketStatus = eTicketStatus.InProgress;
+                r_GarageTickets[i_VehicleLicenseNumber].TicketStatus = eTicketStatus.InProgress;
             }
         }
 
@@ -41,10 +41,10 @@ namespace Ex03.GarageLogic
         {
             eTicketStatus vehicleStatus = parseVehicleStatusFromString(i_StatusString);
             bool isStatusChangeRequired = false;
-            eTicketStatus currentVehicleStatus = m_GarageTickets[i_LicensePlateNumber].TicketStatus;
+            eTicketStatus currentVehicleStatus = r_GarageTickets[i_LicensePlateNumber].TicketStatus;
             if (vehicleStatus != currentVehicleStatus)
             {
-                m_GarageTickets[i_LicensePlateNumber].TicketStatus = vehicleStatus;
+                r_GarageTickets[i_LicensePlateNumber].TicketStatus = vehicleStatus;
                 isStatusChangeRequired = true;
             }
 
@@ -53,14 +53,14 @@ namespace Ex03.GarageLogic
 
         public bool HasVehicleVisited(string i_VehicleLicenseNumber)
         {
-            return m_GarageTickets.ContainsKey(i_VehicleLicenseNumber);
+            return r_GarageTickets.ContainsKey(i_VehicleLicenseNumber);
         }
 
         internal List<GarageTicket> GetTicketListByStatus(eTicketStatus i_TicketStatus)
         {
             List<GarageTicket> garageTickets = new List<GarageTicket>();
 
-            foreach (GarageTicket ticket in m_GarageTickets.Values)
+            foreach (GarageTicket ticket in r_GarageTickets.Values)
             {
                 if (ticket.TicketStatus == i_TicketStatus)
                 {
@@ -73,12 +73,12 @@ namespace Ex03.GarageLogic
 
         internal List<GarageTicket> GetTicketList()
         {
-            return new List<GarageTicket>(m_GarageTickets.Values);
+            return new List<GarageTicket>(r_GarageTickets.Values);
         }
 
-        internal GarageTicket getTicketByLicensePlateNumber(string i_VehicleLicenseNumber)
+        internal GarageTicket GetTicketByLicensePlateNumber(string i_VehicleLicenseNumber)
         {
-            return m_GarageTickets[i_VehicleLicenseNumber];
+            return r_GarageTickets[i_VehicleLicenseNumber];
         }
 
         public void AddVehicleToGarage(ArgumentsCollection i_Arguments, string i_VehicleTypeString, string i_OwnerName, string i_OwnerPhoneNumber)
@@ -86,7 +86,7 @@ namespace Ex03.GarageLogic
             eSupportedVehicles vehicleType = parseVehicleTypeFromString(i_VehicleTypeString);
             Vehicle newVehicle = VehicleFactory.BuildVehicle(vehicleType, i_Arguments);
 
-            m_vehicleInventory.Add(newVehicle.LicensePlateNumber, newVehicle);
+            r_VehicleInventory.Add(newVehicle.LicensePlateNumber, newVehicle);
             AddTicket(newVehicle.LicensePlateNumber, new GarageTicket(i_OwnerName, i_OwnerPhoneNumber, newVehicle.LicensePlateNumber));
         }
 
@@ -115,7 +115,7 @@ namespace Ex03.GarageLogic
         {
             eTicketStatus vehicleStatus = parseVehicleStatusFromString(i_VehicleStatusString);
             List<string> licensePlateNumberList = new List<string>();
-            foreach (GarageTicket ticket in m_GarageTickets.Values)
+            foreach (GarageTicket ticket in r_GarageTickets.Values)
             {
                 if (ticket.TicketStatus == vehicleStatus)
                 {
@@ -128,39 +128,43 @@ namespace Ex03.GarageLogic
 
         public List<string> GetListOfLicensePlateNumbers()
         {
-            return new List<string>(m_GarageTickets.Keys);
+            return new List<string>(r_GarageTickets.Keys);
         }
 
         public string GetVehicleInfoByLicensePlateNumber(string i_LicensePlateNumber)
         {
-            GarageTicket garageTicket = getTicketByLicensePlateNumber(i_LicensePlateNumber);
+            GarageTicket garageTicket = GetTicketByLicensePlateNumber(i_LicensePlateNumber);
             StringBuilder showVehicleInfoStringBuilder = new StringBuilder();
+
             showVehicleInfoStringBuilder.AppendFormat(
                     "\tOwner's name: {0}{3}\tOwner's phone number: {1}{3}\tvehicle status: {2}{3}",
                 garageTicket.OwnerName,
                 garageTicket.OwnerPhoneNumber,
                 garageTicket.TicketStatus.ToString(),
                 Environment.NewLine);
-            showVehicleInfoStringBuilder.AppendLine(m_vehicleInventory[i_LicensePlateNumber].ToString());
+            showVehicleInfoStringBuilder.AppendLine(r_VehicleInventory[i_LicensePlateNumber].ToString());
+                
             return showVehicleInfoStringBuilder.ToString();
         }
 
         public void InflateWheelsToMaximum(string i_LicensePlateNumber)
         {
-            Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
+            Vehicle vehicle = r_VehicleInventory[i_LicensePlateNumber];
             vehicle.InflateWheelsToMaxAirPressure();
         }
 
         public void FuelGasolineVehicle(string i_LicensePlateNumber, string i_GasolineType, float i_AmountToAdd)
         {
             eEnergyTypes gasolineType = parseEnergyTypeFromString(i_GasolineType);
-            Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
+            Vehicle vehicle = r_VehicleInventory[i_LicensePlateNumber];
+
             vehicle.Energize(gasolineType, i_AmountToAdd);
         }
 
         public void ChargeElectricVehicle(string i_LicensePlateNumber, float i_ElectricityHoursToAdd)
         {
-            Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
+            Vehicle vehicle = r_VehicleInventory[i_LicensePlateNumber];
+
             vehicle.Energize(null, i_ElectricityHoursToAdd);
         }
 
@@ -173,7 +177,7 @@ namespace Ex03.GarageLogic
             }
             catch (Exception e)
             {
-                throw new ArgumentException("Error: Received wrong argument value for VehicleType");
+                throw new FormatException("Error: Received wrong argument value for VehicleType");
             }
 
             return result;
@@ -189,9 +193,8 @@ namespace Ex03.GarageLogic
             }
             catch (Exception e)
             {
-                throw new ArgumentException("Error: Received wrong argument value for GasolineType");
+                throw new FormatException("Error: Received wrong argument value for GasolineType");
             }
-
 
             return result;
         }
@@ -205,22 +208,10 @@ namespace Ex03.GarageLogic
             }
             catch (Exception e)
             {
-                throw new ArgumentException("Error: Received wrong argument value for VehicleType");
+                throw new FormatException("Error: Received wrong argument value for VehicleType");
             }
 
             return result;
         }
-
-
-
-        ////public void FillVehicleEnergyContainer(string i_EnergyType, string i_LicensePlateNumber)
-        ////{
-        ////    if (!HasVehicleVisited(i_LicensePlateNumber))
-        ////    {
-        ////        throw new ArgumentException("Error: Received non-existing vehicle license plate number");
-        ////    }
-        ////    Vehicle vehicle = m_vehicleInventory[i_LicensePlateNumber];
-        ////    vehicle.Energize(parseVehicleTypeFromString());
-        ////}
     }
 }

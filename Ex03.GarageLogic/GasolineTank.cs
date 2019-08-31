@@ -16,7 +16,8 @@ namespace Ex03.GarageLogic
         {
             r_SupportedGasolineTypes = i_SupportedGasolineTypes;
             r_MaximumGasolineTankCapacity = i_MaximumGasolineTankCapacity;
-            m_CurrentAmountOfGasoline = i_CurrentAmountOfGasoline;
+            m_CurrentAmountOfGasoline = 0;
+            AddEnergy(ref m_CurrentAmountOfGasoline,i_CurrentAmountOfGasoline,i_MaximumGasolineTankCapacity);
         }
 
         public override eEnergyTypes[] GetSupportedEnergyTypes()
@@ -38,9 +39,9 @@ namespace Ex03.GarageLogic
         {
             bool isSupportedGasolineType = false;
 
-            foreach (eEnergyTypes SupportedGasolineType in r_SupportedGasolineTypes)
+            foreach (eEnergyTypes supportedGasolineType in r_SupportedGasolineTypes)
             {
-                if (i_GasolineType == SupportedGasolineType)
+                if (i_GasolineType == supportedGasolineType)
                 {
                     isSupportedGasolineType = true;
                     break;
@@ -49,20 +50,17 @@ namespace Ex03.GarageLogic
 
             if (isSupportedGasolineType)
             {
-                if (m_CurrentAmountOfGasoline + i_AmountOfGasolineToAdd <= r_MaximumGasolineTankCapacity)
-                {
-                    m_CurrentAmountOfGasoline += i_AmountOfGasolineToAdd;
-                }
-                else
-                {
-                    //throw new GasolineTankExceededMaxCapacityException(r_MaximumGasolineTankCapacity, m_CurrentAmountOfGasoline, i_AmountOfGasolineToAdd);
-                }
+                AddEnergy(ref m_CurrentAmountOfGasoline,i_AmountOfGasolineToAdd,r_MaximumGasolineTankCapacity);
             }
             else
             {
                 //throw new GasolineTankGasolineTypesException(r_SupportedGasolineTypes, i_GasolineType);
+                throw new ArgumentException();
             }
         }
+
+
+
 
         private string toStringSupportedFuelTypes()
         {

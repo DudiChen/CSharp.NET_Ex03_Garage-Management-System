@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Text;
 using Ex03.GarageLogic.ArgumentsUtils;
 
@@ -73,11 +74,9 @@ namespace Ex03.GarageLogic
         {
             LicensePlate,
             Model,
-            ////VehicleType,
             Color,
             NumberOfDoors,
             WheelCurrentPressure,
-            WheelMaxPressure,
             WheelManufacturer,
             CurrentAmountOfGasoline,
             LicenseType,
@@ -262,6 +261,7 @@ namespace Ex03.GarageLogic
                     "{0}{1}",
                     eArgumentKeys.WheelCurrentPressure.ToString(),
                     i).ToString()].Response);
+
                 wheels[i - 1] = new Wheel(wheelManufacturer, i_MaxTire, wheelWheelPressure);
             }
 
@@ -275,7 +275,6 @@ namespace Ex03.GarageLogic
             eNumberOfCarDoors numberOfDoors = (eNumberOfCarDoors)Enum.Parse(typeof(eNumberOfCarDoors), i_Arguments[eArgumentKeys.NumberOfDoors].Response);
             eCarColors carColor = (eCarColors)Enum.Parse(typeof(eCarColors), i_Arguments[eArgumentKeys.Color].Response);
             Wheel[] wheels = wheelsCollectionBuilder(i_Arguments, Car.k_NumberOfWheels, sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxTirePressure]);
-
             return new Car(i_Motor, wheels,sr_VehicleMaxConstantsCollection[eVehicleMaxConstantTypes.CarMaxTirePressure], licensePlate, model, carColor, numberOfDoors);
         }
 

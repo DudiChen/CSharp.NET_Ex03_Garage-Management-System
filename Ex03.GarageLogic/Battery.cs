@@ -14,7 +14,8 @@ namespace Ex03.GarageLogic
         {
             r_SupportedElectricityTypes = i_SupportedElectricityTypes;
             r_MaximumWorkingHours = i_MaximumWorkingHours;
-            m_RemainingWorkingHours = i_RemainingWorkingHours;
+            m_RemainingWorkingHours = 0;
+            AddEnergy(ref m_RemainingWorkingHours, i_RemainingWorkingHours, i_MaximumWorkingHours);
         }
 
         public override eEnergyTypes[] GetSupportedEnergyTypes()
@@ -36,14 +37,7 @@ namespace Ex03.GarageLogic
         {
             if (i_ElectricityType == null)
             {
-                if(m_RemainingWorkingHours + i_EnergyAmountToAdd <= r_MaximumWorkingHours)
-                {
-                    m_RemainingWorkingHours += i_EnergyAmountToAdd;
-                }
-                else
-                {
-                    //throw new GasolineTankExceededMaxCapacityException(r_MaximumGasolineTankCapacity, m_CurrentAmountOfGasoline, i_AmountOfGasolineToAdd);
-                }
+                AddEnergy(ref m_RemainingWorkingHours, i_EnergyAmountToAdd, r_MaximumWorkingHours);
             }
             else
             {
@@ -85,17 +79,17 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Charge(float i_HoursToAdd)
-        {
-            if (m_RemainingWorkingHours + i_HoursToAdd <= r_MaximumWorkingHours)
-            {
-                m_RemainingWorkingHours += i_HoursToAdd;
-            }
-            else
-            {
-                //throw new BatteryMaxWorkingHoursException(r_MaximumWorkingHours, m_RemainingWorkingHours, i_HoursToAdd);
-            }
-        }
+        ////public void Charge(float i_HoursToAdd)
+        ////{
+        ////    if (m_RemainingWorkingHours + i_HoursToAdd <= r_MaximumWorkingHours)
+        ////    {
+        ////        m_RemainingWorkingHours += i_HoursToAdd;
+        ////    }
+        ////    else
+        ////    {
+        ////        //throw new BatteryMaxWorkingHoursException(r_MaximumWorkingHours, m_RemainingWorkingHours, i_HoursToAdd);
+        ////    }
+        ////}
 
         public override string ToString()
         {

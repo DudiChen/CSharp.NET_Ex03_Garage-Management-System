@@ -1,4 +1,5 @@
 ﻿using System;
+using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
 {
@@ -13,14 +14,8 @@ namespace Ex03.GarageLogic
         {
             r_Manufacturer = i_Manufacturer;
             r_MaxTirePressure = i_MaxTirePressure;
-            if (i_CurrentTirePressure >= k_MinTirePressure && i_CurrentTirePressure <= r_MaxTirePressure)
-            {
-                m_CurrentTirePressure = i_CurrentTirePressure;
-            }
-            else
-            {
-                // Throw Exception
-            }
+            m_CurrentTirePressure = 0;
+            Inflate(i_CurrentTirePressure);
         }
 
         internal string Manufacturer
@@ -55,7 +50,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                // throw exception
+                throw new ValueOutOfRangeException(r_MaxTirePressure,0);
             }
         }
 
